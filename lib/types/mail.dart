@@ -16,6 +16,7 @@ class Mail {
   Mail(this._value);
 
 
+  /// Checks whether the mail is valid
   bool isValid() {
     return _pattern.hasMatch(_value);
   }
