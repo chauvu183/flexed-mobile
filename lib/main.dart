@@ -1,4 +1,8 @@
+import 'package:flexed_mobile/api/repository/student_mock_repository.dart';
+import 'package:flexed_mobile/api/repository/student_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'dart:developer' as developer;
 
 void main() {
   runApp(MyApp());
@@ -8,30 +12,43 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        brightness: Brightness.light,
+    return MultiProvider(
+      providers: [
 
-        backgroundColor: Color(0xFFFBE6),
-
-        primaryColorBrightness: Brightness.dark,
-        primaryColor: Color(0x5E5E5E),
-        primaryColorLight: Color(0xF3F3F3),
-        primaryColorDark: Color(0x000000),
-
-        cursorColor: Color(0xBC0000),
-        accentColor: Color(0xBC0000),
-        errorColor: Color(0xBC0000),
-
-        textTheme: TextTheme(
-          bodyText1: TextStyle(color: Colors.black),
-          bodyText2: TextStyle(color: Colors.black),
-
-          headline6: TextStyle(color: Colors.black),
+        // Values and classes provided here are exposed
+        // to the entire app. We can use this to publish
+        // our services to all widgets where needed!
+        Provider<StudentRepository>(
+          create: (context) => new StudentMockRepository(),
         )
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+
+      ],
+
+      child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            brightness: Brightness.light,
+
+            backgroundColor: Color.fromRGBO(0xFF, 0xFB, 0xE6, 1.0),
+
+            primaryColorBrightness: Brightness.dark,
+            primaryColor: Color.fromRGBO(0x5E, 0x5E, 0x5E, 1.0),
+            primaryColorLight: Color.fromRGBO(0xF3, 0xF3, 0xF3, 1.0),
+            primaryColorDark: Color.fromRGBO(0x00, 0x00, 0x00, 1.0),
+
+            cursorColor: Color.fromRGBO(0xBC, 0x00, 0x00, 1.0),
+            accentColor: Color.fromRGBO(0xBC, 0x00, 0x00, 1.0),
+            errorColor: Color.fromRGBO(0xBC, 0x00, 0x00, 1.0),
+
+            textTheme: TextTheme(
+              bodyText1: TextStyle(color: Colors.black),
+              bodyText2: TextStyle(color: Colors.black),
+
+              headline6: TextStyle(color: Colors.black),
+            )
+          ),
+          home: MyHomePage(title: 'Flutter Demo Home Page'),
+        )
     );
   }
 }
@@ -70,6 +87,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+
+    Provider.of<StudentRepository>(context).index().then((students) => 
+      students.forEach((student) { 
+        developer.log(student.toString());
+      })
+    );
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
