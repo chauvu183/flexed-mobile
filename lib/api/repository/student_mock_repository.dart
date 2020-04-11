@@ -1,10 +1,10 @@
 
 
 import 'package:flexed_mobile/api/mocking/student_mocker.dart';
-import 'package:flexed_mobile/api/repository/repository.dart';
+import 'package:flexed_mobile/api/repository/student_repository.dart';
 import 'package:flexed_mobile/models/student.dart';
 
-class StudentMockRepository extends Repository<Student> {
+class StudentMockRepository extends StudentRepository {
 
   StudentMocker _mocker = StudentMocker();
 
