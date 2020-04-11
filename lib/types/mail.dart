@@ -1,4 +1,3 @@
-
 class Mail {
 
   /// The actual mail value set on construction
