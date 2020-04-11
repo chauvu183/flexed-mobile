@@ -1,18 +1,41 @@
-
-
 import 'dart:math';
 
 import 'package:flexed_mobile/types/gender.dart';
 import 'package:flexed_mobile/types/mail.dart';
 import 'package:flexed_mobile/types/phone.dart';
 
+
+///
+/// Mocker class that can be used to create fake data
+/// using a provided pattern of fields.
+/// 
+/// To create a mocker, extend from this class and provide
+/// a 'getFields' hook method that maps attributes to generate
+/// by their type, e.g.
+///
+/// {
+///   'id': 'key',
+///   'name': 'firstName'
+/// }
+///
+/// will generate a map when calling the mock() method like this:
+///
+/// {
+///   'id': 1,
+///   'name': 'Hans'
+/// }
+///
+/// See private method '_generateByType' to see list of available types.
+///
+
 abstract class Mocker {
 
   /// Maps the currently generated primary keys
   Map<String, int> keys = Map<String, int>();
 
+  /// Provides a map of fields and their respective type
+  /// that is used to generate fake data
   Map<String, String> getFields();
-
 
   final List<String> _firstNames = [
       'Peter', 'Lisa', 'Günther', 'Clemens', 'Chau', 'Julius', 'Maria', 'Gustav',
@@ -75,6 +98,7 @@ Nunc at efficitur massa.''';
   }
 
 
+  /// build a map that saves the primary key values
   void _buildKeyMap() {
     Map<String, String> fields = getFields();
 
@@ -86,6 +110,8 @@ Nunc at efficitur massa.''';
   }
 
 
+  /// Mock a new instance. Returns a map of fields and generated
+  /// fake data that can be used to create a model
   Map<String, Object> mock() {
     Map<String, Object> data = Map<String, Object>();
     Map<String, String> fields = getFields();
@@ -102,12 +128,14 @@ Nunc at efficitur massa.''';
     return data;
   }
 
+  /// Generates a new primary key
   int _generateKey(String field) {
     int key = ++keys[field];
 
     return key;
   }
 
+  /// Generates a fitting value by type
   Object _generateByType(String type) {
     switch(type) {
       case 'firstName':
