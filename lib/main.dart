@@ -4,28 +4,29 @@ import 'package:flexed_mobile/pages/home.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
-import 'dart:developer' as developer;
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
+      providers: [
 
-          // Values and classes provided here are exposed
-          // to the entire app. We can use this to publish
-          // our services to all widgets where needed!
-          Provider<StudentRepository>(
-            create: (context) => new StudentMockRepository(),
-          )
+        // Values and classes provided here are exposed
+        // to the entire app. We can use this to publish
+        // our services to all widgets where needed!
+        Provider<StudentRepository>(
+          create: (context) => new StudentMockRepository(),
+        )
 
-        ],
+      ],
 
+      // The children of the MultiProvider has access to
+      // all provided values listed above
       child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
@@ -43,14 +44,14 @@ class MyApp extends StatelessWidget {
             errorColor: Color.fromRGBO(0xBC, 0x00, 0x00, 1.0),
 
             textTheme: TextTheme(
-              body1: TextStyle(color: Colors.black),
-              body2: TextStyle(color: Colors.black),
+              bodyText1: TextStyle(color: Colors.black),
+              bodyText2: TextStyle(color: Colors.black),
 
-          headline: TextStyle(color: Colors.black),
+              headline6: TextStyle(color: Colors.black),
+            )
+          ),
+          home: Home(),
         )
-      ),
-      home: Home(),
-    )
     );
   }
 }
