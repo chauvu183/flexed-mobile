@@ -9,58 +9,46 @@ import 'package:flutter/cupertino.dart';
 class Student extends Model {
 
   /// Primary key of student instance
-  int _id;
+  int id;
 
-  String _firstName;
-  String _lastName;
-  Gender _gender;
-  DateTime _birthday;
+  String firstName;
+  String lastName;
+  Gender gender;
+  DateTime birthday;
 
-  Mail _mail;
-  Mail _parentMail;
+  Mail mail;
+  Mail parentMail;
 
-  PhoneNumber _phone;
+  PhoneNumber phone;
 
-  String _note;
+  String note;
 
-  DateTime _created;
+  DateTime created;
 
 
   Student({
-    int id,
-    @required String firstName,
-    @required String lastName,
-    Gender gender,
-    DateTime birthday,
-    Mail mail,
-    Mail parentMail,
-    PhoneNumber phone,
-    String note,
-    DateTime created
-  }) {
-    this._id = id;
-    this._firstName = firstName;
-    this._lastName = lastName;
-    this._gender = gender;
-    this._birthday = birthday;
-    this._mail = mail;
-    this._parentMail = parentMail;
-    this._phone = phone;
-    this._note = note;
-    this._created = created;
-  }
-
+    this.id,
+    @required this.firstName,
+    @required this.lastName,
+    this.gender,
+    this.birthday,
+    this.mail,
+    this.parentMail,
+    this.phone,
+    this.note,
+    this.created
+  });
 
   String _getFirstLetter(String value) {
     return value.substring(0, 1);
   }
 
   String getInitials() {
-    return _getFirstLetter(_firstName).toUpperCase() + _getFirstLetter(_lastName).toUpperCase();
+    return _getFirstLetter(firstName).toUpperCase() + _getFirstLetter(lastName).toUpperCase();
   }
 
   String toString() {
-    return _firstName + ' ' + _lastName + ' (' + this.getInitials() + ')';
+    return '$id: $firstName $lastName (${getInitials()})';
   }
 
 }
