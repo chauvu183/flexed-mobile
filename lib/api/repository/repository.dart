@@ -1,7 +1,7 @@
-
-
 import 'package:flexed_mobile/models/model.dart';
 
+/// Represents a database connection that creates, fetches, 
+/// manipulates and deletes model instances.
 abstract class Repository<T extends Model> {
 
   /// Create a new model instance
