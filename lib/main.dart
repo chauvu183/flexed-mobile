@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
 
           headline6: TextStyle(color: Colors.black),
         )
-      ),*/
+      ),
       home: Home()
     );
   }
