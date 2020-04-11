@@ -2,8 +2,11 @@
 import 'package:flexed_mobile/api/mocking/mocker.dart';
 import 'package:flexed_mobile/models/student.dart';
 
+/// Mocker that generates new, fake student model instances.
 class StudentMocker extends Mocker {
 
+  /// Map of fields by their type to fill
+  /// with appropriate data
   final Map<String, String> _fields = {
     'id': 'key',
     'firstName':  'firstName',
@@ -17,6 +20,8 @@ class StudentMocker extends Mocker {
     'created':    'date',
   };
 
+  /// Mocks a new student, then injects the generated
+  /// data into a model instance to return
   Student mockStudent() {
     Map<String, Object> mockedData = this.mock();
     return Student(
@@ -33,6 +38,7 @@ class StudentMocker extends Mocker {
     );
   }
 
+  /// Utility method to generate a list of instances
   List<Student> mockStudents({ number = 3 }) {
     List<Student> generated = List<Student>();
     for(int i = 0; i < number; i++) {
