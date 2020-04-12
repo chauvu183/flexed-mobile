@@ -32,16 +32,16 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             brightness: Brightness.light,
 
-            backgroundColor: Color.fromRGBO(0xFF, 0xFB, 0xE6, 1.0),
+            backgroundColor: Color(0xFFFFFBE6),
 
             primaryColorBrightness: Brightness.dark,
-            primaryColor: Color.fromRGBO(0x5E, 0x5E, 0x5E, 1.0),
-            primaryColorLight: Color.fromRGBO(0xF3, 0xF3, 0xF3, 1.0),
-            primaryColorDark: Color.fromRGBO(0x00, 0x00, 0x00, 1.0),
+            primaryColor: Color(0xFF5E5E5E),
+            primaryColorLight: Color(0xFFF3F3F3),
+            primaryColorDark: Color(0xFF000000),
 
-            cursorColor: Color.fromRGBO(0xBC, 0x00, 0x00, 1.0),
-            accentColor: Color.fromRGBO(0xBC, 0x00, 0x00, 1.0),
-            errorColor: Color.fromRGBO(0xBC, 0x00, 0x00, 1.0),
+            cursorColor: Color(0xFFBC0000),
+            accentColor: Color(0xFFBC0000),
+            errorColor: Color(0xFFBC0000),
 
             textTheme: TextTheme(
               bodyText1: TextStyle(color: Colors.black),
