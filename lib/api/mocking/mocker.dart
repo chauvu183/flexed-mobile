@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:flexed_mobile/types/gender.dart';
-import 'package:flexed_mobile/types/mail.dart';
-import 'package:flexed_mobile/types/phone.dart';
+import 'package:flexed_mobile/types/enums/gender.dart';
+import 'package:flexed_mobile/types/data/mail_type.dart';
+import 'package:flexed_mobile/types/data/phone_number_type.dart';
 
 
 ///
@@ -50,11 +50,11 @@ abstract class Mocker {
       Gender.MALE, Gender.FEMALE
   ];
 
-  final List<Mail> _mails = [
-    Mail('p.pan@example.com'), Mail('luedemeier@example.com'), Mail('ban.schools@example.com'), 
-    Mail('not.real@example.com'), Mail('unhackable@example.com'), Mail('foreign@example.com'),
-    Mail('familie.schulz@example.com'), Mail('aenie@example.com'), Mail('ldefg@example.com'), 
-    Mail('wtf@example.com')
+  final List<MailType> _mails = [
+    MailType('p.pan@example.com'), MailType('luedemeier@example.com'), MailType('ban.schools@example.com'), 
+    MailType('not.real@example.com'), MailType('unhackable@example.com'), MailType('foreign@example.com'),
+    MailType('familie.schulz@example.com'), MailType('aenie@example.com'), MailType('ldefg@example.com'), 
+    MailType('wtf@example.com')
   ];
 
   final String _boilerplate = '''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquet eu nunc ut vestibulum. 
@@ -181,11 +181,11 @@ Nunc at efficitur massa.''';
   }
 
 
-  Mail _generateMail() {
+  MailType _generateMail() {
     return _mails[_random.nextInt(_mails.length)];
   }
 
-  PhoneNumber _generatePhone() {
+  PhoneNumberType _generatePhone() {
     String phone = '';
     List<int> numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -193,7 +193,7 @@ Nunc at efficitur massa.''';
       phone += numbers[_random.nextInt(numbers.length)].toString();
     }
 
-    return PhoneNumber(phone);
+    return PhoneNumberType(phone);
   }
 
   String _generateBoilerText() {

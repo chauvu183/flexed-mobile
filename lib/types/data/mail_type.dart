@@ -1,4 +1,4 @@
-class Mail {
+class MailType {
 
   /// The actual mail value set on construction
   final String _value;
@@ -12,7 +12,7 @@ class Mail {
     );
 
 
-  Mail(this._value);
+  MailType(this._value);
 
 
   /// Checks whether the mail is valid

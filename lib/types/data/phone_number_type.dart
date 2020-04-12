@@ -1,4 +1,4 @@
-class PhoneNumber {
+class PhoneNumberType {
 
   /// The actual mail value set on construction
   final String _value;
@@ -12,7 +12,7 @@ class PhoneNumber {
     );
 
 
-  PhoneNumber(this._value);
+  PhoneNumberType(this._value);
 
 
   /// Checks whether the phone number is valid

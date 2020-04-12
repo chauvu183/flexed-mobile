@@ -1,7 +1,7 @@
 import 'package:flexed_mobile/models/model.dart';
-import 'package:flexed_mobile/types/gender.dart';
-import 'package:flexed_mobile/types/mail.dart';
-import 'package:flexed_mobile/types/phone.dart';
+import 'package:flexed_mobile/types/data/mail_type.dart';
+import 'package:flexed_mobile/types/data/phone_number_type.dart';
+import 'package:flexed_mobile/types/enums/gender.dart';
 import 'package:flutter/cupertino.dart';
 
 /// Represents a student of a class
@@ -15,10 +15,10 @@ class Student extends Model {
   Gender gender;
   DateTime birthday;
 
-  Mail mail;
-  Mail parentMail;
+  MailType mail;
+  MailType parentMail;
 
-  PhoneNumber phone;
+  PhoneNumberType phone;
 
   String note;
 
