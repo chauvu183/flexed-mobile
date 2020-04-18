@@ -1,5 +1,6 @@
 
 import 'package:flexed_mobile/api/repository/flexclass_repository.dart';
+import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
 import 'package:flexed_mobile/models/flexclass.dart';
 import 'package:flexed_mobile/pages/feedback/widgets/flexclass_details.dart';
 import 'package:flutter/cupertino.dart';
@@ -45,7 +46,7 @@ class FlexClassListState extends State<FlexClassList> {
             backgroundColor: Theme.of(context).primaryColorLight,
           ),
           title: Text(_class.title),
-          subtitle: Text('Keine offenen Aufgaben'),
+          subtitle: SOLTrackCount(_class),
           onTap: () => _goToClassDetails(_class),
         ),
       );
@@ -56,9 +57,39 @@ class FlexClassListState extends State<FlexClassList> {
 
 
   _goToClassDetails(_class) {
-    developer.log('Test! Ich habe Klasse ' + _class.title + ' angeklickt!');
-
     Navigator.push(context, MaterialPageRoute(builder: (context) => FlexClassDetails()));
   }
 
+}
+
+
+class SOLTrackCount extends StatefulWidget {
+  FlexClass flexClass;
+
+  SOLTrackCount(this.flexClass);
+
+  SOLTrackCountState createState() {
+    return SOLTrackCountState(flexClass);
+  }
+}
+
+class SOLTrackCountState extends State<SOLTrackCount> {
+
+  FlexClass flexClass;
+
+  SOLTrackCountState(this.flexClass);
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: Provider.of<SOLTrackRepository>(context).byStudents(flexClass.getMembers()),
+      builder: (context, snapshot) {
+        if (snapshot.data == null || snapshot.data.length < 1) {
+          return Text('Keine Aufgaben');
+        }
+
+        return Text(snapshot.data.length.toString() + ' Aufgaben');
+      }
+    );
+  }
 }
