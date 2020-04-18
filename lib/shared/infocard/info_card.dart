@@ -13,8 +13,6 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 7,
-      margin: EdgeInsets.all(12.0),
-      color: Theme.of(context).backgroundColor,
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Row(
