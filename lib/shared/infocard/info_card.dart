@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flexed_mobile/models/student.dart';
 import 'package:flexed_mobile/shared/infocard/avatar.dart';
+import 'package:intl/intl.dart';
 
 class InfoCard extends StatelessWidget {
   final Student student;
@@ -22,7 +23,25 @@ class InfoCard extends StatelessWidget {
               padding: EdgeInsets.all(2.0),
               child: Avatar(initials: student.getInitials()),
             ),
-            Card(child: Text('Test'),),
+
+            Padding(
+              padding: EdgeInsets.only(left: 5),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(2),
+                    child: Text(student.getFullName(), style: Theme.of(context).textTheme.headline6),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(2),
+                    child: Text('Geburtstag: ' + DateFormat('dd.MM.yyyy').format(student.birthday), style: Theme.of(context).textTheme.subtitle1),
+                  ),
+                ]
+              ),
+            ),
+
           ],
         ),
       ),
