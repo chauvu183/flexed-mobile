@@ -1,0 +1,5 @@
+
+
+enum Rating {
+  BAD, QUITEBAD, AVERAGE, QUITEGOOD, GOOD, UNDEFINED
+}
