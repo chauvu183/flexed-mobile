@@ -1,6 +1,7 @@
 
 import 'package:flexed_mobile/api/repository/flexclass_repository.dart';
 import 'package:flexed_mobile/models/flexclass.dart';
+import 'package:flexed_mobile/pages/feedback/widgets/flexclass_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -56,6 +57,8 @@ class FlexClassListState extends State<FlexClassList> {
 
   _goToClassDetails(_class) {
     developer.log('Test! Ich habe Klasse ' + _class.title + ' angeklickt!');
+
+    Navigator.push(context, MaterialPageRoute(builder: (context) => FlexClassDetails()));
   }
 
 }
