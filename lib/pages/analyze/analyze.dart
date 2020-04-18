@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
-class Analyse extends StatefulWidget {
+import 'analyze_container.dart';
+
+class Analyze extends StatefulWidget {
   @override
-  _AnalyseState createState() => _AnalyseState();
+  _AnalyzeState createState() => _AnalyzeState();
 }
 
-class _AnalyseState extends State<Analyse> {
+class _AnalyzeState extends State<Analyze> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title : Text('Analyse'),
       ),
+      body: AnalyzeContainer(),
     );
   }
 }
