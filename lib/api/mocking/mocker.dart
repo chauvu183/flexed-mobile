@@ -103,7 +103,7 @@ Nunc at efficitur massa.''';
     Map<String, String> fields = getFields();
 
     fields.forEach((key, type) {
-      if (type == 'key') {
+      if (type == 'key' || type.startsWith('prefixed_key:')) {
         keys.putIfAbsent(key, () => 0);
       }
     });
@@ -119,6 +119,8 @@ Nunc at efficitur massa.''';
     fields.forEach((field, type) {
       if (type == 'key') {
         data.addAll({ field: _generateKey(field) });
+      } else if (type.startsWith('prefixed_key:')) {
+        data.addAll({ field: _generatePrefixedKey(field, type.split(':')[1]) });
       } else {
         data.addAll({ field: _generateByType(type) });
       }
@@ -130,9 +132,11 @@ Nunc at efficitur massa.''';
 
   /// Generates a new primary key
   int _generateKey(String field) {
-    int key = ++keys[field];
+    return ++keys[field];
+  }
 
-    return key;
+  String _generatePrefixedKey(String field, String prefix) {
+    return prefix + (++keys[field]).toString();
   }
 
   /// Generates a fitting value by type

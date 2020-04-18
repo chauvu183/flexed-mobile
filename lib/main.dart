@@ -1,3 +1,5 @@
+import 'package:flexed_mobile/api/repository/flexclass_mock_repository.dart';
+import 'package:flexed_mobile/api/repository/flexclass_repository.dart';
 import 'package:flexed_mobile/api/repository/student_mock_repository.dart';
 import 'package:flexed_mobile/api/repository/student_repository.dart';
 import 'package:flexed_mobile/pages/home.dart';
@@ -21,7 +23,11 @@ class MyApp extends StatelessWidget {
         // our services to all widgets where needed!
         Provider<StudentRepository>(
           create: (context) => new StudentMockRepository(),
-        )
+        ),
+
+        Provider<FlexClassRepository>(
+          create: (context) => new FlexClassMockRepository(),
+        ),
 
       ],
 
