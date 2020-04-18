@@ -46,6 +46,10 @@ class Student extends Model {
     return _getFirstLetter(firstName).toUpperCase() + _getFirstLetter(lastName).toUpperCase();
   }
 
+  String getFullName() {
+    return '$firstName $lastName';
+  }
+
   String toString() {
     return '$id: $firstName $lastName (${getInitials()})';
   }
