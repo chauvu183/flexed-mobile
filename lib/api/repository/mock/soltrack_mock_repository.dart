@@ -31,6 +31,10 @@ class SOLTrackMockRepository extends SOLTrackRepository {
     return dataSource.trackings.firstWhere((tracking) => tracking.id == key);
   }
 
+  Future<List<SOLTrack>> byStudent(Student student) async {
+      return dataSource.trackings.where((tracking) => tracking.student.id == student.id);
+  }
+
   Future<List<SOLTrack>> byStudents(List<Student> students) async {
     List<SOLTrack> result = [];
 
