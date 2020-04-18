@@ -1,9 +1,6 @@
-
-
-import 'package:flexed_mobile/api/mocking/flexclass_mocker.dart';
 import 'package:flexed_mobile/api/repository/flexclass_repository.dart';
+import 'package:flexed_mobile/api/repository/mock/mock_data_source.dart';
 import 'package:flexed_mobile/models/flexclass.dart';
-import 'package:flexed_mobile/models/student.dart';
 
 /// Student mock repository that generates fake data
 /// on initialization, that can then be worked on inside
@@ -11,17 +8,7 @@ import 'package:flexed_mobile/models/student.dart';
 /// real database.
 class FlexClassMockRepository extends FlexClassRepository {
 
-  /// Student mocker that generates fake data
-  FlexClassMocker _mocker = FlexClassMocker();
-
-  /// List of mocked students is persisted to this
-  /// list, so that changes can be made on actual data
-  List<FlexClass> _classes = [];
-
-  FlexClassMockRepository() {
-    // generate mock students on initialization
-    _classes = _mocker.mockFlexClasses(number: 5);
-  }
+  MockDataSource dataSource = MockDataSource.getInstance();
 
   @override
   Future<FlexClass> create(FlexClass model) async {
@@ -35,12 +22,12 @@ class FlexClassMockRepository extends FlexClassRepository {
 
   @override
   Future<List<FlexClass>> index() async {
-    return _classes;
+    return dataSource.flexclasses;
   }
 
   @override
   Future<FlexClass> show(int key) async {
-    return _classes.firstWhere((_class) => _class.id == key);
+    return dataSource.flexclasses.firstWhere((_class) => _class.id == key);
   }
 
   @override

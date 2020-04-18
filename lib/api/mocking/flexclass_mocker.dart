@@ -13,7 +13,7 @@ class FlexClassMocker extends Mocker {
     'created': 'date',
   };
 
-  /// Mocks a new student, then injects the generated
+  /// Mocks a new flex class, then injects the generated
   /// data into a model instance to return
   FlexClass mockFlexClass() {
     Map<String, Object> mockedData = this.mock();

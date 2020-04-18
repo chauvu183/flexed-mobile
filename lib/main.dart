@@ -1,6 +1,6 @@
-import 'package:flexed_mobile/api/repository/flexclass_mock_repository.dart';
 import 'package:flexed_mobile/api/repository/flexclass_repository.dart';
-import 'package:flexed_mobile/api/repository/student_mock_repository.dart';
+import 'package:flexed_mobile/api/repository/mock/flexclass_mock_repository.dart';
+import 'package:flexed_mobile/api/repository/mock/student_mock_repository.dart';
 import 'package:flexed_mobile/api/repository/student_repository.dart';
 import 'package:flexed_mobile/pages/home.dart';
 import 'package:flutter/material.dart';

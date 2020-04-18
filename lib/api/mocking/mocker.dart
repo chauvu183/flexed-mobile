@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flexed_mobile/types/data/subject_type.dart';
 import 'package:flexed_mobile/types/enums/gender.dart';
 import 'package:flexed_mobile/types/data/mail_type.dart';
 import 'package:flexed_mobile/types/data/phone_number_type.dart';
@@ -90,6 +91,12 @@ id, bibendum rutrum odio. Pellentesque eu massa imperdiet, condimentum est eu, f
 sapien, molestie interdum erat. Pellentesque et metus tincidunt, pretium enim at, imperdiet ipsum. 
 Nunc at efficitur massa.''';
 
+  final List<SubjectType> _subjects = [
+    SubjectType(title: 'Deutsch'),
+    SubjectType(title: 'Englisch'),
+    SubjectType(title: 'Mathematik'),
+  ];
+
   final _random = new Random();
 
 
@@ -151,6 +158,9 @@ Nunc at efficitur massa.''';
       case 'gender':
         return _generateGender();
 
+      case 'subject':
+        return _generateSubject();
+
       case 'date':
         return _generateDate();
 
@@ -178,6 +188,10 @@ Nunc at efficitur massa.''';
 
   Gender _generateGender() {
     return _genders[_random.nextInt(_genders.length)];
+  }
+
+  SubjectType _generateSubject() {
+    return _subjects[_random.nextInt(_subjects.length)];
   }
 
   DateTime _generateDate() {
