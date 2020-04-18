@@ -1,5 +1,5 @@
 import 'package:flexed_mobile/models/model.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 import 'student.dart';
 

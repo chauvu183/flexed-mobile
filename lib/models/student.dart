@@ -2,7 +2,7 @@ import 'package:flexed_mobile/models/model.dart';
 import 'package:flexed_mobile/types/data/mail_type.dart';
 import 'package:flexed_mobile/types/data/phone_number_type.dart';
 import 'package:flexed_mobile/types/enums/gender.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 /// Represents a student of a class
 class Student extends Model {
