@@ -1,11 +1,10 @@
 import 'package:flexed_mobile/pages/analyze/analyze.dart';
-import 'package:flexed_mobile/pages/bewertung.dart';
+import 'package:flexed_mobile/pages/feedback/feedback.dart';
 import 'package:flexed_mobile/pages/ziel-erfassen.dart';
 
 import 'package:flutter/material.dart';
 
 import './analyze/analyze.dart';
-import 'bewertung.dart';
 import 'ziel-erfassen.dart';
 import 'solTracking-home.dart';
 
@@ -19,12 +18,7 @@ class _HomeState extends State<Home> {
   // Properties & Variables needed
 
   int currentTab = 0; // to keep track of active tab index
-  final List<Widget> screens = [
-    SolTrackingHome(),
-    ZielErfassen(),
-    Bewertung(),
-    Analyze(),
-  ]; // to store nested tabs
+  
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = ZielErfassen(); // Our first view in viewport
 
@@ -114,7 +108,7 @@ class _HomeState extends State<Home> {
                     onPressed: () {
                       setState(() {
                         currentScreen =
-                            Bewertung(); // if user taps on this dashboard tab will be active
+                            FeedbackView(); // if user taps on this dashboard tab will be active
                         currentTab = 2;
                       });
                     },
