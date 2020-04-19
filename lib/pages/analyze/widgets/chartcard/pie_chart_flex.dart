@@ -28,7 +28,7 @@ class _PieChartFlexState extends State<PieChartFlex> {
           child: Column(
             children: [
               ChartInfo(
-                title: 'Klassenname',
+                title: 'F8',
               ),
               Row(
                 children: <Widget>[

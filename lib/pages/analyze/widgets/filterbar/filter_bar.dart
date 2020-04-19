@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'filter_button.dart';
+import './widgets/filter_button.dart';
 
 class FilterBar extends StatefulWidget {
   @override
@@ -25,6 +25,7 @@ class _FilterBarState extends State<FilterBar> {
             hint: 'Klasse',
             options: flexClasses,
           ),
+          MyVerticalDivider(),
           FilterButton(
             hint: 'Schüler',
             options: students,
@@ -34,5 +35,12 @@ class _FilterBarState extends State<FilterBar> {
         ],
       ),
     );
+  }
+}
+
+class MyVerticalDivider extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(color: Theme.of(context).primaryColorDark, width: 0.5, height: 30.0,);
   }
 }
