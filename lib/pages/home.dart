@@ -1,12 +1,12 @@
 import 'package:flexed_mobile/pages/analyze/analyze.dart';
 import 'package:flexed_mobile/pages/feedback/feedback.dart';
-import 'package:flexed_mobile/pages/ziel-erfassen.dart';
+import 'package:flexed_mobile/pages/dailyTracking/dailyTracking.dart';
 
 import 'package:flutter/material.dart';
 
 import './analyze/analyze.dart';
-import 'ziel-erfassen.dart';
-import 'solTracking-home.dart';
+import './dailyTracking/dailyTracking.dart';
+import './solTrackingHomePage/solTrackingHomepage.dart';
 
 
 class Home extends StatefulWidget {
@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
   int currentTab = 0; // to keep track of active tab index
   
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = ZielErfassen(); // Our first view in viewport
+  Widget currentScreen = DailyTracking(); // Our first view in viewport
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +29,11 @@ class _HomeState extends State<Home> {
         child: currentScreen,
         bucket: bucket,
       ),
-      floatingActionButton: FloatingActionButton(
+      /* floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {},
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, */
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 10,
@@ -75,7 +75,7 @@ class _HomeState extends State<Home> {
                     onPressed: () {
                       setState(() {
                         currentScreen =
-                            ZielErfassen(); // if user taps on this dashboard tab will be active
+                            DailyTracking(); // if user taps on this dashboard tab will be active
                         currentTab = 1;
                       });
                     },

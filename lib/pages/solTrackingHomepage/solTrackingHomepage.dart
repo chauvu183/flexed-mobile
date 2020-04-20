@@ -9,8 +9,8 @@ class _SolTrackingHomeState extends State<SolTrackingHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title : Text('SolTracking-home'),
+      body: Center(
+        child: Text("SOL Homepage"),
       ),
     );
   }
