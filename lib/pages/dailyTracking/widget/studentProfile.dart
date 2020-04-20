@@ -9,7 +9,7 @@ class _StudentProfileState extends State<StudentProfile> {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 100,
+      top: 50,
       child: Container(
         margin: const EdgeInsets.all(20),
         height: 260,

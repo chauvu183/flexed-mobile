@@ -18,7 +18,7 @@ class _DailyTrackingState extends State<DailyTracking> {
       top: 0,
       child: Container(
         color: Colors.grey,
-        height: 300,
+        height: 250,
         width: MediaQuery.of(context).size.width,
       ),
     );
