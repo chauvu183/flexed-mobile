@@ -18,7 +18,7 @@ class _DailyTrackingState extends State<DailyTracking> {
       top: 0,
       child: Container(
         color: Colors.grey,
-        height: 250,
+        height: 300,
         width: MediaQuery.of(context).size.width,
       ),
     );
@@ -27,6 +27,9 @@ class _DailyTrackingState extends State<DailyTracking> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: FilterBar(),
+      ),
         floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {},
@@ -40,9 +43,8 @@ class _DailyTrackingState extends State<DailyTracking> {
               width: MediaQuery.of(context).size.width,
            ),
            _backgroundColors(),
-            //StudentListDropDown(),
-            //StudentProfile(),
-            //SolTracking(),
+            StudentProfile(),
+            SolTracking(),
           ],
           )
       )

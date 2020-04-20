@@ -15,8 +15,19 @@ class _StudentProfileState extends State<StudentProfile> {
         height: 260,
         width: MediaQuery.of(context).size.width * 0.90,
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color: Theme.of(context).primaryColorLight,
           borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              blurRadius: 2.0, // has the effect of softening the shadow
+              spreadRadius: 2.0, // has the effect of extending the shadow
+              offset: Offset(
+                5.0, // horizontal, move right 10
+                5.0, // vertical, move down 10
+              ),
+            )
+          ],
         ),
         child: Container(
           padding: const EdgeInsets.all(20),
