@@ -2,8 +2,7 @@
 import 'package:flexed_mobile/api/repository/flexclass_repository.dart';
 import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
 import 'package:flexed_mobile/models/flexclass.dart';
-import 'package:flexed_mobile/pages/feedback/widgets/flexclass_details.dart';
-import 'package:flexed_mobile/pages/feedback/widgets/student_carousel.dart';
+import 'package:flexed_mobile/pages/feedback/widgets/student_carousel/student_carousel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
