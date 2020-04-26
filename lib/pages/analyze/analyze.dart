@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'analyze_container.dart';
+import 'widgets/filterbar/filter_bar.dart';
+import 'widgets/chartcard/pie_chart_flex.dart';
 
 class Analyze extends StatefulWidget {
   @override
@@ -14,7 +15,10 @@ class _AnalyzeState extends State<Analyze> {
       appBar: AppBar(
         title : Text('Analyse'),
       ),
-      body: AnalyzeContainer(),
+      body: Column(children: [
+        FilterBar(),
+        PieChartFlex(),
+      ]),
     );
   }
 }

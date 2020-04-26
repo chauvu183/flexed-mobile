@@ -15,7 +15,9 @@ class DropdownEntry extends StatelessWidget {
             fontSize: dropDownFontSize,
           ),
         ),
-        Divider(color: Theme.of(context).primaryColorDark,),
+        Divider(
+          color: Theme.of(context).primaryColorDark,
+        ),
       ],
     );
   }
