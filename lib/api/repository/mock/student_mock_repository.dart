@@ -12,6 +12,7 @@ class StudentMockRepository extends StudentRepository {
 
   @override
   Future<Student> create(Student model) async {
+    model.id = (++MockDataSource.STUDENT_ID);
     dataSource.students.add(model);
 
     return model;
