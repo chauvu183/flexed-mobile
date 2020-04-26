@@ -13,12 +13,16 @@ class SOLTrackMockRepository extends SOLTrackRepository {
 
   @override
   Future<SOLTrack> create(SOLTrack model) async {
-    throw UnimplementedError();
+    dataSource.trackings.add(model);
+
+    return model;
   }
 
   @override
-  Future<bool> delete(SOLTrack model) async {
-    throw UnimplementedError();
+  Future<bool> delete(int key) async {
+    dataSource.trackings.removeWhere((tracking) => tracking.id == key);
+
+    return true;
   }
 
   @override
@@ -47,7 +51,11 @@ class SOLTrackMockRepository extends SOLTrackRepository {
 
   @override
   Future<SOLTrack> update(SOLTrack model) async {
-    throw UnimplementedError();
+    SOLTrack existing = dataSource.trackings.firstWhere((student) => student.id == model.id);
+    int index = dataSource.trackings.indexOf(existing);
+    dataSource.trackings[index] = model;
+
+    return dataSource.trackings[index];
   }
 
 }

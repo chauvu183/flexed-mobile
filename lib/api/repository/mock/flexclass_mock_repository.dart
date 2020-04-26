@@ -12,12 +12,16 @@ class FlexClassMockRepository extends FlexClassRepository {
 
   @override
   Future<FlexClass> create(FlexClass model) async {
-    throw UnimplementedError();
+    dataSource.flexclasses.add(model);
+
+    return model;
   }
 
   @override
-  Future<bool> delete(FlexClass model) async {
-    throw UnimplementedError();
+  Future<bool> delete(int key) async {
+    dataSource.students.removeWhere((flexclasses) => flexclasses.id == key);
+
+    return true;
   }
 
   @override
@@ -32,7 +36,11 @@ class FlexClassMockRepository extends FlexClassRepository {
 
   @override
   Future<FlexClass> update(FlexClass model) async {
-    throw UnimplementedError();
+    FlexClass existing = dataSource.flexclasses.firstWhere((flexclass) => flexclass.id == model.id);
+    int index = dataSource.flexclasses.indexOf(existing);
+    dataSource.flexclasses[index] = model;
+
+    return dataSource.flexclasses[index];
   }
 
 }

@@ -12,12 +12,16 @@ class StudentMockRepository extends StudentRepository {
 
   @override
   Future<Student> create(Student model) async {
-    throw UnimplementedError();
+    dataSource.students.add(model);
+
+    return model;
   }
 
   @override
-  Future<bool> delete(Student model) async {
-    throw UnimplementedError();
+  Future<bool> delete(int key) async {
+    dataSource.students.removeWhere((student) => student.id == key);
+
+    return true;
   }
 
   @override
@@ -32,7 +36,11 @@ class StudentMockRepository extends StudentRepository {
 
   @override
   Future<Student> update(Student model) async {
-    throw UnimplementedError();
+    Student existing = dataSource.students.firstWhere((student) => student.id == model.id);
+    int index = dataSource.students.indexOf(existing);
+    dataSource.students[index] = model;
+
+    return dataSource.students[index];
   }
 
 }

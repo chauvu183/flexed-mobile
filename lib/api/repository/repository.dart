@@ -17,5 +17,5 @@ abstract class Repository<T extends Model> {
   Future<T> update(T model);
 
   /// Delete a given model. Returns true if succesful
-  Future<bool> delete(T model);
+  Future<bool> delete(int key);
 }
