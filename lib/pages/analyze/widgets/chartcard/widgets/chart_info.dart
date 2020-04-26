@@ -1,4 +1,3 @@
-import 'package:flexed_mobile/shared/infocard/avatar.dart';
 import 'package:flutter/material.dart';
 
 class ChartInfo extends StatelessWidget {
@@ -27,7 +26,7 @@ class ChartInfo extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 Text('Schüler: $numberStudents'),
-                Text('Bewertungen: $numberRatings'),
+                // Text('Bewertungen: $numberRatings'),
               ],
             ),
           ],

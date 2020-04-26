@@ -23,96 +23,88 @@ class _PieChartFlexState extends State<PieChartFlex> {
     return AspectRatio(
       aspectRatio: 1.0,
       child: Card(
-          color: Theme.of(context).primaryColorLight,
-          elevation: 5,
-          child: Column(
-            children: [
-              ChartInfo(
-                title: 'F8',
+        color: Theme.of(context).primaryColorLight,
+        elevation: 5,
+        child: Row(
+          children: <Widget>[
+            const SizedBox(
+              height: 18,
+            ),
+            Expanded(
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: PieChart(
+                  PieChartData(
+                      pieTouchData:
+                          PieTouchData(touchCallback: (pieTouchResponse) {
+                        setState(() {
+                          if (pieTouchResponse.touchInput is FlLongPressEnd ||
+                              pieTouchResponse.touchInput is FlPanEnd) {
+                            touchedIndex = -1;
+                          } else {
+                            touchedIndex = pieTouchResponse.touchedSectionIndex;
+                          }
+                        });
+                      }),
+                      borderData: FlBorderData(
+                        show: false,
+                      ),
+                      sectionsSpace: 0,
+                      centerSpaceRadius: 40,
+                      sections: showingSections()),
+                ),
               ),
-              Row(
-                children: <Widget>[
-                  const SizedBox(
-                    height: 18,
-                  ),
-                  Expanded(
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: PieChart(
-                        PieChartData(
-                            pieTouchData:
-                                PieTouchData(touchCallback: (pieTouchResponse) {
-                              setState(() {
-                                if (pieTouchResponse.touchInput
-                                        is FlLongPressEnd ||
-                                    pieTouchResponse.touchInput is FlPanEnd) {
-                                  touchedIndex = -1;
-                                } else {
-                                  touchedIndex =
-                                      pieTouchResponse.touchedSectionIndex;
-                                }
-                              });
-                            }),
-                            borderData: FlBorderData(
-                              show: false,
-                            ),
-                            sectionsSpace: 0,
-                            centerSpaceRadius: 40,
-                            sections: showingSections()),
-                      ),
-                    ),
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const <Widget>[
-                      Indicator(
-                        color: colorOne,
-                        text: '--',
-                        isSquare: true,
-                      ),
-                      SizedBox(
-                        height: 4,
-                      ),
-                      Indicator(
-                        color: colorTwo,
-                        text: '-o',
-                        isSquare: true,
-                      ),
-                      SizedBox(
-                        height: 4,
-                      ),
-                      Indicator(
-                        color: colorThree,
-                        text: 'oo',
-                        isSquare: true,
-                      ),
-                      SizedBox(
-                        height: 4,
-                      ),
-                      Indicator(
-                        color: colorFour,
-                        text: 'o+',
-                        isSquare: true,
-                      ),
-                      Indicator(
-                        color: colorFive,
-                        text: '++',
-                        isSquare: true,
-                      ),
-                      SizedBox(
-                        height: 18,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 28,
-                  ),
-                ],
-              ),
-            ],
-          )),
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const <Widget>[
+                Indicator(
+                  color: colorOne,
+                  text: '--',
+                  isSquare: true,
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Indicator(
+                  color: colorTwo,
+                  text: '-o',
+                  isSquare: true,
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Indicator(
+                  color: colorThree,
+                  text: 'oo',
+                  isSquare: true,
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Indicator(
+                  color: colorFour,
+                  text: 'o+',
+                  isSquare: true,
+                ),
+                Indicator(
+                  color: colorFive,
+                  text: '++',
+                  isSquare: true,
+                ),
+                SizedBox(
+                  height: 18,
+                ),
+              ],
+            ),
+            const SizedBox(
+              width: 28,
+            ),
+          ],
+        ),
+      ),
     );
   }
 

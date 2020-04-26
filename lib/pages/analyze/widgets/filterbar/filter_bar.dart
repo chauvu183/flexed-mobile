@@ -8,8 +8,11 @@ class FilterBar extends StatefulWidget {
 }
 
 class _FilterBarState extends State<FilterBar> {
-  List<String> flexClasses = ['Gesamt', 'F8', 'F9', 'F9+'];
-  List<String> students = ['Anton Artig', 'Berta Böse', 'Carmen Cool'];
+  static List<String> flexClasses = ['Gesamt', 'F8', 'F9', 'F9+'];
+  static List<String> studentsF8 = ['Anton Artig', 'Berta Böse', 'Carmen Cool'];
+  static List<String> studentsF9 = ['Detlef Diesig', 'Emilia Eifrig', 'Frederick Fuchsig'];
+  static List<String> studentsF9plus = ['Günther Geizig', 'Harald Handzahm', 'Ina Intensiv'];
+  List<String> students = studentsF8 + studentsF9 + studentsF9plus;
   List<String> dataOptions = ['Bewertung',];
 
   @override
@@ -25,7 +28,7 @@ class _FilterBarState extends State<FilterBar> {
             hint: 'Klasse',
             options: flexClasses,
           ),
-          MyVerticalDivider(),
+          // MyVerticalDivider(),
           FilterButton(
             hint: 'Schüler',
             options: students,
@@ -36,11 +39,10 @@ class _FilterBarState extends State<FilterBar> {
       ),
     );
   }
-}
-
-class MyVerticalDivider extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(color: Theme.of(context).primaryColorDark, width: 0.5, height: 30.0,);
-  }
-}
+} 
+// class MyVerticalDivider extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(color: Theme.of(context).primaryColorDark, width: 0.5, height: 30.0,);
+//   }
+// }
