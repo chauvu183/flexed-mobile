@@ -25,4 +25,9 @@ class FlexClass extends Model {
   void addMember(Student student) {
     members.add(student);
   }
+
+  @override
+  String toString() {
+    return "id: $id -> $title Schüler: ${members.length} created: $created";
+  }
 }
