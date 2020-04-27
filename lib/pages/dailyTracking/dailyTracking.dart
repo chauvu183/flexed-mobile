@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import './widget/filter.dart';
 import './widget/modulesDropdown.dart';
 import './widget/studentProfile.dart';
-import '../analyze/widgets/filterbar/filter_bar.dart';
+import '../analyze/filterbar/filter_bar.dart';
 import './widget/studentListDropdown.dart';
 
 class DailyTracking extends StatefulWidget {
