@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
+import './widget/classList.dart';
 
-import './widget/modulesDropdown.dart';
-import './widget/studentProfile.dart';
-import '../analyze/filterbar/filter_bar.dart';
-import './widget/studentListDropdown.dart';
 
 class DailyTracking extends StatefulWidget {
   @override
@@ -11,42 +8,16 @@ class DailyTracking extends StatefulWidget {
 }
 
 class _DailyTrackingState extends State<DailyTracking> {
-  bool available ;
-    Widget _backgroundColors() {
-    return Positioned(
-      top: 0,
-      child: Container(
-        color: Colors.grey,
-        height: 250,
-        width: MediaQuery.of(context).size.width,
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
-        title: FilterBar(),
+        title: Text("Ziel Erfassen"),
       ),
-        floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {},
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: SingleChildScrollView(
-        child: Stack(
-          children: <Widget>[
-            Container(  
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-           ),
-           _backgroundColors(),
-            StudentProfile(),
-            SolTracking(),
-          ],
-          )
-      )
+      body: ClassList(),
     );
   }
 }
+
+
