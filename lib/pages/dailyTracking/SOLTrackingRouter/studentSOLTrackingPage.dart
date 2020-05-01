@@ -90,23 +90,21 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
                 builder: (context,snapshot){
                 return Padding(
                   padding: EdgeInsets.all(12.0),
-                  child:   Padding(padding: EdgeInsets.all(12.0),
+                  child:   Expanded(
+                       child: SizedBox(
+                      height: 400.0,
                       child: soltrackingFormList.length <= 0
                       ? Center(child: Text("Keine SOL Trackings"))
                       : ListView.builder(
                         addAutomaticKeepAlives: true,
                         itemCount: soltrackingFormList.length,
                         itemBuilder: (_,i) => soltrackingFormList[i])
-                    
+                       )
                       ),
                   );
             },
             ),
             ),
-            Padding(
-                padding: EdgeInsets.all(12),
-                child: SOLTrackingForm(),
-              ),
               ]
            
             ),
