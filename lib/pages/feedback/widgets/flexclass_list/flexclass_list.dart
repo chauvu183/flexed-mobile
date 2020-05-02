@@ -2,6 +2,8 @@
 import 'package:flexed_mobile/api/repository/flexclass_repository.dart';
 import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
 import 'package:flexed_mobile/models/flexclass.dart';
+import 'package:flexed_mobile/models/soltrack.dart';
+import 'package:flexed_mobile/pages/feedback/widgets/flexclass_list/widgets/date_selection.dart';
 import 'package:flexed_mobile/pages/feedback/widgets/student_carousel/student_carousel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,22 +14,40 @@ import 'dart:developer' as developer;
 class FlexClassList extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return FlexClassListState();
+    return _FlexClassListState();
   }
 }
 
 
-class FlexClassListState extends State<FlexClassList> {
+class _FlexClassListState extends State<FlexClassList> {
+
+  DateTime _selectedDate = DateTime.now();
+
+  _onDateChanged(DateTime date) {
+    setState(() {
+      _selectedDate = date;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Provider.of<FlexClassRepository>(context).index(),
-      builder: (context, snapshot) {
-        return ListView(
-          children: _buildClassList(snapshot.data),
-        );
-      }
+    return Column(
+      children: <Widget>[
+        DateSelection(
+          initialDate: _selectedDate,
+          onDateChanged: _onDateChanged,
+        ),
+        Flexible(
+          child: FutureBuilder(
+            future: Provider.of<FlexClassRepository>(context).index(),
+            builder: (context, snapshot) {
+              return ListView(
+                children: _buildClassList(snapshot.data),
+              );
+            }
+          ),
+        ),
+      ],
     );
   }
 
@@ -46,7 +66,7 @@ class FlexClassListState extends State<FlexClassList> {
             backgroundColor: Theme.of(context).primaryColorLight,
           ),
           title: Text(_class.title),
-          subtitle: SOLTrackCount(_class),
+          subtitle: _buildClassSubtitle(_class),
           onTap: () => _goToClassDetails(_class),
         ),
       );
@@ -56,31 +76,7 @@ class FlexClassListState extends State<FlexClassList> {
   }
 
 
-  _goToClassDetails(_class) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => StudentCarousel(_class)));
-  }
-
-}
-
-
-class SOLTrackCount extends StatefulWidget {
-  final FlexClass flexClass;
-
-  SOLTrackCount(this.flexClass);
-
-  SOLTrackCountState createState() {
-    return SOLTrackCountState(flexClass);
-  }
-}
-
-class SOLTrackCountState extends State<SOLTrackCount> {
-
-  FlexClass flexClass;
-
-  SOLTrackCountState(this.flexClass);
-
-  @override
-  Widget build(BuildContext context) {
+  _buildClassSubtitle(FlexClass flexClass) {
     return FutureBuilder(
       future: Provider.of<SOLTrackRepository>(context).byStudents(flexClass.getMembers()),
       builder: (context, snapshot) {
@@ -88,8 +84,17 @@ class SOLTrackCountState extends State<SOLTrackCount> {
           return Text('Keine Aufgaben');
         }
 
-        return Text(snapshot.data.length.toString() + ' Aufgaben');
+        List<SOLTrack> trackings = snapshot.data;
+        trackings = trackings.where((tracking) => tracking.date.difference(_selectedDate).inDays == 0).toList();
+
+        return Text(trackings.length.toString() + ' Aufgaben');
       }
     );
   }
+
+
+  _goToClassDetails(_class) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => StudentCarousel( flexClass: _class, selectedDate: _selectedDate,)));
+  }
+
 }
