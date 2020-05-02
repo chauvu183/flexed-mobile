@@ -1,3 +1,4 @@
+import 'package:flexed_mobile/pages/example/repo_example.dart';
 import 'package:flutter/material.dart';
 import './widget/classList.dart';
 

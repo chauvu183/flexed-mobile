@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'dart:developer';
 
 class StudentSOLPage extends StatefulWidget {
 
@@ -31,6 +32,8 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
   List<SOLTrackingForm> soltrackingFormList = List();
   SOLTrackRepository _repo;
   List<SOLTrack> solEntries = List();
+  var currentLessonCount = 0;
+
 
   Future<List<SOLTrack>> _getTrackings() {
     return Provider.of<SOLTrackRepository>(context).byStudent(_student);
@@ -45,6 +48,7 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
         ///on form user deleted
   void _onDelete(SOLTrack _solTracking) {
     setState(() {
+      currentLessonCount = currentLessonCount - 1;
       var find = soltrackingFormList.firstWhere(
         (it) => it.solTracking == _solTracking,
         orElse: () => null,
@@ -57,12 +61,19 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
   void _onAddForm() {
     setState(() {
       var _solTracking = SOLTrack();
+      currentLessonCount = currentLessonCount + 1 ;
       soltrackingFormList.add( SOLTrackingForm(
         solTracking: _solTracking,
         student: _student,
+        lessonNumber: currentLessonCount,
         onDelete: () => _onDelete(_solTracking),
       ));
     });
+
+    _repo.create(
+        soltrackingFormList[soltrackingFormList.length-1].solTracking
+      ).then((_) => _refreshTrackings());
+
   }
 
 
@@ -88,9 +99,9 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
                 padding: EdgeInsets.all(12),
                 child: FutureBuilder(future: _getTrackings(),
                 builder: (context,snapshot){
-                return Padding(
-                  padding: EdgeInsets.all(12.0),
-                  child:   Expanded(
+                return Row(
+                  children: <Widget>[  
+                    Expanded(
                        child: SizedBox(
                       height: 400.0,
                       child: soltrackingFormList.length <= 0
@@ -101,6 +112,7 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
                         itemBuilder: (_,i) => soltrackingFormList[i])
                        )
                       ),
+                      ]
                   );
             },
             ),

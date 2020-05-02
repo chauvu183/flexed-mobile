@@ -15,10 +15,11 @@ class SOLTrackingForm extends StatefulWidget {
 
   final SOLTrack solTracking;
   final Student student;
+  final int lessonNumber;
 
   final OnDelete onDelete;
 
-  SOLTrackingForm({Key key, this.solTracking,this.student,this.onDelete}) : super(key: key);
+  SOLTrackingForm({Key key, this.solTracking,this.student,this.lessonNumber,this.onDelete}) : super(key: key);
   @override
   _SOLTrackingFormState createState() => _SOLTrackingFormState();
 }
@@ -40,7 +41,7 @@ class _SOLTrackingFormState extends State<SOLTrackingForm> {
             AppBar(
               leading: Icon(Icons.timer),
               elevation: 0,
-              title: Text('Stunde '), // TODO : update the time
+              title: Text('Stunde ' + widget.lessonNumber.toString()), // TODO : update the time
               backgroundColor: Colors.deepPurple,
               centerTitle: true,
               actions: <Widget>[
@@ -71,7 +72,7 @@ class _SOLTrackingFormState extends State<SOLTrackingForm> {
                           dropdownValue = newValue;
                           widget.solTracking.subject = SubjectType(title: newValue);
                           widget.solTracking.date = DateTime.now();
-                          widget.solTracking.lessonNumber = 1;
+                          widget.solTracking.lessonNumber = widget.lessonNumber;
                           widget.solTracking.student = widget.student;
                         });
                       },
