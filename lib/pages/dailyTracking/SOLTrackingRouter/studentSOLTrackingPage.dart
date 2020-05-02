@@ -99,11 +99,6 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
     return tiles;
   }
 
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     _repo = Provider.of<SOLTrackRepository>(context);
@@ -142,9 +137,9 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
             },
             ),
             ),
-       /*      Padding(
+             Padding(
                 padding: EdgeInsets.all(12),
-                child:  Expanded(
+                child:  Container(
                         child: SizedBox(
                         height: 100.0, 
                         child: ListView(
@@ -152,7 +147,7 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
                           ),
                           )
                           )
-                          ) */
+              ) 
               ]
            
             ),
@@ -160,16 +155,18 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
               top: 480,
               left: 320,
               child: FloatingActionButton(
+                heroTag: "btn1",
                 child: Icon(Icons.add),
                 onPressed: _onAddForm)
               ),
-                Positioned(
+                 Positioned(
               top: 480,
               left: 50,
               child: FloatingActionButton(
                 child: Icon(Icons.save),
+                  heroTag: "btn2",
                 onPressed: _onSave())
-              )  
+              )   
         ],
         ),
     );
