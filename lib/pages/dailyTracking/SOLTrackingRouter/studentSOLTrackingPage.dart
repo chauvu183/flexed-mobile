@@ -2,8 +2,6 @@ import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
 import 'package:flexed_mobile/models/student.dart';
 import 'package:flexed_mobile/pages/dailyTracking/widget/moduleSelection.dart';
-import 'package:flexed_mobile/pages/dailyTracking/widget/solDailyTracking.dart';
-
 import 'package:flexed_mobile/shared/infocard/info_card.dart';
 import 'package:flexed_mobile/types/data/subject_type.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'dart:developer';
+import 'dart:convert';
 
 class StudentSOLPage extends StatefulWidget {
 
@@ -32,6 +31,7 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
   List<SOLTrackingForm> soltrackingFormList = List();
   SOLTrackRepository _repo;
   List<SOLTrack> solEntries = List();
+
   var currentLessonCount = 0;
 
 
@@ -69,19 +69,44 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
         onDelete: () => _onDelete(_solTracking),
       ));
     });
-
-    _repo.create(
-        soltrackingFormList[soltrackingFormList.length-1].solTracking
-      ).then((_) => _refreshTrackings());
-
+    
   }
+
+    ///on save forms
+  _onSave() {
+    if (soltrackingFormList.length > 0) {
+        var data = soltrackingFormList.map((it) => it.solTracking).toList();
+            for(var i=0; i< data.length;i++){
+                _repo.create(
+                    SOLTrack(
+                  student: data[i].student,
+                  date:    data[i].date,
+                  lessonNumber: data[i].lessonNumber,
+                  subject: data[i].subject
+                )
+                ).then((_) => _refreshTrackings());
+            }      
+    }
+  }
+
+   // builds a list of ListTile elements to display in the ListView below
+  _buildListTiles() {
+    List<ListTile> tiles = List();
+
+    for(int i = 0; i < solEntries.length; i++) {
+      tiles.add(ListTile(title: Text(solEntries[i].subject.toString())));
+    }
+    return tiles;
+  }
+
+
+
+
 
 
   @override
   Widget build(BuildContext context) {
     _repo = Provider.of<SOLTrackRepository>(context);
-
-
     return SingleChildScrollView(
       child: Stack(
         children: <Widget>[
@@ -117,16 +142,34 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
             },
             ),
             ),
+       /*      Padding(
+                padding: EdgeInsets.all(12),
+                child:  Expanded(
+                        child: SizedBox(
+                        height: 100.0, 
+                        child: ListView(
+                            children: _buildListTiles(),
+                          ),
+                          )
+                          )
+                          ) */
               ]
            
             ),
             Positioned(
               top: 480,
-              left: 300,
+              left: 320,
               child: FloatingActionButton(
                 child: Icon(Icons.add),
                 onPressed: _onAddForm)
-              )
+              ),
+                Positioned(
+              top: 480,
+              left: 50,
+              child: FloatingActionButton(
+                child: Icon(Icons.save),
+                onPressed: _onSave())
+              )  
         ],
         ),
     );
