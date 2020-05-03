@@ -1,9 +1,12 @@
+import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
 import 'package:flexed_mobile/types/enums/rating.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:developer' as developer;
+
+import 'package:provider/provider.dart';
 
 class RatingSheet extends StatefulWidget {
 
@@ -21,16 +24,26 @@ class RatingSheet extends StatefulWidget {
 
 class _RatingSheetState extends State<RatingSheet> {
 
+  SOLTrackRepository _repo;
+
   SOLTrack tracking;
 
   Rating _selectedRating;
 
-  _RatingSheetState(this.tracking);
+  _RatingSheetState(this.tracking) {
+    _selectedRating = this.tracking.rating;
+  }
 
   _selectRating(Rating rating) {
     setState(() {
       _selectedRating = rating;
     });
+  }
+
+  _submitRating() {
+    tracking.rating = _selectedRating;
+
+    _repo.update(tracking).then((tracking) => Navigator.pop(context, tracking.rating));
   }
 
   _buildRatingButton({Icon icon, Rating rating}) {
@@ -44,6 +57,8 @@ class _RatingSheetState extends State<RatingSheet> {
 
   @override
   Widget build(BuildContext context) {
+    _repo = Provider.of<SOLTrackRepository>(context);
+
     return Container(
       height: 215.0,
       child: Container(
@@ -90,7 +105,7 @@ class _RatingSheetState extends State<RatingSheet> {
                   child: RaisedButton(
                     child: Text('Bestätigen', style: TextStyle(fontSize: 18.0, color: Colors.white),),
                     color: Theme.of(context).accentColor,
-                    onPressed: _selectedRating == null ? null : () => null,
+                    onPressed: _selectedRating == null ? null : () => _submitRating(),
                   ),
                 ),
               ),
