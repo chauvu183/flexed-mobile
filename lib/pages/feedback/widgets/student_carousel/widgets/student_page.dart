@@ -3,24 +3,22 @@ import 'package:flexed_mobile/models/soltrack.dart';
 import 'package:flexed_mobile/models/student.dart';
 import 'package:flexed_mobile/pages/feedback/widgets/student_carousel/widgets/rating_sheet.dart';
 import 'package:flexed_mobile/shared/infocard/info_card.dart';
-import 'package:flexed_mobile/types/enums/rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'dart:developer' as developer;
-
 class StudentPage extends StatefulWidget {
 
-  final Student student;
-  final DateTime filteredDate;
+  Student _student;
 
-  StudentPage({ @required this.student, @required this.filteredDate }) {}
+  StudentPage(Student student) {
+    _student = student;
+  }
 
   @override
   State<StatefulWidget> createState() {
-    return _StudentPageState(this.student, this.filteredDate);
+    return _StudentPageState(_student);
   }
 
 }
@@ -29,45 +27,14 @@ class StudentPage extends StatefulWidget {
 class _StudentPageState extends State<StudentPage> {
 
   Student _student;
-  DateTime _date;
 
-  _StudentPageState(Student student, DateTime date) {
+  _StudentPageState(Student student) {
     _student = student;
-    _date = date;
   }
 
 
-  Future<List<SOLTrack>> _getTrackings() async {
-    List<SOLTrack> _trackings;
-
-    await Provider.of<SOLTrackRepository>(context).byStudent(_student).then((trackings) => {
-      _trackings = trackings.where((tracking) => tracking.date.difference(_date).inDays == 0).toList()
-    });
-
-    return _trackings;
-  }
-
-
-  _ratingSentiment(Rating rating) {
-    switch(rating) {
-      case Rating.GOOD:
-        return Icon(Icons.sentiment_very_satisfied);
-      
-      case Rating.QUITEGOOD:
-        return Icon(Icons.sentiment_satisfied);
-
-      case Rating.AVERAGE:
-        return Icon(Icons.sentiment_neutral);
-
-      case Rating.QUITEBAD:
-        return Icon(Icons.sentiment_dissatisfied);
-
-      case Rating.BAD:
-        return Icon(Icons.sentiment_very_dissatisfied);
-
-      default:
-        return Icon(Icons.error);
-    }
+  Future<List<SOLTrack>> _getTrackings() {
+    return Provider.of<SOLTrackRepository>(context).byStudent(_student);
   }
 
 
@@ -78,7 +45,7 @@ class _StudentPageState extends State<StudentPage> {
       return list;
     }
 
-    trackings.forEach((tracking) {
+    trackings.forEach((tracking) { 
       list.add(
         ListTile(
           leading: CircleAvatar(
@@ -87,10 +54,7 @@ class _StudentPageState extends State<StudentPage> {
           ),
           title: Text(tracking.subject.title),
           subtitle: Text('Begonnen: ' + DateFormat('dd.MM.yyyy').format(tracking.date)),
-          trailing: tracking.rating == Rating.UNDEFINED ? null : _ratingSentiment(tracking.rating),
-          onTap: () => showModalBottomSheet(context: context, builder: (context) => RatingSheet(tracking)).then((value) => {
-            setState(() => null)
-          }),
+          onTap: () => showModalBottomSheet(context: context, builder: (context) => RatingSheet(tracking)),
         ),
       );
     });

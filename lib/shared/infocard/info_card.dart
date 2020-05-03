@@ -32,6 +32,10 @@ class InfoCard extends StatelessWidget {
                     padding: EdgeInsets.all(2),
                     child: Text(student.getFullName(), style: Theme.of(context).textTheme.headline6),
                   ),
+                  Padding(
+                    padding: EdgeInsets.all(2),
+                    child: Text('Geburtstag: ' + DateFormat('dd.MM.yyyy').format(student.birthday), style: Theme.of(context).textTheme.subtitle1),
+                  ),
                 ]
               ),
             ),
