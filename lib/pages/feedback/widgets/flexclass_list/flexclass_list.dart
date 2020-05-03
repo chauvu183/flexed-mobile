@@ -94,7 +94,7 @@ class _FlexClassListState extends State<FlexClassList> {
 
 
   _goToClassDetails(_class) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => StudentCarousel( flexClass: _class, selectedDate: _selectedDate,)));
+    Navigator.push(context, CupertinoPageRoute(builder: (context) => StudentCarousel( flexClass: _class, selectedDate: _selectedDate,)));
   }
 
 }
