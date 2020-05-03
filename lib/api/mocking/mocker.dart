@@ -195,9 +195,7 @@ Nunc at efficitur massa.''';
   }
 
   DateTime _generateDate() {
-    DateTime now = DateTime.now();
-
-    return new DateTime(now.year, now.month, now.day);
+    return DateTime.now();
   }
 
 

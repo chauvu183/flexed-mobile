@@ -1,5 +1,4 @@
-
-import 'package:flexed_mobile/pages/feedback/widgets/flexclass_list/flexclass_list.dart';
+import 'package:flexed_mobile/pages/feedback/widgets/flexclass_list.dart';
 import 'package:flutter/material.dart';
 
 class FeedbackView extends StatefulWidget {

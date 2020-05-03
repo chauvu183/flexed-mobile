@@ -6,7 +6,6 @@ import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
 import 'package:flexed_mobile/api/repository/student_repository.dart';
 import 'package:flexed_mobile/pages/home.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:provider/provider.dart';
 
@@ -42,15 +41,6 @@ class MyApp extends StatelessWidget {
       // all provided values listed above
       child: MaterialApp(
           title: 'Flutter Demo',
-
-          localizationsDelegates:  [
-            GlobalMaterialLocalizations.delegate,
-          ],
-
-          supportedLocales: [
-            const Locale('de'),
-          ],
-
           theme: ThemeData(
             brightness: Brightness.light,
 
