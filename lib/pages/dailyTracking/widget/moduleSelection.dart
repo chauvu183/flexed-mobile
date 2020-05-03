@@ -70,7 +70,7 @@ class _SOLTrackingFormState extends State<SOLTrackingForm> {
                       onChanged: (String newValue) {
                         setState(() {
                           dropdownValue = newValue;
-                          widget.solTracking.subject = SubjectType(title: newValue);
+                          widget.solTracking.subject = SubjectType(title: dropdownValue);
                           widget.solTracking.date = DateTime.now();
                           widget.solTracking.lessonNumber = widget.lessonNumber;
                           widget.solTracking.student = widget.student;

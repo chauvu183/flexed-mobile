@@ -73,7 +73,8 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
   }
 
     ///on save forms
-  _onSave() {
+  _onSaveToRepo() {
+  
     if (soltrackingFormList.length > 0) {
         var data = soltrackingFormList.map((it) => it.solTracking).toList();
             for(var i=0; i< data.length;i++){
@@ -87,6 +88,7 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
                 ).then((_) => _refreshTrackings());
             }      
     }
+   // log(soltrackingFormList.toString());
   }
 
    // builds a list of ListTile elements to display in the ListView below
@@ -163,9 +165,9 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
               top: 480,
               left: 50,
               child: FloatingActionButton(
-                child: Icon(Icons.save),
+                  child: Icon(Icons.save),
                   heroTag: "btn2",
-                onPressed: _onSave())
+                  onPressed: _onSaveToRepo)
               )   
         ],
         ),
