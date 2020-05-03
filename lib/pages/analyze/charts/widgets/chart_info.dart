@@ -5,10 +5,6 @@ class ChartInfo extends StatelessWidget {
   final int numberStudents;
   final double numberRatings;
 
-  static const Color colorOne = Color(0xff0293ee);
-  static const Color colorTwo = Color(0xfff8b250);
-  static const Color colorThree = Color(0xff5ac18e);
-
   ChartInfo({
     @required this.title,
     this.numberStudents,
