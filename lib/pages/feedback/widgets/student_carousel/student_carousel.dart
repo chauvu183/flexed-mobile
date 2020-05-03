@@ -1,28 +1,27 @@
-import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
 import 'package:flexed_mobile/models/flexclass.dart';
-import 'package:flexed_mobile/models/soltrack.dart';
 import 'package:flexed_mobile/models/student.dart';
 import 'package:flexed_mobile/pages/feedback/widgets/student_carousel/widgets/page_indicator.dart';
 import 'package:flexed_mobile/pages/feedback/widgets/student_carousel/widgets/student_page.dart';
-import 'package:flexed_mobile/shared/infocard/info_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
-import 'package:provider/provider.dart';
 class StudentCarousel extends StatefulWidget {
 
   final FlexClass flexClass;
+  final DateTime selectedDate;
 
-  StudentCarousel(this.flexClass);
+  StudentCarousel({ @required this.flexClass, @required this.selectedDate });
 
   _StudentCarouselState createState() {
-    return _StudentCarouselState(flexClass);
+    return _StudentCarouselState(flexClass: flexClass, date: selectedDate);
   }
 }
 
 
 class _StudentCarouselState extends State<StudentCarousel> {
+
+  DateTime date;
 
   FlexClass flexClass;
   List<Student> _students;
@@ -30,7 +29,7 @@ class _StudentCarouselState extends State<StudentCarousel> {
   int _activePage = 0;
   final PageController controller = PageController(initialPage: 0);
 
-  _StudentCarouselState(this.flexClass) {
+  _StudentCarouselState({ @required this.flexClass, @required this.date }) {
     _students = flexClass.getMembers();
   }
 
@@ -38,7 +37,7 @@ class _StudentCarouselState extends State<StudentCarousel> {
     List<Widget> pages = List();
 
     _students.forEach((student) { 
-      pages.add(StudentPage(student));
+      pages.add(StudentPage(student: student, filteredDate: date,));
     });
 
     return pages;
@@ -54,7 +53,13 @@ class _StudentCarouselState extends State<StudentCarousel> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title : Text(flexClass.title),
+        title : Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(flexClass.title, style: TextStyle(fontSize: 18.0),),
+            Text(DateFormat('dd.MM.yyyy').format(date), style: TextStyle(fontSize: 13.0),)
+          ]
+        ),
       ),
       body: Container(
         child: Column(
