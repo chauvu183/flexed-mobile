@@ -92,13 +92,22 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
   }
 
    // builds a list of ListTile elements to display in the ListView below
-  _buildListTiles() {
-    List<ListTile> tiles = List();
-
-    for(int i = 0; i < solEntries.length; i++) {
-      tiles.add(ListTile(title: Text(solEntries[i].subject.toString())));
+  _buildSOLListForm(List<SOLTrack> trackings) {
+  
+    if (trackings == null) {
+      return  soltrackingFormList;
     }
-    return tiles;
+
+    trackings.forEach((element) {
+      soltrackingFormList.add(
+        SOLTrackingForm(
+        solTracking: element,
+        student: _student,
+        lessonNumber: currentLessonCount,
+        onDelete: () => _onDelete(element),)
+      );
+    });
+    return soltrackingFormList;
   }
 
   @override
@@ -126,30 +135,25 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
                     Expanded(
                        child: SizedBox(
                       height: 400.0,
-                      child: soltrackingFormList.length <= 0
+                      child:
+                       ListView(
+                        ///addAutomaticKeepAlives: true,
+                        children: _buildSOLListForm(snapshot.data)
+                        ,)
+                    
+                      /* soltrackingFormList.length <= 0
                       ? Center(child: Text("Keine SOL Trackings"))
                       : ListView.builder(
                         addAutomaticKeepAlives: true,
                         itemCount: soltrackingFormList.length,
-                        itemBuilder: (_,i) => soltrackingFormList[i])
+                        itemBuilder: (_,i) => soltrackingFormList[i]) */
                        )
                       ),
                       ]
                   );
             },
             ),
-            ),
-             Padding(
-                padding: EdgeInsets.all(12),
-                child:  Container(
-                        child: SizedBox(
-                        height: 100.0, 
-                        child: ListView(
-                            children: _buildListTiles(),
-                          ),
-                          )
-                          )
-              ) 
+            )
               ]
            
             ),
