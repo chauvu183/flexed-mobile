@@ -1,5 +1,7 @@
-import 'dart:io';
-
+import 'package:flexed_mobile/pages/analyze/charts/BarChart.dart';
+import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/chart_class_info.dart';
+import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/ichart_info.dart';
+import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/chart_student_info.dart';
 import 'package:flexed_mobile/pages/analyze/logic/soltrack_calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +11,6 @@ import '../../api/repository/soltrack_repository.dart';
 import '../../models/flexclass.dart';
 import '../../models/soltrack.dart';
 import '../../models/student.dart';
-import 'charts/sol_chart.dart';
-import 'charts/chart.dart';
 
 class Analyze extends StatefulWidget {
   @override
@@ -24,7 +24,7 @@ class _AnalyzeState extends State<Analyze> {
   Student _selectedStudent;
   List<FlexClass> _createdClasses = List();
   List<SOLTrack> _trackings = List();
-  Chart _chart;
+  BarChart _chart;
   bool showChart = false;
 
   @override
@@ -48,111 +48,106 @@ class _AnalyzeState extends State<Analyze> {
       _refreshTrackingsByClass(_selectedClass.getMembers());
       _chart = _buildChart(SOLTrackCalculator.analyzeTrackings(_trackings));
     } else {
-       _chart = _buildChart(SOLTrackCalculator.analyzeTrackings(_trackings));
+      _chart = _buildChart(SOLTrackCalculator.analyzeTrackings(_trackings));
     }
-    
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-          child: Row(
-            children: [
-              DropdownButton<FlexClass>(
-                value: _selectedClass,
-                hint: Text("Klasse"),
-                icon: Icon(
-                  Icons.arrow_drop_down,
-                  color: Theme.of(context).accentColor,
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom : 5.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            child: Row(
+              children: [
+                DropdownButton<FlexClass>(
+                  value: _selectedClass ?? null,
+                  hint: Text("Klasse"),
+                  icon: Icon(
+                    Icons.arrow_drop_down,
+                    color: Theme.of(context).accentColor,
+                  ),
+                  iconSize: 24,
+                  elevation: 16,
+                  style: TextStyle(color: Theme.of(context).primaryColorDark),
+                  underline: Container(
+                    height: 2,
+                    color: Theme.of(context).accentColor,
+                  ),
+                  onChanged: (FlexClass newSelectedClass) {
+                    setState(() {
+                      _selectedClass = newSelectedClass;
+                      _selectedStudent = null;
+                      _refreshTrackingsByClass(_selectedClass.getMembers());
+                      _chart = _buildChart(
+                          SOLTrackCalculator.analyzeTrackings(_trackings));
+                    });
+                  },
+                  items: _createdClasses
+                      .map<DropdownMenuItem<FlexClass>>((FlexClass value) {
+                    return DropdownMenuItem<FlexClass>(
+                      value: value,
+                      child: Text(value.title),
+                    );
+                  }).toList(),
                 ),
-                iconSize: 24,
-                elevation: 16,
-                style: TextStyle(color: Theme.of(context).primaryColorDark),
-                underline: Container(
-                  height: 2,
-                  color: Theme.of(context).accentColor,
+                VerticalDivider(),
+                DropdownButton<Student>(
+                  value: _selectedStudent,
+                  hint: Text("Schüler"),
+                  icon: Icon(
+                    Icons.arrow_drop_down,
+                    color: Theme.of(context).accentColor,
+                  ),
+                  iconSize: 24,
+                  style: TextStyle(color: Theme.of(context).primaryColorDark),
+                  underline: Container(
+                    height: 2,
+                    color: Theme.of(context).accentColor,
+                  ),
+                  onChanged: (Student newStudent) {
+                    setState(() {
+                      _selectedStudent = newStudent;
+                      _refreshTrackingsByStudent(_selectedStudent);
+                      _chart = _buildChart(
+                          SOLTrackCalculator.analyzeTrackings(_trackings));
+                    });
+                  },
+                  items: _selectedClass
+                      .getMembers()
+                      .map<DropdownMenuItem<Student>>((Student student) {
+                    return DropdownMenuItem<Student>(
+                      value: student,
+                      child: Text(student.getFullName()),
+                    );
+                  }).toList(),
                 ),
-                onChanged: (FlexClass newSelectedClass) {
-                  setState(() {
-                    _selectedClass = newSelectedClass;
-                    _selectedStudent = null;
-                    _refreshTrackingsByClass(_selectedClass.getMembers());
-                    _chart = _buildChart(
-                        SOLTrackCalculator.analyzeTrackings(_trackings));
-                  });
-                },
-                items: _createdClasses
-                    .map<DropdownMenuItem<FlexClass>>((FlexClass value) {
-                  return DropdownMenuItem<FlexClass>(
-                    value: value,
-                    child: Text(value.title),
-                  );
-                }).toList(),
-              ),
-              VerticalDivider(),
-              DropdownButton<Student>(
-                value: _selectedStudent,
-                hint: Text("Schüler"),
-                icon: Icon(
-                  Icons.arrow_drop_down,
-                  color: Theme.of(context).accentColor,
-                ),
-                iconSize: 24,
-                style: TextStyle(color: Theme.of(context).primaryColorDark),
-                underline: Container(
-                  height: 2,
-                  color: Theme.of(context).accentColor,
-                ),
-                onChanged: (Student newStudent) {
-                  setState(() {
-                    _selectedStudent = newStudent;
-                    _refreshTrackingsByStudent(_selectedStudent);
-                    _chart = _buildChart(
-                        SOLTrackCalculator.analyzeTrackings(_trackings));
-                  });
-                },
-                items: _selectedClass
-                    .getMembers()
-                    .map<DropdownMenuItem<Student>>((Student student) {
-                  return DropdownMenuItem<Student>(
-                    value: student,
-                    child: Text(student.getFullName()),
-                  );
-                }).toList(),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
-          child: Column(
-            children: [
-              showChart ? _chart : new Container(width: 0, height: 0),
-            ],
-          ),
-        ),
-      ],
+          showChart ? _chart : new Container(width: 0, height: 0),      
+        ],
+      ),
     );
   }
 
-  _refreshFlexClass() {
-    _flexClassRepository
+  _refreshFlexClass() async {
+    await _flexClassRepository
         .index()
-        .then((flexclasses) => setState(() => {
-          _createdClasses = flexclasses
-          }
-          ));
+        .then((flexclasses) => setState(() => {_createdClasses = flexclasses}));
   }
 
-  _refreshTrackingsByClass(List<Student> students) {
-    _trackRepository.byStudents(students).then((trackings) => {
+  _refreshTrackingsByClass(List<Student> students) async {
+    await _trackRepository.byStudents(students).then((trackings) => {
           _trackings = trackings,
           _chart = _buildChart(SOLTrackCalculator.analyzeTrackings(_trackings))
         });
     showChart = true;
   }
 
-  _refreshTrackingsByStudent(Student student) {
-    _trackRepository
+  _refreshTrackingsByStudent(Student student) async {
+    await _trackRepository
         .byStudent(student)
         .then((trackings) => {_trackings = trackings});
     showChart = true;
@@ -167,20 +162,19 @@ class _AnalyzeState extends State<Analyze> {
       _selectedStudent == null
           ? _refreshTrackingsByClass(_selectedClass.getMembers())
           : _refreshTrackingsByStudent(_selectedStudent);
-      print("trackings updated -> $_trackings");
       return CircularProgressIndicator();
     }
     return _buildContent();
   }
 
-  SOLChart _buildChart(Map<String, int> trackings) {
-    print(trackings);
-    return SOLChart(
-      flexClass: _selectedClass,
-      total: trackings['total'].toDouble(),
-      german: trackings['deutsch'].toDouble(),
-      english: trackings['englisch'].toDouble(),
-      math: trackings['mathematik'].toDouble(),
+  BarChart _buildChart(Map<String, int> trackings) {
+    IChartInfo chartInfo;
+    _selectedStudent == null ? 
+      chartInfo = ChartClassInfo(title: _selectedClass.title, numberStudents: _selectedClass.getMembers().length, numberRatings: trackings['total']) :
+      chartInfo = ChartStudentInfo(fullName: _selectedStudent.getFullName(), mail: _selectedStudent.mail, numberRatings: trackings['total']);
+    return BarChart(
+      trackings: trackings,
+      chartInfo: chartInfo,
     );
   }
 }
