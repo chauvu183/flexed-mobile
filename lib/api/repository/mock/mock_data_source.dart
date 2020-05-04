@@ -11,7 +11,7 @@ class MockDataSource {
 
   static final int NUMBER_CLASSES     = 2;
   static final int STUDENTS_PER_CLASS = 3;
-  static final int TRACKING_PER_CLASS = 2;
+  static final int TRACKING_PER_CLASS = 25;
 
   static final MockDataSource instance = MockDataSource();
 
