@@ -195,7 +195,7 @@ Nunc at efficitur massa.''';
   }
 
   DateTime _generateDate() {
-    DateTime now = DateTime.now();
+    DateTime now = DateTime.now().subtract(new Duration(days: _random.nextInt(14)));
 
     return new DateTime(now.year, now.month, now.day);
   }
