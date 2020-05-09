@@ -20,4 +20,8 @@ class MailType {
     return _pattern.hasMatch(_value);
   }
 
+  @override
+  String toString() {
+    return _value;
+  }
 }

@@ -2,28 +2,52 @@ import 'package:flexed_mobile/pages/analyze/charts/widgets/indicator.dart';
 import 'package:flutter/material.dart';
 
 class IndicatorCard extends StatelessWidget {
-  final List<String> indicatorNames;
-  final List<Color> usedColors;
-
-  IndicatorCard({this.indicatorNames, this.usedColors});
+  static const Color colorGerman = Color(0xff0293ee);
+  static const Color colorEnglish = Color(0xfff8b250);
+  static const Color colorMath = Color(0xff5ac18e);
+  static const Color colorTotal = Colors.red;
 
   @override
   Widget build(BuildContext context) {
-    List<Indicator> indicators;
-
-    for (var i = 0; i < indicators.length - 1; i++) {
-      indicators.add(Indicator(
-        text: indicatorNames[i],
-        color: usedColors[i],
-        isSquare: true,
-      ));
-    }
-
-    return Card(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       child: Row(
-        children: [
-          ...indicators,
-        ],
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Indicator(
+              color: colorGerman,
+              text: 'Deutsch',
+              isSquare: true,
+            ),
+            SizedBox(
+              height: 4,
+            ),
+            Indicator(
+              color: colorEnglish,
+              text: 'Englisch',
+              isSquare: true,
+            ),
+            SizedBox(
+              height: 4,
+            ),
+            Indicator(
+              color: colorMath,
+              text: 'Mathe',
+              isSquare: true,
+            ),
+            SizedBox(
+              height: 4,
+            ),
+            Indicator(
+              color: colorTotal,
+              text: 'Gesamt',
+              isSquare: true,
+            ),
+            SizedBox(
+              height: 4,
+            ),
+          ],
       ),
     );
   }

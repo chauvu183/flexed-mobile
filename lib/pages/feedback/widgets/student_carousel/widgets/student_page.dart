@@ -112,32 +112,28 @@ class _StudentPageState extends State<StudentPage> {
               child: InfoCard(student: _student),
             ),
 
-            Padding(
-              padding: EdgeInsets.all(12.0),
-              child: Card(
-                child: FutureBuilder(
-                  future: _getTrackings(),
-                  builder: (context, snapshot) {
-                    if (snapshot.data == null || snapshot.data.length < 1) {
-                      return Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.all(12.0),
-                            child: Text('Keine Aufgaben zugewiesen.'),
-                          ),
-                        ],
-                      );
-                    }
-
-                    return Container(
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: _buildTrackingList(snapshot.data)
-                      )
+            Flexible(
+              child: FutureBuilder(
+                future: _getTrackings(),
+                builder: (context, snapshot) {
+                  if (snapshot.data == null || snapshot.data.length < 1) {
+                    return Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.all(12.0),
+                          child: Text('Keine Aufgaben zugewiesen.'),
+                        ),
+                      ],
                     );
-                }),
-              )
+                  }
+
+                  return Container(
+                    child: ListView(
+                      children: _buildTrackingList(snapshot.data)
+                    )
+                  );
+              }),
             ),
           ],
         ),
