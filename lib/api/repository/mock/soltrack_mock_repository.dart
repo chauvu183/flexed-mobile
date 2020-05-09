@@ -1,4 +1,4 @@
-import 'package:flexed_mobile/api/repository/mock/mock_data_source.dart';
+import 'package:flexed_mobile/api/repository/mock/fixture_data_source.dart';
 import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
 import 'package:flexed_mobile/models/student.dart';
@@ -9,11 +9,11 @@ import 'package:flexed_mobile/models/student.dart';
 /// real database.
 class SOLTrackMockRepository extends SOLTrackRepository {
 
-  MockDataSource dataSource = MockDataSource.getInstance();
+  FixtureDataSource dataSource = FixtureDataSource.getInstance();
 
   @override
   Future<SOLTrack> create(SOLTrack model) async {
-    model.id = (++MockDataSource.TRACKING_ID);
+    model.id = (++FixtureDataSource.TRACKING_ID);
     dataSource.trackings.add(model);
 
     return model;

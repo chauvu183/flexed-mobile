@@ -1,5 +1,5 @@
 
-import 'package:flexed_mobile/api/mocking/mocker.dart';
+import 'package:flexed_mobile/api/mocking/dynamic/mocker.dart';
 import 'package:flexed_mobile/models/student.dart';
 
 /// Mocker that generates new, fake student model instances.

@@ -1,5 +1,5 @@
 import 'package:flexed_mobile/api/repository/flexclass_repository.dart';
-import 'package:flexed_mobile/api/repository/mock/mock_data_source.dart';
+import 'package:flexed_mobile/api/repository/mock/fixture_data_source.dart';
 import 'package:flexed_mobile/models/flexclass.dart';
 
 /// Student mock repository that generates fake data
@@ -8,11 +8,11 @@ import 'package:flexed_mobile/models/flexclass.dart';
 /// real database.
 class FlexClassMockRepository extends FlexClassRepository {
 
-  MockDataSource dataSource = MockDataSource.getInstance();
+  FixtureDataSource dataSource = FixtureDataSource.getInstance();
 
   @override
   Future<FlexClass> create(FlexClass model) async {
-    model.id = (++MockDataSource.CLASS_ID);
+    model.id = (++FixtureDataSource.CLASS_ID);
     dataSource.flexclasses.add(model);
 
     return model;

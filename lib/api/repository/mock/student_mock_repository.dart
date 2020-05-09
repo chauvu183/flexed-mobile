@@ -1,4 +1,4 @@
-import 'package:flexed_mobile/api/repository/mock/mock_data_source.dart';
+import 'package:flexed_mobile/api/repository/mock/fixture_data_source.dart';
 import 'package:flexed_mobile/api/repository/student_repository.dart';
 import 'package:flexed_mobile/models/student.dart';
 
@@ -8,11 +8,11 @@ import 'package:flexed_mobile/models/student.dart';
 /// real database.
 class StudentMockRepository extends StudentRepository {
 
-  MockDataSource dataSource = MockDataSource.getInstance();
+  FixtureDataSource dataSource = FixtureDataSource.getInstance();
 
   @override
   Future<Student> create(Student model) async {
-    model.id = (++MockDataSource.STUDENT_ID);
+    model.id = (++FixtureDataSource.STUDENT_ID);
     dataSource.students.add(model);
 
     return model;

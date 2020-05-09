@@ -1,8 +1,8 @@
 
 import 'dart:math';
 
-import 'package:flexed_mobile/api/mocking/mocker.dart';
-import 'package:flexed_mobile/api/mocking/student_mocker.dart';
+import 'package:flexed_mobile/api/mocking/dynamic/mocker.dart';
+import 'package:flexed_mobile/api/mocking/dynamic/student_mocker.dart';
 import 'package:flexed_mobile/models/flexclass.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
 import 'package:flexed_mobile/models/student.dart';
@@ -36,7 +36,7 @@ class SOLTrackMocker extends Mocker {
       date:            mockedData['date'],
       student:         students[rand.nextInt(students.length)],
       subject:         mockedData['subject'],
-      lessonNumber:    mockedData['created'],
+      lessonNumber:    mockedData['lessonNumber'],
     );
   }
 

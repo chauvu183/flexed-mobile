@@ -1,19 +1,19 @@
 import 'dart:math';
 
-import 'package:flexed_mobile/api/mocking/flexclass_mocker.dart';
-import 'package:flexed_mobile/api/mocking/soltrack_mocker.dart';
-import 'package:flexed_mobile/api/mocking/student_mocker.dart';
+import 'package:flexed_mobile/api/mocking/dynamic/flexclass_mocker.dart';
+import 'package:flexed_mobile/api/mocking/dynamic/soltrack_mocker.dart';
+import 'package:flexed_mobile/api/mocking/dynamic/student_mocker.dart';
 import 'package:flexed_mobile/models/flexclass.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
 import 'package:flexed_mobile/models/student.dart';
 
-class MockDataSource {
+class DynamicMockDataSource {
 
   static final int NUMBER_CLASSES     = 2;
   static final int STUDENTS_PER_CLASS = 3;
   static final int TRACKING_PER_CLASS = 25;
 
-  static final MockDataSource instance = MockDataSource();
+  static final DynamicMockDataSource instance = DynamicMockDataSource();
 
   static getInstance() {
     return instance;
