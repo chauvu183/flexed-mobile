@@ -86,7 +86,7 @@ class _StudentPageState extends State<StudentPage> {
             backgroundColor: Theme.of(context).primaryColorLight,
           ),
           title: Text(tracking.subject.title),
-          // subtitle: Text('Begonnen: ' + DateFormat('dd.MM.yyyy').format(tracking.date)),
+          subtitle: Text('${tracking.lessonNumber}. Unterrichtsstunde'),
           trailing: tracking.rating == Rating.UNDEFINED ? null : _ratingSentiment(tracking.rating),
           onTap: () => showModalBottomSheet(context: context, builder: (context) => RatingSheet(tracking)).then((value) => {
             setState(() => null)
