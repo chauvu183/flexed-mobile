@@ -25,7 +25,6 @@ class _AnalyzeState extends State<Analyze> {
   List<FlexClass> _createdClasses = List();
   List<SOLTrack> _trackings = List();
   BarChart _chart;
-  bool showChart = false;
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +45,9 @@ class _AnalyzeState extends State<Analyze> {
     if (_selectedClass == null) {
       _selectedClass = _createdClasses[0];
       _refreshTrackingsByClass(_selectedClass.getMembers());
-      _chart = _buildChart(SOLTrackCalculator.analyzeTrackings(_trackings));
+      _chart = _buildChart(SOLTrackCalculator.analyzeTrackingsBySOL(_trackings));
     } else {
-      _chart = _buildChart(SOLTrackCalculator.analyzeTrackings(_trackings));
+      _chart = _buildChart(SOLTrackCalculator.analyzeTrackingsBySOL(_trackings));
     }
 
     return Padding(
@@ -81,7 +80,7 @@ class _AnalyzeState extends State<Analyze> {
                       _selectedStudent = null;
                       _refreshTrackingsByClass(_selectedClass.getMembers());
                       _chart = _buildChart(
-                          SOLTrackCalculator.analyzeTrackings(_trackings));
+                          SOLTrackCalculator.analyzeTrackingsBySOL(_trackings));
                     });
                   },
                   items: _createdClasses
@@ -111,7 +110,7 @@ class _AnalyzeState extends State<Analyze> {
                       _selectedStudent = newStudent;
                       _refreshTrackingsByStudent(_selectedStudent);
                       _chart = _buildChart(
-                          SOLTrackCalculator.analyzeTrackings(_trackings));
+                          SOLTrackCalculator.analyzeTrackingsBySOL(_trackings));
                     });
                   },
                   items: _selectedClass
@@ -126,7 +125,7 @@ class _AnalyzeState extends State<Analyze> {
               ],
             ),
           ),
-          showChart ? _chart : new Container(width: 0, height: 0),      
+          _chart,   
         ],
       ),
     );
@@ -141,16 +140,14 @@ class _AnalyzeState extends State<Analyze> {
   _refreshTrackingsByClass(List<Student> students) async {
     await _trackRepository.byStudents(students).then((trackings) => {
           _trackings = trackings,
-          _chart = _buildChart(SOLTrackCalculator.analyzeTrackings(_trackings))
+          _chart = _buildChart(SOLTrackCalculator.analyzeTrackingsBySOL(_trackings))
         });
-    showChart = true;
   }
 
   _refreshTrackingsByStudent(Student student) async {
     await _trackRepository
         .byStudent(student)
         .then((trackings) => {_trackings = trackings});
-    showChart = true;
   }
 
   Widget _checkLoadingState() {

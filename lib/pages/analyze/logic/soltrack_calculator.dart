@@ -4,7 +4,7 @@ import '../../../models/soltrack.dart';
 
 class SOLTrackCalculator {
 
-  static Map<String,int> analyzeTrackings(List<SOLTrack> trackings) {
+  static Map<String,int> analyzeTrackingsBySOL(List<SOLTrack> trackings) {
     int german = 0;
     int english = 0;
     int math = 0;
