@@ -73,8 +73,7 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
   }
 
     ///on save forms
-  _onSaveToRepo() {
-  
+  _onSaveToRepo() { 
     if (soltrackingFormList.length > 0) {
         var data = soltrackingFormList.map((it) => it.solTracking).toList();
             for(var i=0; i< data.length;i++){
@@ -112,7 +111,9 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
 
   @override
   Widget build(BuildContext context) {
+    
     _repo = Provider.of<SOLTrackRepository>(context);
+
     return SingleChildScrollView(
       child: Stack(
         children: <Widget>[
@@ -136,17 +137,17 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
                        child: SizedBox(
                       height: 400.0,
                       child:
-                       ListView(
+                        ListView(
                         ///addAutomaticKeepAlives: true,
                         children: _buildSOLListForm(snapshot.data)
-                        ,)
+                        ,) 
                     
-                      /* soltrackingFormList.length <= 0
+/*                        _buildSOLListForm(snapshot.data).length <= 0
                       ? Center(child: Text("Keine SOL Trackings"))
                       : ListView.builder(
                         addAutomaticKeepAlives: true,
                         itemCount: soltrackingFormList.length,
-                        itemBuilder: (_,i) => soltrackingFormList[i]) */
+                        itemBuilder: (_,i) => soltrackingFormList[i]) */ 
                        )
                       ),
                       ]
