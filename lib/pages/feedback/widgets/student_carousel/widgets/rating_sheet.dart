@@ -31,12 +31,12 @@ class _RatingSheetState extends State<RatingSheet> {
   Rating _selectedRating;
 
   _RatingSheetState(this.tracking) {
-    _selectedRating = this.tracking.rating;
+    _selectedRating = this.tracking.rating != null ? this.tracking.rating : Rating.UNDEFINED;
   }
 
   _selectRating(Rating rating) {
     setState(() {
-      _selectedRating = rating;
+      _selectedRating = rating == _selectedRating ? Rating.UNDEFINED : rating;
     });
   }
 
@@ -105,7 +105,7 @@ class _RatingSheetState extends State<RatingSheet> {
                   child: RaisedButton(
                     child: Text('Bestätigen', style: TextStyle(fontSize: 18.0, color: Colors.white),),
                     color: Theme.of(context).accentColor,
-                    onPressed: _selectedRating == null ? null : () => _submitRating(),
+                    onPressed: _selectedRating == this.tracking.rating ? null : () => _submitRating(),
                   ),
                 ),
               ),
