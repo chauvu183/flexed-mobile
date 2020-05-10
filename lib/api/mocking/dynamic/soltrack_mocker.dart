@@ -2,7 +2,6 @@
 import 'dart:math';
 
 import 'package:flexed_mobile/api/mocking/dynamic/mocker.dart';
-import 'package:flexed_mobile/api/mocking/dynamic/student_mocker.dart';
 import 'package:flexed_mobile/models/flexclass.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
 import 'package:flexed_mobile/models/student.dart';
