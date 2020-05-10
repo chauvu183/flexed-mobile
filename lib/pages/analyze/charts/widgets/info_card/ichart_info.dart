@@ -9,22 +9,19 @@ abstract class IChartInfo extends StatelessWidget {
         elevation: 2,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: declareChildren(context),
-              ),
-            ],
+          child: SizedBox(
+            width: MediaQuery.of(context).copyWith().size.width - 50,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: declareChildren(context),
+            ),
           ),
         ),
       ),
     );
   }
 
-  
-  List<Text> declareChildren(BuildContext context) => List();
+  List<Widget> declareChildren(BuildContext context) => List();
 }

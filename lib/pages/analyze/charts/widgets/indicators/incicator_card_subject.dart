@@ -1,11 +1,10 @@
-import 'package:flexed_mobile/pages/analyze/charts/widgets/indicator.dart';
+import 'package:flexed_mobile/pages/analyze/charts/widgets/indicators/indicator.dart';
 import 'package:flutter/material.dart';
 
-class IndicatorCard extends StatelessWidget {
-  static const Color colorGerman = Color(0xff0293ee);
-  static const Color colorEnglish = Color(0xfff8b250);
-  static const Color colorMath = Color(0xff5ac18e);
-  static const Color colorTotal = Colors.red;
+class IndicatorSubjectCard extends StatelessWidget {
+  final List<Color> colors;
+
+  IndicatorSubjectCard({this.colors});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class IndicatorCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Indicator(
-              color: colorGerman,
+              color: colors[0],
               text: 'Deutsch',
               isSquare: true,
             ),
@@ -24,7 +23,7 @@ class IndicatorCard extends StatelessWidget {
               height: 4,
             ),
             Indicator(
-              color: colorEnglish,
+              color: colors[1],
               text: 'Englisch',
               isSquare: true,
             ),
@@ -32,7 +31,7 @@ class IndicatorCard extends StatelessWidget {
               height: 4,
             ),
             Indicator(
-              color: colorMath,
+              color: colors[2],
               text: 'Mathe',
               isSquare: true,
             ),
@@ -40,7 +39,7 @@ class IndicatorCard extends StatelessWidget {
               height: 4,
             ),
             Indicator(
-              color: colorTotal,
+              color: colors[3],
               text: 'Gesamt',
               isSquare: true,
             ),

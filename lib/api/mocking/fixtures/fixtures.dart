@@ -6,6 +6,7 @@ import 'package:flexed_mobile/types/data/phone_number_type.dart';
 import 'package:flexed_mobile/types/data/subject_type.dart';
 import 'package:flexed_mobile/types/enums/gender.dart';
 import 'package:flexed_mobile/types/enums/rating.dart';
+import 'package:flexed_mobile/types/enums/special_educational_needs.dart';
 
 class Fixtures {
 
@@ -25,6 +26,7 @@ class Fixtures {
           parentMail: MailType("n.pan@example.com"),
           phone: PhoneNumberType("01235 48912"),
           note: null,
+          specialEducationalNeeds: SpecialEducationalNeeds.SPECIAL_NEEDS,
           created: DateTime.now().subtract(Duration(days: 56)),
         ),
 
@@ -38,6 +40,7 @@ class Fixtures {
           parentMail: MailType("albern2@example.com"),
           phone: PhoneNumberType("01265815858"),
           note: null,
+          specialEducationalNeeds: SpecialEducationalNeeds.NONE,
           created: DateTime.now().subtract(Duration(days: 44)),
         ),
 
@@ -51,6 +54,7 @@ class Fixtures {
           parentMail: MailType("familie-bunt@example.com"),
           phone: PhoneNumberType("5874285752"),
           note: null,
+          specialEducationalNeeds: SpecialEducationalNeeds.NONE,
           created: DateTime.now().subtract(Duration(days: 56)),
         ),
 
@@ -64,6 +68,7 @@ class Fixtures {
           parentMail: MailType("volker.crutzk@example.com"),
           phone: PhoneNumberType("123478121"),
           note: null,
+          specialEducationalNeeds: SpecialEducationalNeeds.SPECIAL_NEEDS,
           created: DateTime.now().subtract(Duration(days: 55)),
         ),
 
@@ -77,6 +82,7 @@ class Fixtures {
           parentMail: MailType("die-doofs@example.com"),
           phone: PhoneNumberType("0123456789"),
           note: null,
+          specialEducationalNeeds: SpecialEducationalNeeds.NONE,
           created: DateTime.now().subtract(Duration(days: 54)),
         ),
 
@@ -90,6 +96,20 @@ class Fixtures {
           parentMail: MailType("eichhorns@example.com"),
           phone: PhoneNumberType("2561478"),
           note: null,
+          specialEducationalNeeds: SpecialEducationalNeeds.NONE,
+          created: DateTime.now().subtract(Duration(days: 54)),
+        ),
+        Student(
+          id: 7,
+          firstName: 'Frank',
+          lastName: 'Fleißig',
+          gender: Gender.MALE,
+          birthday: DateTime.parse("2009-05-02"),
+          mail: MailType("frankyboy@example.com"),
+          parentMail: MailType("fleissig-familie@example.com"),
+          phone: PhoneNumberType("2561478"),
+          note: null,
+          specialEducationalNeeds: SpecialEducationalNeeds.GERMAN_AS_SECOND_LANGUAGE,
           created: DateTime.now().subtract(Duration(days: 54)),
         ),
   ];
@@ -114,6 +134,7 @@ class Fixtures {
       members: [
         students[4],
         students[5],
+        students[6],
       ],
     )
   ];
@@ -133,7 +154,7 @@ class Fixtures {
       student: students[0],
       date: removeTime(DateTime.now().subtract(Duration(days: 2))),
       lessonNumber: 2,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.GOOD,
     ),
     SOLTrack(
@@ -141,7 +162,7 @@ class Fixtures {
       student: students[0],
       date: removeTime(DateTime.now().subtract(Duration(days: 1))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.QUITEGOOD,
     ),
     SOLTrack(
@@ -149,7 +170,7 @@ class Fixtures {
       student: students[0],
       date: removeTime(DateTime.now().subtract(Duration(days: 1))),
       lessonNumber: 2,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.GOOD,
     ),
     SOLTrack(
@@ -157,7 +178,7 @@ class Fixtures {
       student: students[0],
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Geschichte"),
+      subject: SubjectType(title: "Englisch"),
       rating: Rating.BAD,
     ),
     SOLTrack(
@@ -165,7 +186,7 @@ class Fixtures {
       student: students[0],
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 2,
-      subject: SubjectType(title: "Geschichte"),
+      subject: SubjectType(title: "Englisch"),
       rating: Rating.UNDEFINED,
     ),
 
@@ -184,7 +205,7 @@ class Fixtures {
       student: students[1],
       date: removeTime(DateTime.now().subtract(Duration(days: 2))),
       lessonNumber: 2,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.GOOD,
     ),
     SOLTrack(
@@ -226,7 +247,7 @@ class Fixtures {
       student: students[2],
       date: removeTime(DateTime.now().subtract(Duration(days: 1))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Geschichte"),
+      subject: SubjectType(title: "Englisch"),
       rating: Rating.QUITEGOOD,
     ),
     SOLTrack(
@@ -242,7 +263,7 @@ class Fixtures {
       student: students[2],
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.UNDEFINED,
     ),
 
@@ -269,7 +290,7 @@ class Fixtures {
       student: students[3],
       date: removeTime(DateTime.now().subtract(Duration(days: 1))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Geschichte"),
+      subject: SubjectType(title: "Englisch"),
       rating: Rating.BAD,
     ),
     SOLTrack(
@@ -285,7 +306,7 @@ class Fixtures {
       student: students[3],
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.UNDEFINED,
     ),
     SOLTrack(
@@ -293,7 +314,7 @@ class Fixtures {
       student: students[3],
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 2,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.UNDEFINED,
     ),
 
@@ -320,7 +341,7 @@ class Fixtures {
       student: students[4],
       date: removeTime(DateTime.now().subtract(Duration(days: 1))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.BAD,
     ),
     SOLTrack(
@@ -328,7 +349,7 @@ class Fixtures {
       student: students[4],
       date: removeTime(DateTime.now().subtract(Duration(days: 1))),
       lessonNumber: 2,
-      subject: SubjectType(title: "Geschichte"),
+      subject: SubjectType(title: "Englisch"),
       rating: Rating.BAD,
     ),
     SOLTrack(
@@ -336,7 +357,7 @@ class Fixtures {
       student: students[4],
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Sozialkunde"),
+      subject: SubjectType(title: "Deutsch"),
       rating: Rating.BAD,
     ),
     SOLTrack(
@@ -344,7 +365,7 @@ class Fixtures {
       student: students[4],
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 2,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Englisch"),
       rating: Rating.UNDEFINED,
     ),
 
@@ -354,7 +375,7 @@ class Fixtures {
       student: students[5],
       date: removeTime(DateTime.now().subtract(Duration(days: 2))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.GOOD,
     ),
     SOLTrack(
@@ -387,16 +408,88 @@ class Fixtures {
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 1,
       subject: SubjectType(title: "Englisch"),
-      rating: Rating.UNDEFINED,
+      rating: Rating.GOOD,
     ),
     SOLTrack(
       id: 32,
       student: students[5],
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 2,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.UNDEFINED,
     ),
 
+    SOLTrack(
+      id: 33,
+      student: students[6],
+      date: removeTime(DateTime.now().subtract(Duration(days: 0))),
+      lessonNumber: 1,
+      subject: SubjectType(title: "Mathematik"),
+      rating: Rating.QUITEGOOD,
+    ),
+    SOLTrack(
+      id: 34,
+      student: students[6],
+      date: removeTime(DateTime.now().subtract(Duration(days: 0))),
+      lessonNumber: 2,
+      subject: SubjectType(title: "Mathematik"),
+      rating: Rating.QUITEGOOD,
+    ),
+    SOLTrack(
+      id: 35,
+      student: students[6],
+      date: removeTime(DateTime.now().subtract(Duration(days: 0))),
+      lessonNumber: 3,
+      subject: SubjectType(title: "Englisch"),
+      rating: Rating.GOOD,
+    ),
+    SOLTrack(
+      id: 36,
+      student: students[5],
+      date: removeTime(DateTime.now().subtract(Duration(days: 1))),
+      lessonNumber: 1,
+      subject: SubjectType(title: "Deutsch"),
+      rating: Rating.BAD,
+    ),
+    SOLTrack(
+      id: 37,
+      student: students[5],
+      date: removeTime(DateTime.now().subtract(Duration(days: 1))),
+      lessonNumber: 2,
+      subject: SubjectType(title: "Deutsch"),
+      rating: Rating.QUITEBAD,
+    ),
+    SOLTrack(
+      id: 38,
+      student: students[5],
+      date: removeTime(DateTime.now().subtract(Duration(days: 1))),
+      lessonNumber: 3,
+      subject: SubjectType(title: "Englisch"),
+      rating: Rating.BAD,
+    ),
+    SOLTrack(
+      id: 39,
+      student: students[5],
+      date: removeTime(DateTime.now().subtract(Duration(days: 2))),
+      lessonNumber: 1,
+      subject: SubjectType(title: "Deutsch"),
+      rating: Rating.BAD,
+    ),
+    SOLTrack(
+      id: 40,
+      student: students[5],
+      date: removeTime(DateTime.now().subtract(Duration(days: 2))),
+      lessonNumber: 2,
+      subject: SubjectType(title: "Deutsch"),
+      rating: Rating.QUITEBAD,
+    ),
+    SOLTrack(
+      id: 41,
+      student: students[5],
+      date: removeTime(DateTime.now().subtract(Duration(days: 2))),
+      lessonNumber: 3,
+      subject: SubjectType(title: "Englisch"),
+      rating: Rating.BAD,
+    ),
   ];
 }

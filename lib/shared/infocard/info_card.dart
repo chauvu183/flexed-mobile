@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flexed_mobile/models/student.dart';
 import 'package:flexed_mobile/shared/infocard/avatar.dart';
-import 'package:intl/intl.dart';
 
 class InfoCard extends StatelessWidget {
   final Student student;
