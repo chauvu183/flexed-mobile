@@ -16,26 +16,63 @@ class SOLTrackingForm extends StatefulWidget {
   final SOLTrack tracking;
   final OnDelete onDelete;
 
-  SOLTrackingForm({Key key, this.tracking,this.onDelete}) : super(key: key);
+  SOLTrackingForm({this.tracking,this.onDelete});
   @override
   _SOLTrackingFormState createState() {
     return _SOLTrackingFormState(this.tracking);
     }
+    
 }
 
 class _SOLTrackingFormState extends State<SOLTrackingForm> {
-  SOLTrack _tracking;
-  _SOLTrackingFormState(SOLTrack track){
-    _tracking = track;
-  }
 
   List<String> subjects = [ "Deutsch" ,"Englisch", "Mathematik"];
   String dropdownValue =  "Deutsch";
-  final form = GlobalKey<FormState>();
+  SOLTrack _tracking;
+  _SOLTrackingFormState(SOLTrack tracking){
+    _tracking = tracking;
+  }
 
+  SOLTrackRepository _repo;
+    // initialise the list of entries as empty
+  List<SOLTrack> entries = List();
+
+  // refreshes the trackings by fetching them from the repository
+  _refreshTrackings() {
+    _repo.index().then((trackings) => {
+      setState(() => entries = trackings)
+    });
+  }
+
+  _saveTracking() {
+    if(widget.tracking.lessonNumber == null){
+        widget.tracking.lessonNumber = 1;
+    }else if(widget.tracking.subject == null){
+        widget.tracking.subject = SubjectType(title: "Deutsch");
+    }
+    _repo.create(
+      SOLTrack(
+/*         student: widget.student,
+        date:    DateTime.now(),
+        lessonNumber: widget.tracking.lessonNumber,
+        subject: widget.tracking.subject  */
+        student: widget.tracking.student,
+        date:    DateTime.now(),
+        lessonNumber: widget.tracking.lessonNumber,
+        subject: widget.tracking.subject,
+      )
+    ).then((_) => _refreshTrackings());
+  }
+
+  final form = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    _repo = Provider.of<SOLTrackRepository>(context);
+
+    // refresh the tracking records on first render
+  //  _refreshTrackings();
+
     return Padding(
       padding: EdgeInsets.all(12.0),
       child: Form(
@@ -54,8 +91,8 @@ class _SOLTrackingFormState extends State<SOLTrackingForm> {
                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                  children: <Widget>[
                     TextFormField(
-                        initialValue: "1",
-                        onSaved: (val) => _tracking.lessonNumber = int.parse(val),
+                        initialValue: widget.tracking.lessonNumber.toString(),
+                        onSaved: (val) => widget.tracking.lessonNumber = int.parse(val),
                         validator: (val) =>
                             val.length < 0 ? null : 'Lesson number is invalid',
                         decoration: InputDecoration(
@@ -83,7 +120,7 @@ class _SOLTrackingFormState extends State<SOLTrackingForm> {
                               onChanged: (String newValue) {
                                 setState(() {
                                   dropdownValue = newValue;
-                                  _tracking.subject = SubjectType(title: dropdownValue);
+                                  widget.tracking.subject = SubjectType(title: dropdownValue);
                                 });
                               },
                               items: subjects
@@ -97,7 +134,18 @@ class _SOLTrackingFormState extends State<SOLTrackingForm> {
                             )
                  ],
               ),
-              SheetButton(_tracking)
+            RaisedButton(
+            color: Colors.grey[800],
+            onPressed: ()async {
+              await Future.delayed(Duration(seconds: 1));
+              Navigator.pop(context);
+              _saveTracking();
+              },
+            child: Text(
+              'Save Tracking',
+              style: TextStyle(color: Colors.white),
+            ),
+          ), 
           ]
         ),
       ) 
@@ -109,10 +157,11 @@ class _SOLTrackingFormState extends State<SOLTrackingForm> {
 
 class SheetButton extends StatefulWidget {
     SOLTrack tracking;
-    SheetButton(this.tracking);
+    Student student;
+    SheetButton(this.tracking,this.student);
     
   _SheetButtonState createState() { 
-    return _SheetButtonState(this.tracking);
+    return _SheetButtonState(this.tracking,this.student);
   }
 }
 class _SheetButtonState extends State<SheetButton> {
@@ -121,15 +170,17 @@ class _SheetButtonState extends State<SheetButton> {
 
   SOLTrackRepository _repo;
   SOLTrack _tracking;
+  Student _student;
 
-  _SheetButtonState(SOLTrack tracking){
+  _SheetButtonState(SOLTrack tracking,Student student){
       _tracking = tracking;
+      _student = student;
   }
 
   _saveTracking() {
     _repo.create(
       SOLTrack(
-        student: _tracking.student,
+        student: _student,
         date:    DateTime.now(),
         lessonNumber: _tracking.lessonNumber,
         subject: _tracking.subject

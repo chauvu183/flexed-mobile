@@ -29,8 +29,8 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
   SOLTrack _tracking;
   _StudentSOLPageState(Student student){
     _student = student;
-    //_tracking.student = student;
   }
+
 
   List<SOLTrackingForm> soltrackingFormList = List();
   SOLTrackRepository _repo;
@@ -94,7 +94,7 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
 
    // builds a list of ListTile elements to display in the ListView below
   _buildSOLListForm(List<SOLTrack> trackings) {
-  
+
     if (trackings == null) {
       return  soltrackingFormList;
     }
@@ -127,14 +127,17 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
           title: Text(tracking.subject.title),
           subtitle: Text('Begonnen: ' + DateFormat('dd.MM.yyyy').format(tracking.date)),
           trailing: Icon(Icons.delete),
-          //onTap: () => showModalBottomSheet(context: context, builder: (context) => BottomSheetWidget())
-      )
+          onTap: () {
+              showModalBottomSheet(context: context, builder: (context) => SOLTrackingForm(tracking:tracking)).then((value) => {
+              setState(() => null)
+            });
+          } )
       );
     });
 
     return list;
   }
-
+  
   @override
   Widget build(BuildContext context) {
     
@@ -165,17 +168,6 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
                       child:ListView(
                           children: _buildListTiles(snapshot.data),
                         ),
-  /*                      ListView(
-                        ///addAutomaticKeepAlives: true,
-                        children: _buildSOLListForm(snapshot.data)
-                        ,) */
-                    
- /*                       _buildSOLListForm(snapshot.data).length <= 0
-                      ? Center(child: Text("Keine SOL Trackings"))
-                      : ListView.builder(
-                        addAutomaticKeepAlives: true,
-                        itemCount: soltrackingFormList.length,
-                        itemBuilder: (_,i) => soltrackingFormList[i]) */ 
                        )
                       ),
                       ]
@@ -189,16 +181,17 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
              Positioned(
               top: 480,
               left: 320,
-              child: MyFloatingActionButton(tracking: _tracking)
+              child:  FloatingActionButton(
+                  onPressed: () {
+                    SOLTrack tracking = new SOLTrack(student:_student );
+                    showModalBottomSheet(context: context, builder: (context) => SOLTrackingForm(tracking:tracking)).then((value) => {
+                    setState(() => null)
+                  });
+                  },
+                  child: Icon(Icons.add),
+                  backgroundColor: Colors.red,
+                ),
               ),
- /*                Positioned(
-              top: 480,
-              left: 50,
-              child: FloatingActionButton(
-                  child: Icon(Icons.save),
-                  heroTag: "btn2",
-                  onPressed: _onSaveToRepo)
-              )    */
         ],
         ),
     );

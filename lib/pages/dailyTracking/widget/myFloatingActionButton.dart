@@ -6,25 +6,31 @@ import 'package:flutter/widgets.dart';
 import 'bottomSheetWidget.dart';
 
 class MyFloatingActionButton extends StatefulWidget {
-  SOLTrack tracking;
-  MyFloatingActionButton({Key key,this.tracking});
+  Student student;
+  MyFloatingActionButton({Key key,this.student});
   @override
   _MyFloatingActionButtonState createState(){
-    return _MyFloatingActionButtonState(this.tracking);
+    return _MyFloatingActionButtonState(this.student);
   }
 }
 
 class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
-  SOLTrack _tracking;
+  Student _student;
+  SOLTrack _tracking = new SOLTrack();
+
   bool showFab = true;
-  _MyFloatingActionButtonState(SOLTrack tracking){
-    _tracking = tracking;
+  _MyFloatingActionButtonState( Student student){
+    _student = student;
+  }
+  _addTracking(){
+    _tracking.student = _student;
   }
   @override
   Widget build(BuildContext context) {
     return showFab
         ? FloatingActionButton(
             onPressed: () {
+              _tracking.student = _student;
                var bottomSheetController = showBottomSheet(
                   context: context,
                   builder: (context) => Container(
