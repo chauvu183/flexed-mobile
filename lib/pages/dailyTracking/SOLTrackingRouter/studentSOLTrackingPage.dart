@@ -14,7 +14,6 @@ import 'dart:developer';
 import 'dart:convert';
 
 class StudentSOLPage extends StatefulWidget {
-
   Student _student;
   StudentSOLPage(Student student){
       _student = student;
@@ -26,13 +25,9 @@ class StudentSOLPage extends StatefulWidget {
 
 class _StudentSOLPageState extends State<StudentSOLPage> {
   Student _student;
-  SOLTrack _tracking;
   _StudentSOLPageState(Student student){
     _student = student;
   }
-
-
-  List<SOLTrackingForm> soltrackingFormList = List();
   SOLTrackRepository _repo;
   List<SOLTrack> solEntries = List();
 
@@ -50,73 +45,26 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
   }
 
         ///on form user deleted
-  void _onDelete(SOLTrack _solTracking) {
+  _onDelete(SOLTrack _solTracking) {
     setState(() {
-      currentLessonCount = currentLessonCount - 1;
-      var find = soltrackingFormList.firstWhere(
-        (it) => it.tracking == _solTracking,
+       currentLessonCount = currentLessonCount - 1;
+       _repo.delete(1);
+/*       var find = solEntries.firstWhere(
+        (it) => it == _solTracking,
         orElse: () => null,
       );
-      if (find != null) soltrackingFormList.removeAt(soltrackingFormList.indexOf(find));
+      if (find != null) solEntries.removeAt(solEntries.indexOf(find)); */ 
     });
   }
 
-  ///on add form
-  void _onAddForm() {
-    setState(() {
-      var _solTracking = SOLTrack();
-      currentLessonCount = currentLessonCount + 1 ;
-      soltrackingFormList.add( SOLTrackingForm(
-        tracking: _solTracking,
-        onDelete: () => _onDelete(_solTracking),
-      ));
-    });
-    
-  }
 
-    ///on save forms
-  _onSaveToRepo() { 
-    if (soltrackingFormList.length > 0) {
-        var data = soltrackingFormList.map((it) => it.tracking).toList();
-            for(var i=0; i< data.length;i++){
-                _repo.create(
-                    SOLTrack(
-                  student: data[i].student,
-                  date:    data[i].date,
-                  lessonNumber: data[i].lessonNumber,
-                  subject: data[i].subject
-                )
-                ).then((_) => _refreshTrackings());
-            }      
-    }
-   // log(soltrackingFormList.toString());
-  }
-
-   // builds a list of ListTile elements to display in the ListView below
-  _buildSOLListForm(List<SOLTrack> trackings) {
-
-    if (trackings == null) {
-      return  soltrackingFormList;
-    }
-
-    trackings.forEach((element) {
-      soltrackingFormList.add(
-        SOLTrackingForm(
-        tracking: element,
-        onDelete: () => _onDelete(element),)
-      );
-    });
-    return soltrackingFormList;
-  }
 
     // builds a list of ListTile elements to display in the ListView below
   _buildListTiles(List<SOLTrack> trackings) {
     List<Widget> list = [];
-
     if (trackings == null) {
       return list;
     }
-
     trackings.forEach((tracking) {
       list.add(
         ListTile(
@@ -125,8 +73,11 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
             backgroundColor: Theme.of(context).primaryColorLight,
           ),
           title: Text(tracking.subject.title),
-          subtitle: Text('Begonnen: ' + DateFormat('dd.MM.yyyy').format(tracking.date)),
-          trailing: Icon(Icons.delete),
+          subtitle: Text('Datum: ' + DateFormat('dd.MM.yyyy').format(tracking.date) + " \nUnterricht Stunde : " + tracking.lessonNumber.toString() ),
+          trailing: IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: (){}
+            ),
           onTap: () {
               showModalBottomSheet(context: context, builder: (context) => SOLTrackingForm(tracking:tracking)).then((value) => {
               setState(() => null)
@@ -140,7 +91,6 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
   
   @override
   Widget build(BuildContext context) {
-    
     _repo = Provider.of<SOLTrackRepository>(context);
 
     return SingleChildScrollView(
@@ -183,7 +133,7 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
               left: 320,
               child:  FloatingActionButton(
                   onPressed: () {
-                    SOLTrack tracking = new SOLTrack(student:_student );
+                    SOLTrack tracking = new SOLTrack(student:_student,lessonNumber: 1,subject: SubjectType(title: "Deutsch"));
                     showModalBottomSheet(context: context, builder: (context) => SOLTrackingForm(tracking:tracking)).then((value) => {
                     setState(() => null)
                   });

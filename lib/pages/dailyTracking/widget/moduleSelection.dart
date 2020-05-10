@@ -25,9 +25,9 @@ class SOLTrackingForm extends StatefulWidget {
 }
 
 class _SOLTrackingFormState extends State<SOLTrackingForm> {
-
-  List<String> subjects = [ "Deutsch" ,"Englisch", "Mathematik"];
+  List<String> subjects = [ "Deutsch" ,"Englisch", "Mathe","Geschichte"];
   String dropdownValue =  "Deutsch";
+
   SOLTrack _tracking;
   _SOLTrackingFormState(SOLTrack tracking){
     _tracking = tracking;
@@ -50,18 +50,26 @@ class _SOLTrackingFormState extends State<SOLTrackingForm> {
     }else if(widget.tracking.subject == null){
         widget.tracking.subject = SubjectType(title: "Deutsch");
     }
-    _repo.create(
+    if(widget.tracking.date != null){
+      _repo.update(
       SOLTrack(
-/*         student: widget.student,
-        date:    DateTime.now(),
-        lessonNumber: widget.tracking.lessonNumber,
-        subject: widget.tracking.subject  */
         student: widget.tracking.student,
         date:    DateTime.now(),
         lessonNumber: widget.tracking.lessonNumber,
         subject: widget.tracking.subject,
       )
     ).then((_) => _refreshTrackings());
+    }else{
+      _repo.create(
+      SOLTrack(
+        student: widget.tracking.student,
+        date:    DateTime.now(),
+        lessonNumber: widget.tracking.lessonNumber,
+        subject: widget.tracking.subject,
+      )
+    ).then((_) => _refreshTrackings());
+    }
+
   }
 
   final form = GlobalKey<FormState>();
@@ -106,7 +114,7 @@ class _SOLTrackingFormState extends State<SOLTrackingForm> {
                      DropdownButton<String>(
                               icon: Icon(Icons.arrow_downward),
                               isExpanded: true,
-                              value: dropdownValue,
+                              value: widget.tracking.subject.title,
                 
                               iconSize: 24,
                               elevation: 20,
@@ -150,61 +158,6 @@ class _SOLTrackingFormState extends State<SOLTrackingForm> {
         ),
       ) 
       );
-
-  }
-
-}
-
-class SheetButton extends StatefulWidget {
-    SOLTrack tracking;
-    Student student;
-    SheetButton(this.tracking,this.student);
-    
-  _SheetButtonState createState() { 
-    return _SheetButtonState(this.tracking,this.student);
-  }
-}
-class _SheetButtonState extends State<SheetButton> {
-  bool checkingValid = false;
-  bool success = false;
-
-  SOLTrackRepository _repo;
-  SOLTrack _tracking;
-  Student _student;
-
-  _SheetButtonState(SOLTrack tracking,Student student){
-      _tracking = tracking;
-      _student = student;
-  }
-
-  _saveTracking() {
-    _repo.create(
-      SOLTrack(
-        student: _student,
-        date:    DateTime.now(),
-        lessonNumber: _tracking.lessonNumber,
-        subject: _tracking.subject
-      )
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return !checkingValid
-        ? MaterialButton(
-            color: Colors.grey[800],
-            onPressed: (){},
-            child: Text(
-              'Save Tracking',
-              style: TextStyle(color: Colors.white),
-            ),
-          )
-        : !success
-            ? CircularProgressIndicator()
-            : Icon(
-                Icons.check,
-                color: Colors.green,
-              );
   }
 }
 
