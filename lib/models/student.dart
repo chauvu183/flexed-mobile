@@ -2,6 +2,7 @@ import 'package:flexed_mobile/models/model.dart';
 import 'package:flexed_mobile/types/data/mail_type.dart';
 import 'package:flexed_mobile/types/data/phone_number_type.dart';
 import 'package:flexed_mobile/types/enums/gender.dart';
+import 'package:flexed_mobile/types/enums/special_educational_needs.dart';
 import 'package:flutter/foundation.dart';
 
 /// Represents a student of a class
@@ -20,6 +21,7 @@ class Student extends Model {
 
   PhoneNumberType phone;
 
+  SpecialEducationalNeeds specialEducationalNeeds;
   String note;
 
   DateTime created;
@@ -35,6 +37,7 @@ class Student extends Model {
     this.parentMail,
     this.phone,
     this.note,
+    this.specialEducationalNeeds,
     this.created
   });
 
