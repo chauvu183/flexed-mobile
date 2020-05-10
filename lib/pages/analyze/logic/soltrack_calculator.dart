@@ -11,6 +11,7 @@ class SOLTrackCalculator {
     int english = 0;
     int math = 0;
     int total = 0;
+    int undefined = 0;
     Map<String,int> result = HashMap();
     
     for (var track in trackings) {
@@ -25,30 +26,29 @@ class SOLTrackCalculator {
           math++;
           break;
       }
-      total++;
+      track.rating == Rating.UNDEFINED ? undefined++ : total++;  
     }
     result.putIfAbsent('deutsch', () => german);
     result.putIfAbsent('englisch', () => english);
     result.putIfAbsent('mathematik', () => math);
     result.putIfAbsent('total', () => total);
+    result.putIfAbsent('undefined', () => undefined);
     return result;
   }
 
-  static Map<Rating,int> analyzeTrackingsByRating(List<SOLTrack> trackings) {
+  static Map<String,int> analyzeTrackingsByRating(List<SOLTrack> trackings) {
     int bad = 0;
     int quitebad = 0;
     int average = 0;
     int quitegood = 0;
     int good = 0;
     int total = 0;
+    int undefined = 0;
 
-    Map<Rating,int> result = HashMap();
+    Map<String,int> result = HashMap();
     
     for (var track in trackings) {
       switch (track.rating) {
-        case Rating.UNDEFINED:
-          total--;
-          break;
         case Rating.BAD:
           bad++;
           break;
@@ -59,19 +59,24 @@ class SOLTrackCalculator {
           average++;
           break;
         case Rating.QUITEGOOD:
-          average++;
+          quitegood++;
           break;
         case Rating.GOOD:
-          average++;
+          good++;
           break;
+        case Rating.UNDEFINED:
+          undefined++;
+          break;  
       }
-      total++;
+      total = bad + quitebad + average + quitegood + good;
     }
-    result.putIfAbsent(Rating.BAD, () => bad);
-    result.putIfAbsent(Rating.QUITEBAD, () => quitebad);
-    result.putIfAbsent(Rating.AVERAGE, () => average);
-    result.putIfAbsent(Rating.QUITEGOOD, () => quitegood);
-    result.putIfAbsent(Rating.GOOD, () => good);
+    result.putIfAbsent("bad", () => bad);
+    result.putIfAbsent("quitebad", () => quitebad);
+    result.putIfAbsent("average", () => average);
+    result.putIfAbsent("quitegood", () => quitegood);
+    result.putIfAbsent("good", () => good);
+    result.putIfAbsent("undefined", () => undefined);
+    result.putIfAbsent("total", () => total);
     
     return result;
   }

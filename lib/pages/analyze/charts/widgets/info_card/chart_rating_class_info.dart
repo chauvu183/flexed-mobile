@@ -1,12 +1,12 @@
 import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/ichart_info.dart';
 import 'package:flutter/material.dart';
 
-class ChartClassInfo extends IChartInfo {
+class ChartRatingClassInfo extends IChartInfo {
   final String title;
   final int numberStudents;
   final int numberRatings;
 
-  ChartClassInfo({
+  ChartRatingClassInfo({
     @required this.title,
     this.numberStudents,
     this.numberRatings,
