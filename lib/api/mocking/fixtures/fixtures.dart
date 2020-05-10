@@ -133,7 +133,7 @@ class Fixtures {
       student: students[0],
       date: removeTime(DateTime.now().subtract(Duration(days: 2))),
       lessonNumber: 2,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.GOOD,
     ),
     SOLTrack(
@@ -141,7 +141,7 @@ class Fixtures {
       student: students[0],
       date: removeTime(DateTime.now().subtract(Duration(days: 1))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.QUITEGOOD,
     ),
     SOLTrack(
@@ -149,7 +149,7 @@ class Fixtures {
       student: students[0],
       date: removeTime(DateTime.now().subtract(Duration(days: 1))),
       lessonNumber: 2,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.GOOD,
     ),
     SOLTrack(
@@ -157,7 +157,7 @@ class Fixtures {
       student: students[0],
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Geschichte"),
+      subject: SubjectType(title: "Englisch"),
       rating: Rating.BAD,
     ),
     SOLTrack(
@@ -165,7 +165,7 @@ class Fixtures {
       student: students[0],
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 2,
-      subject: SubjectType(title: "Geschichte"),
+      subject: SubjectType(title: "Englisch"),
       rating: Rating.UNDEFINED,
     ),
 
@@ -184,7 +184,7 @@ class Fixtures {
       student: students[1],
       date: removeTime(DateTime.now().subtract(Duration(days: 2))),
       lessonNumber: 2,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.GOOD,
     ),
     SOLTrack(
@@ -226,7 +226,7 @@ class Fixtures {
       student: students[2],
       date: removeTime(DateTime.now().subtract(Duration(days: 1))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Geschichte"),
+      subject: SubjectType(title: "Englisch"),
       rating: Rating.QUITEGOOD,
     ),
     SOLTrack(
@@ -242,7 +242,7 @@ class Fixtures {
       student: students[2],
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.UNDEFINED,
     ),
 
@@ -269,7 +269,7 @@ class Fixtures {
       student: students[3],
       date: removeTime(DateTime.now().subtract(Duration(days: 1))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Geschichte"),
+      subject: SubjectType(title: "Englisch"),
       rating: Rating.BAD,
     ),
     SOLTrack(
@@ -285,7 +285,7 @@ class Fixtures {
       student: students[3],
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.UNDEFINED,
     ),
     SOLTrack(
@@ -293,7 +293,7 @@ class Fixtures {
       student: students[3],
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 2,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.UNDEFINED,
     ),
 
@@ -320,7 +320,7 @@ class Fixtures {
       student: students[4],
       date: removeTime(DateTime.now().subtract(Duration(days: 1))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.BAD,
     ),
     SOLTrack(
@@ -328,7 +328,7 @@ class Fixtures {
       student: students[4],
       date: removeTime(DateTime.now().subtract(Duration(days: 1))),
       lessonNumber: 2,
-      subject: SubjectType(title: "Geschichte"),
+      subject: SubjectType(title: "Englisch"),
       rating: Rating.BAD,
     ),
     SOLTrack(
@@ -336,7 +336,7 @@ class Fixtures {
       student: students[4],
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Sozialkunde"),
+      subject: SubjectType(title: "Deutsch"),
       rating: Rating.BAD,
     ),
     SOLTrack(
@@ -344,7 +344,7 @@ class Fixtures {
       student: students[4],
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 2,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Englisch"),
       rating: Rating.UNDEFINED,
     ),
 
@@ -354,7 +354,7 @@ class Fixtures {
       student: students[5],
       date: removeTime(DateTime.now().subtract(Duration(days: 2))),
       lessonNumber: 1,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.GOOD,
     ),
     SOLTrack(
@@ -394,7 +394,7 @@ class Fixtures {
       student: students[5],
       date: removeTime(DateTime.now().subtract(Duration(days: 0))),
       lessonNumber: 2,
-      subject: SubjectType(title: "Mathe"),
+      subject: SubjectType(title: "Mathematik"),
       rating: Rating.UNDEFINED,
     ),
 
