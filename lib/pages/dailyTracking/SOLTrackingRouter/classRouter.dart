@@ -2,6 +2,7 @@ import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
 import 'package:flexed_mobile/models/flexclass.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
 import 'package:flexed_mobile/models/student.dart';
+import 'package:flexed_mobile/pages/dailyTracking/widget/myFloatingActionButton.dart';
 import 'package:flexed_mobile/pages/feedback/widgets/student_carousel/widgets/page_indicator.dart';
 import 'package:flexed_mobile/pages/feedback/widgets/student_carousel/widgets/student_page.dart';
 import 'package:flexed_mobile/shared/infocard/info_card.dart';
@@ -71,6 +72,8 @@ refreshPageIndicator(int page) {
           ],
         ),
       ),
+      //floatingActionButton: MyFloatingActionButton()
     );
   }
 }
+
