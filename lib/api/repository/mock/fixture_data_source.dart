@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flexed_mobile/api/mocking/fixtures/fixtures.dart';
 import 'package:flexed_mobile/models/flexclass.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
