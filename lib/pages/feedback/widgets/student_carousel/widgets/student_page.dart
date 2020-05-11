@@ -6,10 +6,7 @@ import 'package:flexed_mobile/shared/infocard/info_card.dart';
 import 'package:flexed_mobile/types/enums/rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
-import 'dart:developer' as developer;
 
 class StudentPage extends StatefulWidget {
 

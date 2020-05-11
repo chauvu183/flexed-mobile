@@ -1,7 +1,6 @@
 
 import 'package:flexed_mobile/api/repository/flexclass_repository.dart';
 import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
-import 'package:flexed_mobile/models/flexclass.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
 import 'package:flexed_mobile/pages/feedback/widgets/flexclass_list/widgets/date_selection.dart';
 import 'package:flexed_mobile/pages/feedback/widgets/student_carousel/student_carousel.dart';
@@ -9,8 +8,6 @@ import 'package:flexed_mobile/types/enums/rating.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'dart:developer' as developer;
 
 class FlexClassList extends StatefulWidget {
   @override
@@ -148,7 +145,7 @@ class _FlexClassListState extends State<FlexClassList> {
 
 
   _goToClassDetails(_class) {
-    Navigator.push(context, CupertinoPageRoute(builder: (context) => StudentCarousel( flexClass: _class, selectedDate: _selectedDate,))).then((value) => setState(() => {}));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => StudentCarousel( flexClass: _class, selectedDate: _selectedDate,))).then((value) => setState(() => {}));
   }
 
 }
