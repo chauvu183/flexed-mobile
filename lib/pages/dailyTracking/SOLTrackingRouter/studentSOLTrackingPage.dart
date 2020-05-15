@@ -46,15 +46,13 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
 
         ///on form user deleted
   _onDelete(SOLTrack _solTracking) {
-    setState(() {
-       currentLessonCount = currentLessonCount - 1;
-       _repo.delete(1);
-/*       var find = solEntries.firstWhere(
+ /*    setState(() {
+       var find = solEntries.firstWhere(
         (it) => it == _solTracking,
         orElse: () => null,
       );
-      if (find != null) solEntries.removeAt(solEntries.indexOf(find)); */ 
-    });
+     // if (find != null) _repo.delete(solEntries.indexOf(find)).then((_) => _refreshTrackings());
+    }); */
   }
 
 
@@ -76,7 +74,7 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
           subtitle: Text('Datum: ' + DateFormat('dd.MM.yyyy').format(tracking.date) + " \nUnterricht Stunde : " + tracking.lessonNumber.toString() ),
           trailing: IconButton(
             icon: Icon(Icons.delete),
-            onPressed: (){}
+            onPressed: (){},
             ),
           onTap: () {
               showModalBottomSheet(context: context, builder: (context) => SOLTrackingForm(tracking:tracking)).then((value) => {
@@ -92,7 +90,8 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
   @override
   Widget build(BuildContext context) {
     _repo = Provider.of<SOLTrackRepository>(context);
-
+    // refresh the tracking records on first render
+    _refreshTrackings();
     return SingleChildScrollView(
       child: Stack(
         children: <Widget>[
@@ -125,12 +124,11 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
             },
             ),
             )
-              ]
-           
+            ]          
             ),
-             Positioned(
-              top: 480,
-              left: 320,
+            Positioned(
+              top: 490,
+              left: 250,
               child:  FloatingActionButton(
                   onPressed: () {
                     SOLTrack tracking = new SOLTrack(student:_student,lessonNumber: 1,subject: SubjectType(title: "Deutsch"));

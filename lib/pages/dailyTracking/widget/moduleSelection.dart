@@ -25,7 +25,7 @@ class SOLTrackingForm extends StatefulWidget {
 }
 
 class _SOLTrackingFormState extends State<SOLTrackingForm> {
-  List<String> subjects = [ "Deutsch" ,"Englisch", "Mathe","Geschichte"];
+  List<String> subjects = [ "Deutsch" ,"Englisch", "Mathematik","Geschichte"];
   String dropdownValue =  "Deutsch";
 
   SOLTrack _tracking;
