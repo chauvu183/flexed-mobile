@@ -4,8 +4,6 @@ import 'package:flexed_mobile/types/enums/rating.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'dart:developer' as developer;
-
 import 'package:provider/provider.dart';
 
 class RatingSheet extends StatefulWidget {
