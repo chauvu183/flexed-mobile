@@ -13,7 +13,7 @@ class SOLTrackMockRepository extends SOLTrackRepository {
 
   @override
   Future<SOLTrack> create(SOLTrack model) async {
-    model.id = (++FixtureDataSource.TRACKING_ID);
+    model.id = (++FixtureDataSource.trackingId);
     dataSource.trackings.add(model);
 
     return model;

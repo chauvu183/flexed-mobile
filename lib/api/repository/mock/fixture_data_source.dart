@@ -10,9 +10,9 @@ class FixtureDataSource {
     return instance;
   }
 
-  static int STUDENT_ID  = Fixtures.students[Fixtures.students.length - 1].id;
-  static int CLASS_ID    = Fixtures.classes[Fixtures.classes.length - 1].id;
-  static int TRACKING_ID = Fixtures.trackings[Fixtures.trackings.length - 1].id;
+  static int studentId  = Fixtures.students[Fixtures.students.length - 1].id;
+  static int classId    = Fixtures.classes[Fixtures.classes.length - 1].id;
+  static int trackingId = Fixtures.trackings[Fixtures.trackings.length - 1].id;
 
   List<Student> students = Fixtures.students;
   List<FlexClass> flexclasses = Fixtures.classes;

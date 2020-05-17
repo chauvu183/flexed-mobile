@@ -12,7 +12,7 @@ class FlexClassMockRepository extends FlexClassRepository {
 
   @override
   Future<FlexClass> create(FlexClass model) async {
-    model.id = (++FixtureDataSource.CLASS_ID);
+    model.id = (++FixtureDataSource.classId);
     dataSource.flexclasses.add(model);
 
     return model;
