@@ -13,7 +13,7 @@ class StudentPage extends StatefulWidget {
   final Student student;
   final DateTime filteredDate;
 
-  StudentPage({ @required this.student, @required this.filteredDate }) {}
+  StudentPage({ @required this.student, @required this.filteredDate });
 
   @override
   State<StatefulWidget> createState() {
