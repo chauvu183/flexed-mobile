@@ -1,12 +1,11 @@
 import 'package:flexed_mobile/models/soltrack.dart';
-import 'package:flexed_mobile/models/student.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'moduleSelection.dart';
 
 class BottomSheetWidget extends StatefulWidget {
-  SOLTrack tracking;
+  final SOLTrack tracking;
   BottomSheetWidget({Key key ,this.tracking});
   @override
   _BottomSheetWidgetState createState() {
