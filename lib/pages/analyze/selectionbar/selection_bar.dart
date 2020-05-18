@@ -46,7 +46,6 @@ class _SelectionBarState extends State<SelectionBar> {
                 ),
                 onChanged: (FlexClass newSelectedClass) {
                   setState(() {
-                    // widget.selectedClass = newSelectedClass;
                     widget.callBackSelectedClass(newSelectedClass);
                     widget.callBackSelectedStudent(null);
                   });
@@ -75,7 +74,6 @@ class _SelectionBarState extends State<SelectionBar> {
                 ),
                 onChanged: (Student newStudent) {
                   setState(() {
-                    // widget.selectedStudent = newStudent;
                     widget.callBackSelectedStudent(newStudent);
                   });
                 },
@@ -107,7 +105,6 @@ class _SelectionBarState extends State<SelectionBar> {
             ),
             onChanged: (String newType) {
               setState(() {
-                // widget.analyzeType = newType;
                 widget.callBackSelectedAnalyzeType(newType);
               });
             },
