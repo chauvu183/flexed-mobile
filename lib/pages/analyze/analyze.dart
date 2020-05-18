@@ -98,12 +98,7 @@ class _AnalyzeState extends State<Analyze> {
       _analyzeType = 'Fach';
     }
 
-    _chart = _analyzeType == 'Fach'
-        ? _buildSubjectChart(
-            SOLTrackCalculator.analyzeTrackingsBySOL(_trackings))
-        : _buildRatingChart(
-            SOLTrackCalculator.analyzeTrackingsByRating(_trackings),
-          );
+    _buildChart();
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 5.0),
@@ -125,14 +120,14 @@ class _AnalyzeState extends State<Analyze> {
   _refreshFlexClass() async {
     await _flexClassRepository
         .index()
-        .then((flexclasses) => setState(() => {_createdClasses = flexclasses}));
+        .then((flexclasses) => setState(() => {
+          _createdClasses = flexclasses
+          }));
   }
 
   _refreshTrackingsByClass(List<Student> students) async {
     await _trackRepository.byStudents(students).then((trackings) => {
           _trackings = trackings,
-          _chart = _buildSubjectChart(
-              SOLTrackCalculator.analyzeTrackingsBySOL(_trackings))
         });
   }
 
@@ -142,19 +137,22 @@ class _AnalyzeState extends State<Analyze> {
         .then((trackings) => {_trackings = trackings});
   }
 
-  SubjectChart _buildSubjectChart(Map<String, int> trackings) {
-    return SubjectChart(
+  _buildChart() {
+    Map<String,int> trackings;
+    if (_analyzeType == 'Fach') {      
+      trackings = SOLTrackCalculator.analyzeTrackingsBySOL(_trackings);
+      _chart = SubjectChart(
       trackings: trackings,
       chartInfo: _buildChartInfo(trackings),
-    );
+      );
+    } else {
+      trackings = SOLTrackCalculator.analyzeTrackingsByRating(_trackings);
+       _chart = RatingChart(
+      trackings: trackings,
+      chartInfo: _buildChartInfo(trackings));
+    }  
   }
 
-  RatingChart _buildRatingChart(Map<String, int> trackings) {
-    return RatingChart(
-      trackings: trackings,
-      chartInfo: _buildChartInfo(trackings),
-    );
-  }
 
   IChartInfo _buildChartInfo(Map<String, int> trackings) {
     IChartInfo chartInfo;
