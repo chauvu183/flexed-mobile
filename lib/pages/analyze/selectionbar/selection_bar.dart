@@ -1,6 +1,7 @@
-import 'package:flexed_mobile/models/flexclass.dart';
-import 'package:flexed_mobile/models/student.dart';
 import 'package:flutter/material.dart';
+
+import '../../../models/flexclass.dart';
+import '../../../models/student.dart';
 
 class SelectionBar extends StatefulWidget {
   final List<FlexClass> createdClasses;

@@ -1,5 +1,6 @@
-import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/ichart_info.dart';
 import 'package:flutter/material.dart';
+
+import './ichart_info.dart';
 
 class ChartSubjectClassInfo extends IChartInfo {
   final String title;

@@ -1,13 +1,3 @@
-import 'package:flexed_mobile/pages/analyze/charts/rating_chart.dart';
-import 'package:flexed_mobile/pages/analyze/charts/subject_chart.dart';
-import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/chart_rating_class_info.dart';
-import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/chart_rating_student_info.dart';
-import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/chart_subject_class_info.dart';
-import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/ichart_info.dart';
-import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/chart_subject_student_info.dart';
-import 'package:flexed_mobile/pages/analyze/logic/soltrack_calculator.dart';
-import 'package:flexed_mobile/pages/analyze/selectionbar/analyze_home_card.dart';
-import 'package:flexed_mobile/pages/analyze/selectionbar/selection_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +6,18 @@ import '../../api/repository/soltrack_repository.dart';
 import '../../models/flexclass.dart';
 import '../../models/soltrack.dart';
 import '../../models/student.dart';
-import 'charts/ichart.dart';
+
+import './charts/placeholder_chart.dart';
+import './charts/rating_chart.dart';
+import './charts/subject_chart.dart';
+import './charts/widgets/info_card/chart_rating_class_info.dart';
+import './charts/widgets/info_card/chart_rating_student_info.dart';
+import './charts/widgets/info_card/chart_subject_class_info.dart';
+import './charts/widgets/info_card/ichart_info.dart';
+import './charts/widgets/info_card/chart_subject_student_info.dart';
+import './charts/ichart.dart';
+import './logic/soltrack_calculator.dart';
+import './selectionbar/selection_bar.dart';
 
 class Analyze extends StatefulWidget {
   @override
@@ -75,44 +76,36 @@ class _AnalyzeState extends State<Analyze> {
             callBackSelectedStudent: callBackSelectedStudent,
             callBackSelectedAnalyzeType: callBackSelectedAnalyzeType,
           ),
-          _selectedClass == null
-              ? Expanded(
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 5.0),
-                      child: AnalyzeHomeCard(),
-                    ),
-                  ),
-                )
-              : _buildContent(),
+          Expanded(
+            child: Container(
+              color: Colors.white,
+              child: _buildContent(),
+            ),
+          ),
         ],
       ),
     );
   }
 
   Widget _buildContent() {
-    _selectedStudent == null
-        ? _refreshTrackingsByClass(_selectedClass.getMembers())
-        : _refreshTrackingsByStudent(_selectedStudent);
-    if (_analyzeType == null) {
-      _analyzeType = 'Fach';
+    if (_selectedClass == null) {
+      _chart = PlaceholderChart();
+    } else {
+      _selectedStudent == null
+          ? _refreshTrackingsByClass(_selectedClass.getMembers())
+          : _refreshTrackingsByStudent(_selectedStudent);
+      if (_analyzeType == null) {
+        _analyzeType = 'Fach';
+      }
+      _buildChart();
     }
 
-    _buildChart();
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 5.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          AnimatedSwitcher(
-            duration: Duration(
-              milliseconds: 1000,
-            ),
-            child: _chart,
-          ),
-        ],
+    return Center(
+      child: AnimatedSwitcher(
+        duration: Duration(
+          milliseconds: 1000,
+        ),
+        child: _chart,
       ),
     );
   }
@@ -120,9 +113,7 @@ class _AnalyzeState extends State<Analyze> {
   _refreshFlexClass() async {
     await _flexClassRepository
         .index()
-        .then((flexclasses) => setState(() => {
-          _createdClasses = flexclasses
-          }));
+        .then((flexclasses) => setState(() => {_createdClasses = flexclasses}));
   }
 
   _refreshTrackingsByClass(List<Student> students) async {
@@ -138,21 +129,21 @@ class _AnalyzeState extends State<Analyze> {
   }
 
   _buildChart() {
-    Map<String,int> trackings;
-    if (_analyzeType == 'Fach') {      
+    Map<String, int> trackings;
+    if (_analyzeType == 'Fach') {
       trackings = SOLTrackCalculator.analyzeTrackingsBySOL(_trackings);
       _chart = SubjectChart(
-      trackings: trackings,
-      chartInfo: _buildChartInfo(trackings),
+        trackings: trackings,
+        chartInfo: _buildChartInfo(trackings),
       );
     } else {
       trackings = SOLTrackCalculator.analyzeTrackingsByRating(_trackings);
-       _chart = RatingChart(
-      trackings: trackings,
-      chartInfo: _buildChartInfo(trackings));
-    }  
+      _chart = RatingChart(
+        trackings: trackings,
+        chartInfo: _buildChartInfo(trackings),
+      );
+    }
   }
-
 
   IChartInfo _buildChartInfo(Map<String, int> trackings) {
     IChartInfo chartInfo;

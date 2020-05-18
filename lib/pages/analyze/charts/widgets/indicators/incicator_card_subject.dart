@@ -1,5 +1,6 @@
-import 'package:flexed_mobile/pages/analyze/charts/widgets/indicators/indicator.dart';
 import 'package:flutter/material.dart';
+
+import './indicator.dart';
 
 class IndicatorSubjectCard extends StatelessWidget {
   final List<Color> colors;
