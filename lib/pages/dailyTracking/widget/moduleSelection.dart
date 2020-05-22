@@ -72,6 +72,14 @@ class _SOLTrackingFormState extends State<SOLTrackingForm> {
 
   }
 
+  _delteTracking(SOLTrack _solTracking){
+     var find = entries.firstWhere(
+        (it) => it == _solTracking,
+        orElse: () => null,
+      );
+ //     if (find != null) _repo.delete(entries.indexOf(find)).then((_) => _refreshTrackings());
+  }
+
   final form = GlobalKey<FormState>();
 
   @override
@@ -79,7 +87,7 @@ class _SOLTrackingFormState extends State<SOLTrackingForm> {
     _repo = Provider.of<SOLTrackRepository>(context);
 
     // refresh the tracking records on first render
-  //  _refreshTrackings();
+    //_refreshTrackings();
 
     return Padding(
       padding: EdgeInsets.all(12.0),
@@ -151,6 +159,18 @@ class _SOLTrackingFormState extends State<SOLTrackingForm> {
               },
             child: Text(
               'Save Tracking',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          RaisedButton(
+            color: Colors.red[500],
+            onPressed: ()async {
+              await Future.delayed(Duration(seconds: 1));
+              Navigator.pop(context);
+              //_delteTracking(_tracking);
+              },
+            child: Text(
+              'Delete Tracking',
               style: TextStyle(color: Colors.white),
             ),
           ), 
