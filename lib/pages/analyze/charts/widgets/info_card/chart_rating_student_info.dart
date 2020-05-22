@@ -1,6 +1,7 @@
-import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/ichart_info.dart';
-import 'package:flexed_mobile/types/enums/special_educational_needs.dart';
 import 'package:flutter/material.dart';
+
+import './ichart_info.dart';
+import '../../../../../types/enums/special_educational_needs.dart';
 
 class ChartRatingStudentInfo extends IChartInfo {
   final String fullName;

@@ -1,8 +1,9 @@
-import 'package:flexed_mobile/pages/analyze/charts/ichart.dart';
-import 'package:flexed_mobile/pages/analyze/charts/widgets/indicators/indicator_card_rating.dart';
 import 'package:flutter/material.dart';
-import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/ichart_info.dart';
-import 'widgets/bar_item.dart';
+
+import '../charts/widgets/indicators/indicator_card_rating.dart';
+import '../charts/ichart.dart';
+import '../charts/widgets/info_card/ichart_info.dart';
+import './widgets/bar_item.dart';
 
 class RatingChart extends IChart {
 

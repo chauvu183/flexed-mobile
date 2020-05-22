@@ -1,13 +1,10 @@
-import 'package:flexed_mobile/models/student.dart';
+
 import 'package:flexed_mobile/types/data/subject_type.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flexed_mobile/api/repository/flexclass_repository.dart';
 import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
-import 'package:flexed_mobile/models/flexclass.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
-import 'package:intl/intl.dart';
 
 typedef OnDelete();
 

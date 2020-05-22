@@ -1,11 +1,3 @@
-import 'package:flexed_mobile/pages/analyze/charts/rating_chart.dart';
-import 'package:flexed_mobile/pages/analyze/charts/subject_chart.dart';
-import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/chart_rating_class_info.dart';
-import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/chart_rating_student_info.dart';
-import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/chart_subject_class_info.dart';
-import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/ichart_info.dart';
-import 'package:flexed_mobile/pages/analyze/charts/widgets/info_card/chart_subject_student_info.dart';
-import 'package:flexed_mobile/pages/analyze/logic/soltrack_calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +6,18 @@ import '../../api/repository/soltrack_repository.dart';
 import '../../models/flexclass.dart';
 import '../../models/soltrack.dart';
 import '../../models/student.dart';
-import 'charts/ichart.dart';
+
+import './charts/placeholder_chart.dart';
+import './charts/rating_chart.dart';
+import './charts/subject_chart.dart';
+import './charts/widgets/info_card/chart_rating_class_info.dart';
+import './charts/widgets/info_card/chart_rating_student_info.dart';
+import './charts/widgets/info_card/chart_subject_class_info.dart';
+import './charts/widgets/info_card/ichart_info.dart';
+import './charts/widgets/info_card/chart_subject_student_info.dart';
+import './charts/ichart.dart';
+import './logic/soltrack_calculator.dart';
+import './selectionbar/selection_bar.dart';
 
 class Analyze extends StatefulWidget {
   @override
@@ -31,163 +34,78 @@ class _AnalyzeState extends State<Analyze> {
   List<SOLTrack> _trackings = List();
   IChart _chart;
 
+  callBackSelectedClass(selectedClass) {
+    setState(() {
+      _selectedClass = selectedClass;
+    });
+  }
+
+  callBackSelectedStudent(selectedStudent) {
+    setState(() {
+      _selectedStudent = selectedStudent;
+    });
+  }
+
+  callBackSelectedAnalyzeType(selectedAnalyzeType) {
+    setState(() {
+      _analyzeType = selectedAnalyzeType;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     _flexClassRepository = Provider.of<FlexClassRepository>(context);
     _trackRepository = Provider.of<SOLTrackRepository>(context);
 
+    _refreshFlexClass();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Analyse"),
       ),
-      body: Center(
-        child: _checkLoadingState(),
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SelectionBar(
+            createdClasses: _createdClasses,
+            selectedClass: _selectedClass,
+            selectedStudent: _selectedStudent,
+            analyzeType: _analyzeType,
+            callBackSelectedClass: callBackSelectedClass,
+            callBackSelectedStudent: callBackSelectedStudent,
+            callBackSelectedAnalyzeType: callBackSelectedAnalyzeType,
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.white,
+              child: _buildContent(),
+            ),
+          ),
+        ],
       ),
     );
   }
 
   Widget _buildContent() {
-    if (_analyzeType == null) {
-      _analyzeType = 'Fach';
-    }
     if (_selectedClass == null) {
-      _selectedClass = _createdClasses[0];
-      _refreshTrackingsByClass(_selectedClass.getMembers());
+      _chart = PlaceholderChart();
+    } else {
+      _selectedStudent == null
+          ? _refreshTrackingsByClass(_selectedClass.getMembers())
+          : _refreshTrackingsByStudent(_selectedStudent);
+      if (_analyzeType == null) {
+        _analyzeType = 'Fach';
+      }
+      _buildChart();
     }
-    _chart = _analyzeType == 'Fach'
-        ? _buildSubjectChart(
-            SOLTrackCalculator.analyzeTrackingsBySOL(_trackings))
-        : _buildRatingChart(
-            SOLTrackCalculator.analyzeTrackingsByRating(_trackings),
-          );
 
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 5.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    DropdownButton<FlexClass>(
-                      value: _selectedClass ?? null,
-                      hint: Text("Klasse"),
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                        color: Theme.of(context).accentColor,
-                      ),
-                      iconSize: 24,
-                      elevation: 16,
-                      style:
-                          TextStyle(color: Theme.of(context).primaryColorDark),
-                      underline: Container(
-                        height: 2,
-                        color: Theme.of(context).accentColor,
-                      ),
-                      onChanged: (FlexClass newSelectedClass) {
-                        setState(() {
-                          _selectedClass = newSelectedClass;
-                          _selectedStudent = null;
-                          _refreshTrackingsByClass(_selectedClass.getMembers());
-                          _chart = _buildSubjectChart(
-                              SOLTrackCalculator.analyzeTrackingsBySOL(
-                                  _trackings));
-                        });
-                      },
-                      items: _createdClasses
-                          .map<DropdownMenuItem<FlexClass>>((FlexClass value) {
-                        return DropdownMenuItem<FlexClass>(
-                          value: value,
-                          child: Text(value.title),
-                        );
-                      }).toList(),
-                    ),
-                    VerticalDivider(),
-                    DropdownButton<Student>(
-                      value: _selectedStudent,
-                      hint: Text("Schüler"),
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                        color: Theme.of(context).accentColor,
-                      ),
-                      iconSize: 24,
-                      style:
-                          TextStyle(color: Theme.of(context).primaryColorDark),
-                      underline: Container(
-                        height: 2,
-                        color: Theme.of(context).accentColor,
-                      ),
-                      onChanged: (Student newStudent) {
-                        setState(() {
-                          _selectedStudent = newStudent;
-                          _refreshTrackingsByStudent(_selectedStudent);
-                          _chart = _buildSubjectChart(
-                              SOLTrackCalculator.analyzeTrackingsBySOL(
-                                  _trackings));
-                        });
-                      },
-                      items: _selectedClass
-                          .getMembers()
-                          .map<DropdownMenuItem<Student>>((Student student) {
-                        return DropdownMenuItem<Student>(
-                          value: student,
-                          child: Text(student.getFullName()),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-                DropdownButton<String>(
-                  value: _analyzeType,
-                  hint: Text("Auswertung"),
-                  icon: Icon(
-                    Icons.arrow_drop_down,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  iconSize: 24,
-                  style: TextStyle(color: Theme.of(context).primaryColorDark),
-                  underline: Container(
-                    height: 2,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  onChanged: (String newType) {
-                    setState(() {
-                      _analyzeType = newType;
-                      _chart = newType == 'Fach'
-                          ? _buildSubjectChart(
-                              SOLTrackCalculator.analyzeTrackingsBySOL(
-                                  _trackings))
-                          : _buildRatingChart(
-                              SOLTrackCalculator.analyzeTrackingsByRating(
-                                  _trackings));
-                    });
-                  },
-                  items: [
-                    DropdownMenuItem<String>(
-                      value: 'Fach',
-                      child: Text('Fach'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Bewertung',
-                      child: Text('Bewertung'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          AnimatedSwitcher(
-            duration: Duration(
-              milliseconds: 1000,
-            ),
-            child: _chart,
-          ),
-        ],
+    return Center(
+      child: AnimatedSwitcher(
+        duration: Duration(
+          milliseconds: 1000,
+        ),
+        child: _chart,
       ),
     );
   }
@@ -201,8 +119,6 @@ class _AnalyzeState extends State<Analyze> {
   _refreshTrackingsByClass(List<Student> students) async {
     await _trackRepository.byStudents(students).then((trackings) => {
           _trackings = trackings,
-          _chart = _buildSubjectChart(
-              SOLTrackCalculator.analyzeTrackingsBySOL(_trackings))
         });
   }
 
@@ -212,32 +128,21 @@ class _AnalyzeState extends State<Analyze> {
         .then((trackings) => {_trackings = trackings});
   }
 
-  Widget _checkLoadingState() {
-    if (_createdClasses.length == 0) {
-      _refreshFlexClass();
-      return CircularProgressIndicator();
+  _buildChart() {
+    Map<String, int> trackings;
+    if (_analyzeType == 'Fach') {
+      trackings = SOLTrackCalculator.analyzeTrackingsBySOL(_trackings);
+      _chart = SubjectChart(
+        trackings: trackings,
+        chartInfo: _buildChartInfo(trackings),
+      );
+    } else {
+      trackings = SOLTrackCalculator.analyzeTrackingsByRating(_trackings);
+      _chart = RatingChart(
+        trackings: trackings,
+        chartInfo: _buildChartInfo(trackings),
+      );
     }
-    if (_trackings.length == 0 && _selectedClass != null) {
-      _selectedStudent == null
-          ? _refreshTrackingsByClass(_selectedClass.getMembers())
-          : _refreshTrackingsByStudent(_selectedStudent);
-      return CircularProgressIndicator();
-    }
-    return _buildContent();
-  }
-
-  SubjectChart _buildSubjectChart(Map<String, int> trackings) {
-    return SubjectChart(
-      trackings: trackings,
-      chartInfo: _buildChartInfo(trackings),
-    );
-  }
-
-  RatingChart _buildRatingChart(Map<String, int> trackings) {
-    return RatingChart(
-      trackings: trackings,
-      chartInfo: _buildChartInfo(trackings),
-    );
   }
 
   IChartInfo _buildChartInfo(Map<String, int> trackings) {
@@ -252,7 +157,8 @@ class _AnalyzeState extends State<Analyze> {
               )
             : ChartSubjectStudentInfo(
                 fullName: _selectedStudent.getFullName(),
-                specialEducationalNeeds: _selectedStudent.specialEducationalNeeds,
+                specialEducationalNeeds:
+                    _selectedStudent.specialEducationalNeeds,
                 solTrackingsRated: trackings['total'],
                 solTrackingsOpen: trackings['undefined'],
               )
@@ -264,7 +170,8 @@ class _AnalyzeState extends State<Analyze> {
               )
             : ChartRatingStudentInfo(
                 fullName: _selectedStudent.getFullName(),
-                specialEducationalNeeds: _selectedStudent.specialEducationalNeeds,
+                specialEducationalNeeds:
+                    _selectedStudent.specialEducationalNeeds,
                 numberRatings: trackings['total'],
               );
     return chartInfo;

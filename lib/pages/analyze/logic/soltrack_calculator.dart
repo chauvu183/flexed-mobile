@@ -1,7 +1,6 @@
 import 'dart:collection';
 
-import 'package:flexed_mobile/types/enums/rating.dart';
-
+import '../../../types/enums/rating.dart';
 import '../../../models/soltrack.dart';
 
 class SOLTrackCalculator {

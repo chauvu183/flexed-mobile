@@ -1,26 +1,20 @@
 import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
 import 'package:flexed_mobile/models/student.dart';
-import 'package:flexed_mobile/pages/dailyTracking/widget/bottomSheetWidget.dart';
 import 'package:flexed_mobile/pages/dailyTracking/widget/moduleSelection.dart';
-import 'package:flexed_mobile/pages/dailyTracking/widget/myFloatingActionButton.dart';
 import 'package:flexed_mobile/shared/infocard/info_card.dart';
 import 'package:flexed_mobile/types/data/subject_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'dart:developer';
-import 'dart:convert';
 
 class StudentSOLPage extends StatefulWidget {
-  Student _student;
-  StudentSOLPage(Student student){
-      _student = student;
-  }
+  final Student student;
+  StudentSOLPage(this.student);
   
   @override
-  _StudentSOLPageState createState() => _StudentSOLPageState(_student);
+  _StudentSOLPageState createState() => _StudentSOLPageState(student);
 }
 
 class _StudentSOLPageState extends State<StudentSOLPage> {
