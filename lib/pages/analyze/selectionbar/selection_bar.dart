@@ -40,7 +40,6 @@ class _SelectionBarState extends State<SelectionBar> {
                 ),
                 iconSize: 24,
                 elevation: 16,
-                style: TextStyle(color: Theme.of(context).primaryColorDark),
                 underline: Container(
                   height: 2,
                   color: Theme.of(context).accentColor,
@@ -68,7 +67,6 @@ class _SelectionBarState extends State<SelectionBar> {
                   color: Theme.of(context).accentColor,
                 ),
                 iconSize: 24,
-                style: TextStyle(color: Theme.of(context).primaryColorDark),
                 underline: Container(
                   height: 2,
                   color: Theme.of(context).accentColor,
@@ -99,7 +97,6 @@ class _SelectionBarState extends State<SelectionBar> {
               color: Theme.of(context).accentColor,
             ),
             iconSize: 24,
-            style: TextStyle(color: Theme.of(context).primaryColorDark),
             underline: Container(
               height: 2,
               color: Theme.of(context).accentColor,
