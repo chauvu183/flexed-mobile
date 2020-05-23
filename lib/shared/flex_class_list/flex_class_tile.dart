@@ -18,7 +18,7 @@ class FlexClassTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      padding: EdgeInsets.only(left: 10, right: 10, top: 10),
       child: Ink(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10.0)), 
