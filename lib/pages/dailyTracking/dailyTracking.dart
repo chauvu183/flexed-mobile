@@ -1,5 +1,6 @@
+import 'package:flexed_mobile/pages/dailyTracking/SOLTrackingRouter/classRouter.dart';
+import 'package:flexed_mobile/shared/class_list/class_list.dart';
 import 'package:flutter/material.dart';
-import './widget/classList.dart';
 
 
 class DailyTracking extends StatefulWidget {
@@ -15,7 +16,11 @@ class _DailyTrackingState extends State<DailyTracking> {
       appBar: AppBar(
         title: Text("Ziel Erfassen"),
       ),
-      body: ClassList(),
+      body: FlexClassList(onClassSelected: this._goToClassDetails),
     );
+  }
+
+  _goToClassDetails(_class) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ClassRouter(_class)));
   }
 }

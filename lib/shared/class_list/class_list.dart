@@ -1,51 +1,52 @@
-
 import 'package:flexed_mobile/api/repository/flexclass_repository.dart';
 import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
-import 'package:flexed_mobile/pages/feedback/widgets/flexclass_list/widgets/date_selection.dart';
-import 'package:flexed_mobile/pages/feedback/widgets/student_carousel/student_carousel.dart';
 import 'package:flexed_mobile/types/enums/rating.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
+
 class FlexClassList extends StatefulWidget {
+
+  final Function onClassSelected;
+  final Function dateFilterFactory;
+
+  FlexClassList({ this.onClassSelected, this.dateFilterFactory });
+
   @override
   State<StatefulWidget> createState() {
-    return _FlexClassListState();
+    return _FlexClassListState(
+      onClassSelected: this.onClassSelected,
+      dateFilterFactory: dateFilterFactory
+    );
   }
 }
 
 
 class _FlexClassListState extends State<FlexClassList> {
 
-  DateTime _selectedDate = DateTime.now();
+  Function onClassSelected;
+  Function dateFilterFactory;
 
-  _onDateChanged(DateTime date) {
-    setState(() {
-      _selectedDate = date;
-    });
-  }
+  DateTime _filterDate;
+
+  _FlexClassListState({ this.onClassSelected, this.dateFilterFactory });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        DateSelection(
-          initialDate: _selectedDate,
-          onDateChanged: _onDateChanged,
-        ),
-        Flexible(
-          child: FutureBuilder(
-            future: Provider.of<FlexClassRepository>(context).index(),
-            builder: (context, snapshot) {
-              return ListView(
-                children: _buildClassList(snapshot.data),
-              );
-            }
-          ),
-        ),
-      ],
+    if (this.dateFilterFactory != null) {
+      _filterDate = this.dateFilterFactory();
+    }
+
+    return FutureBuilder(
+      future: Provider.of<FlexClassRepository>(context).index(),
+      builder: (context, snapshot) {
+        return ListView(
+          children: _buildClassList(snapshot.data),
+        );
+      }
     );
   }
 
@@ -70,8 +71,8 @@ class _FlexClassListState extends State<FlexClassList> {
             
             // filter current date
             List<SOLTrack> trackings = snapshot.data;
-            if (trackings != null) {
-              trackings = snapshot.data.where((tracking) => tracking.date.difference(_selectedDate).inDays == 0).toList();
+            if (trackings != null && _filterDate != null) {
+              trackings = snapshot.data.where((tracking) => tracking.date.difference(_filterDate).inDays == 0).toList();
             }
             
 
@@ -85,7 +86,7 @@ class _FlexClassListState extends State<FlexClassList> {
                 child: _buildClassOpenTrackingsCount(trackings),
               ),
               subtitle: _buildClassSubtitle(trackings),
-              onTap: () => _goToClassDetails(_class),
+              onTap: () => this.onClassSelected(_class),
             );
           }
         )
@@ -141,11 +142,6 @@ class _FlexClassListState extends State<FlexClassList> {
         )
       );
     }
-  }
-
-
-  _goToClassDetails(_class) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => StudentCarousel( flexClass: _class, selectedDate: _selectedDate,))).then((value) => setState(() => {}));
   }
 
 }
