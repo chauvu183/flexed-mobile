@@ -5,6 +5,7 @@ import 'package:flexed_mobile/api/repository/student_repository.dart';
 import 'package:flexed_mobile/models/flexclass.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
 import 'package:flexed_mobile/pages/feedback/feedback.dart';
+import 'package:flexed_mobile/shared/class_list/class_tile.dart';
 import 'package:flexed_mobile/shared/class_list_date_filter/date_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -65,7 +66,7 @@ void main() {
 
     // check whether classes have a list tile each
     expect(find.byType(ListView), findsNWidgets(1));
-    expect(find.byType(ListTile), findsNWidgets(testClasses.length));
+    expect(find.byType(FlexClassTile), findsNWidgets(testClasses.length));
 
 
     // check whether date selection works
