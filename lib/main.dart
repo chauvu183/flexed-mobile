@@ -11,10 +11,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(FlexedMobile());
 }
 
-class MyApp extends StatelessWidget {
+class FlexedMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
