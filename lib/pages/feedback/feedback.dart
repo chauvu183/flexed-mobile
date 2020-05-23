@@ -1,6 +1,6 @@
 import 'package:flexed_mobile/pages/feedback/widgets/student_carousel/student_carousel.dart';
-import 'package:flexed_mobile/shared/class_list/class_list.dart';
-import 'package:flexed_mobile/shared/class_list_date_filter/date_selection.dart';
+import 'package:flexed_mobile/shared/flex_class_list/flex_class_list.dart';
+import 'package:flexed_mobile/shared/flex_class_list_date_filter/date_selection.dart';
 import 'package:flutter/material.dart';
 
 class FeedbackView extends StatefulWidget {

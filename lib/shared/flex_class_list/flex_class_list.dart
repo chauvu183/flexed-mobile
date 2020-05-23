@@ -1,7 +1,7 @@
 import 'package:flexed_mobile/api/repository/flexclass_repository.dart';
 import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
-import 'package:flexed_mobile/shared/class_list/class_tile.dart';
+import 'package:flexed_mobile/shared/flex_class_list/flex_class_tile.dart';
 import 'package:flexed_mobile/types/enums/rating.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

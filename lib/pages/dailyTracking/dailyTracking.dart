@@ -1,5 +1,5 @@
 import 'package:flexed_mobile/pages/dailyTracking/SOLTrackingRouter/classRouter.dart';
-import 'package:flexed_mobile/shared/class_list/class_list.dart';
+import 'package:flexed_mobile/shared/flex_class_list/flex_class_list.dart';
 import 'package:flutter/material.dart';
 
 
