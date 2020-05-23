@@ -1,14 +1,8 @@
-import 'package:flexed_mobile/pages/analyze/analyze.dart';
-import 'package:flexed_mobile/pages/feedback/feedback.dart';
-import 'package:flexed_mobile/pages/dailyTracking/dailyTracking.dart';
+import 'package:flexed_mobile/pages/solTrackingHomepage/solTrackingHomepage.dart';
 import 'package:flexed_mobile/pages/widgets/bottom_nav_button.dart';
 import 'package:flexed_mobile/pages/widgets/bottom_nav_divider.dart';
 
 import 'package:flutter/material.dart';
-
-import './analyze/analyze.dart';
-import './dailyTracking/dailyTracking.dart';
-import './solTrackingHomePage/solTrackingHomepage.dart';
 
 class Home extends StatefulWidget {
   @override
