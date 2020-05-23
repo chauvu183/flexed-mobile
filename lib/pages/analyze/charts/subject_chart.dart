@@ -1,22 +1,20 @@
+import 'package:flexed_mobile/pages/analyze/charts/widgets/chart-bars/subject_bar_item.dart';
 import 'package:flutter/material.dart';
 
 import '../charts/ichart.dart';
-import '../charts/widgets/indicators/incicator_card_subject.dart';
 import '../charts/widgets/info_card/ichart_info.dart';
-import './widgets/bar_item.dart';
 
 class SubjectChart extends IChart {
   final List<Color> colors = [
-    Color(0xff0293ee),
-    Color(0xfff8b250),
-    Color(0xff5ac18e),
-    Color(0xff808080),
+    Color(0xFF33D97D),
+    Color(0xFF14BD9C),
+    Color(0xFF87CCBA),
+    Color(0xFFFFBB28),
+    Color(0xFFCCF2E9),
   ];
 
   final Map<String, int> trackings;
   final IChartInfo chartInfo;
-
-  final double _width = 50;
 
   SubjectChart({
     this.trackings,
@@ -31,44 +29,42 @@ class SubjectChart extends IChart {
         children: [
           chartInfo,
           buildChart(context, trackings),
-          Divider(),
-          IndicatorSubjectCard(colors: colors),
         ],
     );
   }
 
   Widget buildChart(BuildContext context, Map<String, int> trackings) {
     double maxHeight = MediaQuery.of(context).size.height/2.5;
-    List<BarItem> bars = [];
+    List<SubjectBarItem> bars = [];
 
     double total = trackings['total'].toDouble()+trackings['undefined'].toDouble();
     double german = trackings['deutsch'].toDouble();
     double english = trackings['englisch'].toDouble();
     double math = trackings['mathematik'].toDouble();
 
-    bars.add(BarItem(
+    bars.add(SubjectBarItem(
       color: colors[0],
-      width: _width,
       height: german / total * maxHeight,
       timesPicked: german.toInt(),
+      label: "Deutsch",
     ));
-    bars.add(BarItem(
+    bars.add(SubjectBarItem(
       color: colors[1],
-      width: _width,
       height: english / total * maxHeight,
       timesPicked: english.toInt(),
+      label: "Englisch",
     ));
-    bars.add(BarItem(
+    bars.add(SubjectBarItem(
       color: colors[2],
-      width: _width,
       height: math / total * maxHeight,
       timesPicked: math.toInt(),
+      label: "Mathe",
     ));
-    bars.add(BarItem(
+    bars.add(SubjectBarItem(
       color: colors[3],
-      width: _width,
       height: total / total * maxHeight,
       timesPicked: total.toInt(),
+      label: "Gesamt",
     ));
 
     return Container(

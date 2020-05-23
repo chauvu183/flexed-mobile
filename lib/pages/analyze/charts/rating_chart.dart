@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 
-import '../charts/widgets/indicators/indicator_card_rating.dart';
 import '../charts/ichart.dart';
 import '../charts/widgets/info_card/ichart_info.dart';
-import './widgets/bar_item.dart';
+import 'widgets/chart-bars/rating_bar_item.dart';
 
 class RatingChart extends IChart {
-
   static const List<Color> colors = [
-    Color(0xffe50000),
-    Color(0xffec8227),
-    Color(0xffe5e500),
-    Color(0xff5ac18e),
-    Color(0xff065535),
-    Color(0xff808080),
+    Color(0xFF33D97D),
+    Color(0xFF14BD9C),
+    Color(0xFFCCF2E9),
+    Color(0xFF87CCBA),
+    Color(0xFF20CCBF),
+    Color(0xFFFFBB28),
   ];
 
   final Map<String, int> trackings;
   final IChartInfo chartInfo;
-  final double _width = 35;
 
   RatingChart({
     this.trackings,
@@ -28,20 +25,18 @@ class RatingChart extends IChart {
   @override
   Widget build(BuildContext context) {
     return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          chartInfo,
-          buildChart(context, trackings),
-          Divider(),
-          IndicatorRatingCard(colors: colors, width: _width,),
-        ],
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        chartInfo,
+        buildChart(context, trackings),
+      ],
     );
   }
 
   Widget buildChart(BuildContext context, Map<String, int> trackings) {
-    double maxHeight = MediaQuery.of(context).size.height/2.5;
-    List<BarItem> bars = [];
+    double maxHeight = MediaQuery.of(context).size.height / 2.5;
+    List<RatingBarItem> bars = [];
 
     double bad = trackings['bad'].toDouble();
     double quitebad = trackings['quitebad'].toDouble();
@@ -49,51 +44,52 @@ class RatingChart extends IChart {
     double quitegood = trackings['quitegood'].toDouble();
     double good = trackings['good'].toDouble();
     double total = trackings['total'].toDouble();
-   
-    bars.add(BarItem(
-      color: colors[0],
-      width: _width,
-      height: bad / total * maxHeight,
-      timesPicked: bad.toInt(),
-    ));
-    bars.add(BarItem(
+
+    bars.add(RatingBarItem(
+        color: colors[0],
+        height: bad / total * maxHeight,
+        timesPicked: bad.toInt(),
+        icon: Icons.sentiment_very_dissatisfied));
+    bars.add(RatingBarItem(
       color: colors[1],
-      width: _width,
       height: quitebad / total * maxHeight,
       timesPicked: quitebad.toInt(),
+      icon: Icons.sentiment_dissatisfied,
     ));
-    bars.add(BarItem(
+    bars.add(RatingBarItem(
       color: colors[2],
-      width: _width,
       height: average / total * maxHeight,
       timesPicked: average.toInt(),
+      icon: Icons.sentiment_neutral,
     ));
-    bars.add(BarItem(
+    bars.add(RatingBarItem(
       color: colors[3],
-      width: _width,
       height: quitegood / total * maxHeight,
       timesPicked: quitegood.toInt(),
+      icon: Icons.sentiment_satisfied,
     ));
-    bars.add(BarItem(
+    bars.add(RatingBarItem(
       color: colors[4],
-      width: _width,
       height: good / total * maxHeight,
       timesPicked: good.toInt(),
+      icon: Icons.sentiment_very_satisfied,
     ));
-    bars.add(BarItem(
+    bars.add(RatingBarItem(
       color: colors[5],
-      width: _width,
       height: total / total * maxHeight,
       timesPicked: total.toInt(),
+      icon: Icons.functions,
     ));
 
     return Container(
-        color: Colors.white,
-        height: MediaQuery.of(context).copyWith().size.height/2,
-        width: MediaQuery.of(context).copyWith().size.width - 50,
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: bars),
+      margin: EdgeInsets.symmetric(vertical: 8.0),
+      color: Colors.white,
+      height: MediaQuery.of(context).copyWith().size.height / 2,
+      width: MediaQuery.of(context).copyWith().size.width - 50,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: bars,
+      ),
     );
   }
 }

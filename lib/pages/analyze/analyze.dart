@@ -101,11 +101,14 @@ class _AnalyzeState extends State<Analyze> {
     }
 
     return Center(
-      child: AnimatedSwitcher(
-        duration: Duration(
-          milliseconds: 1000,
+      child: Container(
+        margin: EdgeInsets.all(5.0),
+        child: AnimatedSwitcher(
+          duration: Duration(
+            milliseconds: 1000,
+          ),
+          child: _chart,
         ),
-        child: _chart,
       ),
     );
   }

@@ -14,7 +14,7 @@ class PlaceholderChart extends IChart {
               child: Icon(
                 Icons.assessment,
                 size: 160,
-                color: Theme.of(context).primaryColor,
+                color: Color(0xFF14BD9C),
               ),
             ),
             Padding(
