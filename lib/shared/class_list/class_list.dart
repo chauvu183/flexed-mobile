@@ -1,6 +1,7 @@
 import 'package:flexed_mobile/api/repository/flexclass_repository.dart';
 import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
+import 'package:flexed_mobile/shared/class_list/class_tile.dart';
 import 'package:flexed_mobile/types/enums/rating.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -76,18 +77,27 @@ class _FlexClassListState extends State<FlexClassList> {
             }
             
 
-            return ListTile(
-              leading: CircleAvatar(
-                child: Icon(Icons.group), 
-                backgroundColor: Theme.of(context).primaryColorLight,
-              ),
-              title: Text(_class.title),
+            return FlexClassTile(
+              flexClass: _class,
+              subtitle: _buildClassSubtitle(trackings),
               trailing: Container(
                 child: _buildClassOpenTrackingsCount(trackings),
               ),
-              subtitle: _buildClassSubtitle(trackings),
-              onTap: () => this.onClassSelected(_class),
+              onTap: this.onClassSelected,
             );
+            
+            // ListTile(
+            //   leading: CircleAvatar(
+            //     child: Icon(Icons.group), 
+            //     backgroundColor: Theme.of(context).primaryColorLight,
+            //   ),
+            //   title: Text(_class.title),
+            //   trailing: Container(
+            //     child: _buildClassOpenTrackingsCount(trackings),
+            //   ),
+            //   subtitle: _buildClassSubtitle(trackings),
+            //   onTap: () => this.onClassSelected(_class),
+            // );
           }
         )
       );
