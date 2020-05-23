@@ -57,13 +57,19 @@ class FlexedMobile extends StatelessWidget {
             backgroundColor: Color(0xFFFFFBE6),
 
             primaryColorBrightness: Brightness.dark,
-            primaryColor: Color(0xFF5E5E5E),
-            primaryColorLight: Color(0xFFF3F3F3),
-            primaryColorDark: Color(0xFF000000),
+            primaryColor: Color(0xFF14BD9C),
+            primaryColorLight: Color(0xFFCCF2E9),
+            primaryColorDark: Color(0xFF14BD9C),
 
-            cursorColor: Color(0xFFBC0000),
-            accentColor: Color(0xFFBC0000),
+            accentColorBrightness: Brightness.light,
+            accentColor: Color(0xFF33D97D),
             errorColor: Color(0xFFBC0000),
+
+            // Breaks some of the layouts right now;
+            // use this locally for now when designing.
+            // You may need to quit your app and rebuild
+            // completely before this takes effect.
+            // fontFamily: 'Montserrat',
 
             textTheme: TextTheme(
               bodyText1: TextStyle(color: Colors.black),
