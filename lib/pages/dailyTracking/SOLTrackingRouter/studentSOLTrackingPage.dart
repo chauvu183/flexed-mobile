@@ -40,11 +40,12 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
 
         ///on form user deleted
   _onDelete(SOLTrack _solTracking) {
+
        var find = solEntries.firstWhere(
         (it) => it == _solTracking,
         orElse: () => null,
       );
-     // if (find != null) _repo.delete(solEntries.indexOf(find)).then((_) => _refreshTrackings());
+      if (find != null) _repo.delete(solEntries.indexOf(find)).then((_) => _refreshTrackings());
   
   }
 
@@ -67,7 +68,9 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
           subtitle: Text('Datum: ' + DateFormat('dd.MM.yyyy').format(tracking.date) + " \nUnterricht Stunde : " + tracking.lessonNumber.toString() ),
           trailing: IconButton(
             icon: Icon(Icons.delete),
-            onPressed: (){},
+            onPressed: (){
+              _onDelete(tracking);
+            },
             ),
           onTap: () {
               showModalBottomSheet(context: context, builder: (context) => SOLTrackingForm(tracking:tracking)).then((value) => {
@@ -88,10 +91,6 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
     return SingleChildScrollView(
       child: Stack(
         children: <Widget>[
-        Container(  
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-           ),
           Column(
             children: <Widget>[
               Padding(
@@ -124,7 +123,7 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
               left: 250,
               child:  FloatingActionButton(
                   onPressed: () {
-                    SOLTrack tracking = new SOLTrack(student:_student,lessonNumber: 1,subject: SubjectType(title: "Deutsch"));
+                    SOLTrack tracking = new SOLTrack(student:_student,lessonNumber: null,subject: SubjectType(title: "Deutsch"), date: null);
                     showModalBottomSheet(context: context, builder: (context) => SOLTrackingForm(tracking:tracking)).then((value) => {
                     setState(() => null)
                   });

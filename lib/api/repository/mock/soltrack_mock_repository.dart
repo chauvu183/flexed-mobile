@@ -52,10 +52,9 @@ class SOLTrackMockRepository extends SOLTrackRepository {
 
   @override
   Future<SOLTrack> update(SOLTrack model) async {
-    SOLTrack existing = dataSource.trackings.firstWhere((student) => student.id == model.id);
+    SOLTrack existing = dataSource.trackings.firstWhere((student) => student.id == model.id, orElse: () => null);
     int index = dataSource.trackings.indexOf(existing);
     dataSource.trackings[index] = model;
-
     return dataSource.trackings[index];
   }
 
