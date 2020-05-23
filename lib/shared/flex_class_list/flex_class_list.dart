@@ -85,19 +85,6 @@ class _FlexClassListState extends State<FlexClassList> {
               ),
               onTap: this.onClassSelected,
             );
-            
-            // ListTile(
-            //   leading: CircleAvatar(
-            //     child: Icon(Icons.group), 
-            //     backgroundColor: Theme.of(context).primaryColorLight,
-            //   ),
-            //   title: Text(_class.title),
-            //   trailing: Container(
-            //     child: _buildClassOpenTrackingsCount(trackings),
-            //   ),
-            //   subtitle: _buildClassSubtitle(trackings),
-            //   onTap: () => this.onClassSelected(_class),
-            // );
           }
         )
       );
