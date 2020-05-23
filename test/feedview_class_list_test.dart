@@ -21,7 +21,6 @@ class MockTrackingRepository extends Mock implements SOLTrackRepository {}
 void main() {
 
   List<FlexClass> testClasses = Fixtures.classes;
-  List<Student> testStudents = Fixtures.students;
   List<SOLTrack> testTrackings = Fixtures.trackings;
 
   testWidgets('Test feedback class list view', (WidgetTester tester) async {
@@ -55,8 +54,10 @@ void main() {
       )
     );
 
+    // ... wait for class list rebuild
     await tester.pump();
 
+    // ... wait for class assignment count rebuild
     await tester.pump();
 
     // check if date selection is initialized
@@ -68,10 +69,19 @@ void main() {
     expect(find.byType(ListTile), findsNWidgets(testClasses.length));
 
 
+    // check whether date selection works
     await tester.tap(find.byIcon(Icons.chevron_right));
+
+    // ... wait for date selection rebuild
+    await tester.pump();
+
+    // ... wait for class list rebuild
+    await tester.pump();
+
+    // ... wait for class assignment count rebuild
     await tester.pump();
 
     expect(find.text(DateFormat('dd.MM.yyyy').format(DateTime.now().add(Duration(days: 1)))), findsOneWidget);
-
+    expect(find.text('Keine Aufgaben'), findsNWidgets(testClasses.length));
   });
 }
