@@ -1,13 +1,14 @@
 import 'package:flexed_mobile/pages/analyze/analyze.dart';
 import 'package:flexed_mobile/pages/feedback/feedback.dart';
 import 'package:flexed_mobile/pages/dailyTracking/dailyTracking.dart';
+import 'package:flexed_mobile/pages/widgets/bottom_nav_button.dart';
+import 'package:flexed_mobile/pages/widgets/bottom_nav_divider.dart';
 
 import 'package:flutter/material.dart';
 
 import './analyze/analyze.dart';
 import './dailyTracking/dailyTracking.dart';
 import './solTrackingHomePage/solTrackingHomepage.dart';
-
 
 class Home extends StatefulWidget {
   @override
@@ -17,145 +18,66 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   // Properties & Variables needed
 
-  int currentTab = 0; // to keep track of active tab index
-  
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = SolTrackingHome(); // Our first view in viewport
+  Widget _currentScreen = SolTrackingHome();
+  int _currentTab = 0;
+
+  // Coloring
+  Color currentColor = Color(0xFF14BD9C);
+  Color mainColor = Colors.black;
+
+  // Callbacks
+  callbackCurrentScreen(currentScreen, currentTab) {
+    setState(() {
+      _currentScreen = currentScreen;
+      _currentTab = currentTab;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageStorage(
-        child: currentScreen,
+        child: _currentScreen,
         bucket: bucket,
       ),
-      /* floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {},
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, */
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
-        notchMargin: 10,
+        notchMargin: 5,
         child: Container(
           height: 60,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen =
-                            SolTrackingHome(); // if user taps on this dashboard tab will be active
-                        currentTab = 0;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.dashboard,
-                          color: currentTab == 0 ? Colors.blue : Colors.grey,
-                        ),
-                        Text(
-                          'Home',
-                          style: TextStyle(
-                            color: currentTab == 0 ? Colors.blue : Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen =
-                            DailyTracking(); // if user taps on this dashboard tab will be active
-                        currentTab = 1;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.assignment_ind,
-                          color: currentTab == 1 ? Colors.blue : Colors.grey,
-                        ),
-                        Text(
-                          'Ziel Erfassen',
-                          style: TextStyle(
-                            color: currentTab == 1 ? Colors.blue : Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+              BottomNavDivider(finalOrFirst: true),
+              BottomNavButton(
+                icon: Icons.home,
+                selected: _currentTab == 0,
+                callback: callbackCurrentScreen,
+                tab: 0,
               ),
-
-              // Right Tab bar icons
-
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen =
-                            FeedbackView(); // if user taps on this dashboard tab will be active
-                        currentTab = 2;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.assignment,
-                          color: currentTab == 2 ? Colors.blue : Colors.grey,
-                        ),
-                        Text(
-                          'Bewertung',
-                          style: TextStyle(
-                            color: currentTab == 2 ? Colors.blue : Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen =
-                            Analyze(); // if user taps on this dashboard tab will be active
-                        currentTab = 3;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.assessment,
-                          color: currentTab == 3 ? Colors.blue : Colors.grey,
-                        ),
-                        Text(
-                          'Analyse',
-                          style: TextStyle(
-                            color: currentTab == 3 ? Colors.blue : Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              )
-
+              BottomNavDivider(),
+              BottomNavButton(
+                icon: Icons.assignment_ind,
+                selected: _currentTab == 1,
+                callback: callbackCurrentScreen,
+                tab: 1,
+              ),
+              BottomNavDivider(),
+              BottomNavButton(
+                icon: Icons.assignment,
+                selected: _currentTab == 2,
+                callback: callbackCurrentScreen,
+                tab: 2,
+              ),
+              BottomNavDivider(),
+              BottomNavButton(
+                icon: Icons.assessment,
+                selected: _currentTab == 3,
+                callback: callbackCurrentScreen,
+                tab: 3,
+              ),
+              BottomNavDivider(finalOrFirst: true),
             ],
           ),
         ),
