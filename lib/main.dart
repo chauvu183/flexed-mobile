@@ -60,6 +60,7 @@ class FlexedMobile extends StatelessWidget {
             primaryColor: Color(0xFF14BD9C),
             primaryColorLight: Color(0xFFCCF2E9),
             primaryColorDark: Color(0xFF14BD9C),
+            
 
             accentColorBrightness: Brightness.light,
             accentColor: Color(0xFF33D97D),
