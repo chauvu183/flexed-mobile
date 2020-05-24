@@ -60,9 +60,9 @@ class _AnalyzeState extends State<Analyze> {
     _refreshFlexClass();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Analyse"),
-      ),
+      // appBar: AppBar(
+      //   title: Text("Analyse"),
+      // ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
