@@ -44,7 +44,7 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
         (it) => it == _solTracking,
         orElse: () => null,
       );
-     // if (find != null) _repo.delete(solEntries.indexOf(find)).then((_) => _refreshTrackings());
+      if (find != null) _repo.delete(solEntries.indexOf(find)).then((_) => _refreshTrackings());
   
   }
 
@@ -67,7 +67,9 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
           subtitle: Text('Datum: ' + DateFormat('dd.MM.yyyy').format(tracking.date) + " \nUnterricht Stunde : " + tracking.lessonNumber.toString() ),
           trailing: IconButton(
             icon: Icon(Icons.delete),
-            onPressed: (){},
+            onPressed: (){
+              _onDelete(tracking);
+            },
             ),
           onTap: () {
               showModalBottomSheet(context: context, builder: (context) => SOLTrackingForm(tracking:tracking)).then((value) => {
@@ -85,21 +87,17 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
     _repo = Provider.of<SOLTrackRepository>(context);
     // refresh the tracking records on first render
     _refreshTrackings();
-    return SingleChildScrollView(
+    return Padding(
+      padding: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
       child: Stack(
         children: <Widget>[
-        Container(  
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-           ),
           Column(
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.all(12),
                 child: InfoCard(student: _student),
               ),
-              Padding(
-                padding: EdgeInsets.all(12),
+              Flexible(
                 child: FutureBuilder(future: _getTrackings(),
                 builder: (context,snapshot){
                 return Row(
@@ -116,23 +114,19 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
                   );
             },
             ),
-            )
-            ]          
             ),
-            Positioned(
-              top: 490,
-              left: 250,
-              child:  FloatingActionButton(
+            FloatingActionButton(
                   onPressed: () {
-                    SOLTrack tracking = new SOLTrack(student:_student,lessonNumber: 1,subject: SubjectType(title: "Deutsch"));
+                    SOLTrack tracking = new SOLTrack(student:_student,lessonNumber: null,subject: SubjectType(title: "Deutsch"), date: null);
                     showModalBottomSheet(context: context, builder: (context) => SOLTrackingForm(tracking:tracking)).then((value) => {
                     setState(() => null)
                   });
                   },
                   child: Icon(Icons.add),
-                  backgroundColor: Colors.red,
-                ),
-              ),
+                  backgroundColor: Theme.of(context).primaryColorDark,
+                )
+            ]          
+            ),
         ],
         ),
     );
