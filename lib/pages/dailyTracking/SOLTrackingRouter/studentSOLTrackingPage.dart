@@ -40,7 +40,6 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
 
         ///on form user deleted
   _onDelete(SOLTrack _solTracking) {
-
        var find = solEntries.firstWhere(
         (it) => it == _solTracking,
         orElse: () => null,
@@ -88,7 +87,8 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
     _repo = Provider.of<SOLTrackRepository>(context);
     // refresh the tracking records on first render
     _refreshTrackings();
-    return SingleChildScrollView(
+    return Padding(
+      padding: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
       child: Stack(
         children: <Widget>[
           Column(
@@ -97,8 +97,7 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
                 padding: EdgeInsets.all(12),
                 child: InfoCard(student: _student),
               ),
-              Padding(
-                padding: EdgeInsets.all(12),
+              Flexible(
                 child: FutureBuilder(future: _getTrackings(),
                 builder: (context,snapshot){
                 return Row(
@@ -115,13 +114,8 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
                   );
             },
             ),
-            )
-            ]          
             ),
-            Positioned(
-              top: 490,
-              left: 250,
-              child:  FloatingActionButton(
+            FloatingActionButton(
                   onPressed: () {
                     SOLTrack tracking = new SOLTrack(student:_student,lessonNumber: null,subject: SubjectType(title: "Deutsch"), date: null);
                     showModalBottomSheet(context: context, builder: (context) => SOLTrackingForm(tracking:tracking)).then((value) => {
@@ -129,9 +123,10 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
                   });
                   },
                   child: Icon(Icons.add),
-                  backgroundColor: Colors.red,
-                ),
-              ),
+                  backgroundColor: Theme.of(context).primaryColorDark,
+                )
+            ]          
+            ),
         ],
         ),
     );
