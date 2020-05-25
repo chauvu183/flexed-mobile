@@ -164,6 +164,7 @@ class _AnalyzeState extends State<Analyze> {
                     _selectedStudent.specialEducationalNeeds,
                 solTrackingsRated: trackings['total'],
                 solTrackingsOpen: trackings['undefined'],
+                gender: _selectedStudent.gender,
               )
         : chartInfo = _selectedStudent == null
             ? ChartRatingClassInfo(
@@ -176,6 +177,7 @@ class _AnalyzeState extends State<Analyze> {
                 specialEducationalNeeds:
                     _selectedStudent.specialEducationalNeeds,
                 numberRatings: trackings['total'],
+                gender: _selectedStudent.gender,
               );
     return chartInfo;
   }

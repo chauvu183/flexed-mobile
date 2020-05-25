@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './ichart_info.dart';
+import 'icon_title.dart';
 
 class ChartRatingClassInfo extends IChartInfo {
   final String title;
@@ -16,15 +17,15 @@ class ChartRatingClassInfo extends IChartInfo {
   @override
   List<Text> declareChildren(BuildContext context) {
     return [
-      Text(
-        'Klasse: $title',
-        style: TextStyle(
-            color: Theme.of(context).primaryColorDark,
-            fontSize: 18,
-            fontWeight: FontWeight.bold),
-      ),
-      Text('Schüler: $numberStudents'),
       Text('Bewertungen: ${numberRatings.ceil()}'),
     ];
+  }
+
+  IconTitle buildIconTitle() {
+    return IconTitle(
+      url: "",
+      title: title,
+      numberStudents: this.numberStudents,
+    );
   }
 }

@@ -1,21 +1,43 @@
 import 'package:flutter/material.dart';
 
+import 'icon_title.dart';
+
 abstract class IChartInfo extends StatelessWidget {
+  final List<Color> colors = [
+    Color(0xFF33D97D),
+    Color(0xFF14BD9C),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
-      child: Card(
-        elevation: 2,
+      child: Container(
+        height: 100,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          gradient: LinearGradient(
+            colors: colors,
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
           child: SizedBox(
             width: MediaQuery.of(context).copyWith().size.width - 50,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: declareChildren(context),
+              children: [
+                buildIconTitle(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: declareChildren(context),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -24,4 +46,6 @@ abstract class IChartInfo extends StatelessWidget {
   }
 
   List<Widget> declareChildren(BuildContext context) => List();
+  
+  IconTitle buildIconTitle();
 }

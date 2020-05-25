@@ -11,12 +11,13 @@ class _SolTrackingHomeState extends State<SolTrackingHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: Image.asset(
-        'images/homepagewithAll-01.png',
-        fit: BoxFit.cover,
-        height: double.infinity,
-        width: double.infinity,
-      )),
+        child: Image.asset(
+          'images/homepagewithAll-01.png',
+          fit: BoxFit.cover,
+          height: double.infinity,
+          width: double.infinity,
+        ),
+      ),
     );
   }
 }
