@@ -23,21 +23,37 @@ class SubjectChart extends IChart {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          chartInfo,
-          buildChart(context, trackings),
-        ],
+    return Stack(
+      children: [
+         Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              alignment: Alignment.bottomRight,
+              image: AssetImage(
+                'images/background-03-02.png',
+              ),
+            ),
+          ),
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            chartInfo,
+            buildChart(context, trackings),
+          ],
+        ),
+      ],
     );
   }
 
   Widget buildChart(BuildContext context, Map<String, int> trackings) {
-    double maxHeight = MediaQuery.of(context).size.height/2.5;
+    double maxHeight = MediaQuery.of(context).size.height / 2.5;
     List<SubjectBarItem> bars = [];
 
-    double total = trackings['total'].toDouble()+trackings['undefined'].toDouble();
+    double total =
+        trackings['total'].toDouble() + trackings['undefined'].toDouble();
     double german = trackings['deutsch'].toDouble();
     double english = trackings['englisch'].toDouble();
     double math = trackings['mathematik'].toDouble();
@@ -68,12 +84,11 @@ class SubjectChart extends IChart {
     ));
 
     return Container(
-        color: Colors.white,
-        height: MediaQuery.of(context).copyWith().size.height/2,
-        width: MediaQuery.of(context).copyWith().size.width - 50,
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: bars),
+      color: Colors.transparent,
+      height: MediaQuery.of(context).copyWith().size.height / 2,
+      width: MediaQuery.of(context).copyWith().size.width - 50,
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween, children: bars),
     );
   }
 }

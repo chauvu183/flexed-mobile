@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../charts/ichart.dart';
 import '../charts/widgets/info_card/ichart_info.dart';
 import 'widgets/chart-bars/rating_bar_item.dart';
+import 'dart:math' as math;
 
 class RatingChart extends IChart {
   static const List<Color> colors = [
@@ -24,12 +25,28 @@ class RatingChart extends IChart {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      mainAxisSize: MainAxisSize.max,
+    return Stack(
       children: [
-        chartInfo,
-        buildChart(context, trackings),
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.,
+              alignment: Alignment.bottomLeft,
+              image: AssetImage(
+                'images/background-03-02.png',
+              ),
+            ),
+          ),
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            chartInfo,
+            buildChart(context, trackings),
+          ],
+        ),
       ],
     );
   }
@@ -83,7 +100,7 @@ class RatingChart extends IChart {
 
     return Container(
       margin: EdgeInsets.symmetric(vertical: 8.0),
-      color: Colors.white,
+      color: Colors.transparent,
       height: MediaQuery.of(context).copyWith().size.height / 2,
       width: MediaQuery.of(context).copyWith().size.width - 50,
       child: Row(
