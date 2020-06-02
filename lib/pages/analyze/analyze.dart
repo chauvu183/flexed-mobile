@@ -59,30 +59,39 @@ class _AnalyzeState extends State<Analyze> {
 
     _refreshFlexClass();
 
-    return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Analyse"),
-      // ),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SelectionBar(
-            createdClasses: _createdClasses,
-            selectedClass: _selectedClass,
-            selectedStudent: _selectedStudent,
-            analyzeType: _analyzeType,
-            callBackSelectedClass: callBackSelectedClass,
-            callBackSelectedStudent: callBackSelectedStudent,
-            callBackSelectedAnalyzeType: callBackSelectedAnalyzeType,
-          ),
-          Expanded(
-            child: Container(
-              color: Colors.white,
-              child: _buildContent(),
+  
+     return Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            alignment: Alignment.bottomRight,
+            image: AssetImage(
+              'images/background-03-02.png',
             ),
           ),
-        ],
+        ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SelectionBar(
+              createdClasses: _createdClasses,
+              selectedClass: _selectedClass,
+              selectedStudent: _selectedStudent,
+              analyzeType: _analyzeType,
+              callBackSelectedClass: callBackSelectedClass,
+              callBackSelectedStudent: callBackSelectedStudent,
+              callBackSelectedAnalyzeType: callBackSelectedAnalyzeType,
+            ),
+            Expanded(
+              child: Container(
+                color: Colors.white,
+                child: _buildContent(),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -102,6 +111,7 @@ class _AnalyzeState extends State<Analyze> {
 
     return Center(
       child: Container(
+        color: Colors.transparent,
         margin: EdgeInsets.all(5.0),
         child: AnimatedSwitcher(
           duration: Duration(
