@@ -45,9 +45,7 @@ class FeedbackState extends State<FeedbackView> {
                         color: Color(0xFFFFFBB28),
                         image: DecorationImage(
                           alignment: Alignment(-0.9, 0.2),
-                          image: AssetImage(
-                        'images/girlForPageClasses.png',
-                        )
+                          image: AssetImage('images/girlForPageClasses.png'),
                         ),        
                       ),        
                     ),

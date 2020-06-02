@@ -2,6 +2,7 @@ import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
 import 'package:flexed_mobile/models/student.dart';
 import 'package:flexed_mobile/pages/feedback/widgets/student_carousel/widgets/rating_sheet.dart';
+import 'package:flexed_mobile/pages/feedback/widgets/student_carousel/widgets/tracking_tile.dart';
 import 'package:flexed_mobile/shared/infocard/info_card.dart';
 import 'package:flexed_mobile/types/enums/rating.dart';
 import 'package:flutter/material.dart';
@@ -46,25 +47,35 @@ class _StudentPageState extends State<StudentPage> {
 
 
   _ratingSentiment(Rating rating) {
+    IconData icon;
+
     switch(rating) {
       case Rating.GOOD:
-        return Icon(Icons.sentiment_very_satisfied);
+        icon = Icons.sentiment_very_satisfied;
+        break;
       
       case Rating.QUITEGOOD:
-        return Icon(Icons.sentiment_satisfied);
+        icon = Icons.sentiment_satisfied;
+        break;
 
       case Rating.AVERAGE:
-        return Icon(Icons.sentiment_neutral);
+        icon = Icons.sentiment_neutral;
+        break;
 
       case Rating.QUITEBAD:
-        return Icon(Icons.sentiment_dissatisfied);
+        icon = Icons.sentiment_dissatisfied;
+        break;
 
       case Rating.BAD:
-        return Icon(Icons.sentiment_very_dissatisfied);
+        icon = Icons.sentiment_very_dissatisfied;
+        break;
 
       default:
-        return Icon(Icons.error);
+        icon = Icons.error;
+        break;
     }
+
+    return Icon(icon, size: 39);
   }
 
 
@@ -77,15 +88,11 @@ class _StudentPageState extends State<StudentPage> {
 
     trackings.forEach((tracking) {
       list.add(
-        ListTile(
-          leading: CircleAvatar(
-            child: Icon(Icons.assignment), 
-            backgroundColor: Theme.of(context).primaryColorLight,
-          ),
-          title: Text(tracking.subject.title),
+        TrackingTile(
+          tracking: tracking,
           subtitle: Text('${tracking.lessonNumber}. Unterrichtsstunde'),
           trailing: tracking.rating == Rating.UNDEFINED ? null : _ratingSentiment(tracking.rating),
-          onTap: () => showModalBottomSheet(context: context, builder: (context) => RatingSheet(tracking)).then((value) => {
+          onTap: (selectedTracking) => showModalBottomSheet(context: context, builder: (context) => RatingSheet(selectedTracking)).then((value) => {
             setState(() => null)
           }),
         ),
