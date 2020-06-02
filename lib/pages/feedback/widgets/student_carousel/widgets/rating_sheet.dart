@@ -47,8 +47,8 @@ class _RatingSheetState extends State<RatingSheet> {
   _buildRatingButton({Icon icon, Rating rating}) {
     return IconButton(
       icon: icon,
-      color: _selectedRating == rating ? Theme.of(context).accentColor : null,
-      iconSize: 50,
+      color: _selectedRating == rating ? Theme.of(context).primaryColorLight : null,
+      iconSize: 55,
       onPressed: () => _selectRating(rating),
     );
   }
@@ -59,58 +59,68 @@ class _RatingSheetState extends State<RatingSheet> {
 
     return Container(
       height: 215.0,
+      color: Color(0xFF737373),
       child: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Text.rich(
-                TextSpan(
-                  style: TextStyle(fontSize: 18),
-                  text: 'Bewertung abgeben für ', 
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: tracking.subject.title, 
-                      style: TextStyle(fontWeight: FontWeight.bold)
-                    ),
-                    TextSpan(
-                      text: ':'
-                    ),
-                  ] 
-                )
-              ),
-            ),
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildRatingButton(icon: Icon(Icons.sentiment_very_dissatisfied), rating: Rating.BAD),
-                    _buildRatingButton(icon: Icon(Icons.sentiment_dissatisfied), rating: Rating.QUITEBAD),
-                    _buildRatingButton(icon: Icon(Icons.sentiment_neutral), rating: Rating.AVERAGE),
-                    _buildRatingButton(icon: Icon(Icons.sentiment_satisfied), rating: Rating.QUITEGOOD),
-                    _buildRatingButton(icon: Icon(Icons.sentiment_very_satisfied), rating: Rating.GOOD),
-                  ],
-                ),
-              ]
-            ),
-
-            Flexible(
-              child: Padding(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [
+            Theme.of(context).primaryColor,
+            Theme.of(context).accentColor,
+          ]),
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
+        ),
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
                 padding: EdgeInsets.all(20.0),
-                child: SizedBox.expand(
-                  child: RaisedButton(
-                    child: Text('Bestätigen', style: TextStyle(fontSize: 18.0, color: Colors.white),),
-                    color: Theme.of(context).accentColor,
-                    onPressed: _selectedRating == this.tracking.rating ? null : () => _submitRating(),
+                child: Text.rich(
+                  TextSpan(
+                    style: TextStyle(fontSize: 18),
+                    text: 'Bewertung für ', 
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: tracking.subject.title, 
+                        style: TextStyle(fontWeight: FontWeight.bold)
+                      ),
+                      TextSpan(
+                        text: ':'
+                      ),
+                    ] 
+                  )
+                ),
+              ),
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildRatingButton(icon: Icon(Icons.sentiment_very_dissatisfied), rating: Rating.BAD),
+                      _buildRatingButton(icon: Icon(Icons.sentiment_dissatisfied), rating: Rating.QUITEBAD),
+                      _buildRatingButton(icon: Icon(Icons.sentiment_neutral), rating: Rating.AVERAGE),
+                      _buildRatingButton(icon: Icon(Icons.sentiment_satisfied), rating: Rating.QUITEGOOD),
+                      _buildRatingButton(icon: Icon(Icons.sentiment_very_satisfied), rating: Rating.GOOD),
+                    ],
+                  ),
+                ]
+              ),
+
+              Flexible(
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: SizedBox.expand(
+                    child: RaisedButton(
+                      child: Text('Bestätigen', style: TextStyle(fontSize: 18.0, color: _selectedRating == this.tracking.rating ? Theme.of(context).primaryColor : Colors.black),),
+                      color: Theme.of(context).primaryColorLight,
+                      onPressed: _selectedRating == this.tracking.rating ? null : () => _submitRating(),
+                    ),
                   ),
                 ),
-              ),
-            )
-          ]
-        )
-        
+              )
+            ]
+          )
+          
+        ),
       ),
     );
   }
