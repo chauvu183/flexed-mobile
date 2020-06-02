@@ -31,7 +31,6 @@ class RatingChart extends IChart {
           decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,
-              colorFilter: ColorFilter.,
               alignment: Alignment.bottomLeft,
               image: AssetImage(
                 'images/background-03-02.png',
