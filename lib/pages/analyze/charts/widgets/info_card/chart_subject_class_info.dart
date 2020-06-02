@@ -28,7 +28,7 @@ class ChartSubjectClassInfo extends IChartInfo {
 
   IconTitle buildIconTitle() {
     return IconTitle(
-      url: 'images/Classes.png',
+      url: 'images/teacher.png',
       title: title,
       numberStudents: this.numberStudents,
     );

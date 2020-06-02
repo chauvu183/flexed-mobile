@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../charts/ichart.dart';
 import '../charts/widgets/info_card/ichart_info.dart';
 import 'widgets/chart-bars/rating_bar_item.dart';
-import 'dart:math' as math;
 
 class RatingChart extends IChart {
   static const List<Color> colors = [
