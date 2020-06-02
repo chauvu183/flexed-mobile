@@ -16,8 +16,4 @@ class AppBarFlexed extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: true,
       );
   }
-
-  // @override
-  // // TODO: implement preferredSize
-  // Size get preferredSize => throw UnimplementedError();
 }
