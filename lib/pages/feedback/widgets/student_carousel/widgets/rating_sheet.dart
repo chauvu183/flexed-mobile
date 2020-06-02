@@ -41,7 +41,11 @@ class _RatingSheetState extends State<RatingSheet> {
   _submitRating() {
     tracking.rating = _selectedRating;
 
-    _repo.update(tracking).then((tracking) => Navigator.pop(context, tracking.rating));
+    _repo.update(tracking).then((tracking) {
+      if (tracking != null) {
+        Navigator.pop(context, tracking.rating);
+      }
+    });
   }
 
   _buildRatingButton({Icon icon, Rating rating}) {

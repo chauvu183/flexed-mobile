@@ -61,10 +61,12 @@ void main() {
     await tester.pump();
 
     // check if date selection is initialized
+    print('Test feedback view date selection was initialized correctly');
     expect(find.byType(DateSelection), findsNWidgets(1));
     expect(find.text(DateFormat('dd.MM.yyyy').format(DateTime.now())), findsOneWidget);
 
     // check whether classes have a list tile each
+    print('Test feedback view has tile for each flex class');
     expect(find.byType(ListView), findsNWidgets(1));
     expect(find.byType(FlexClassTile), findsNWidgets(testClasses.length));
 
@@ -81,6 +83,7 @@ void main() {
     // ... wait for class assignment count rebuild
     await tester.pump();
 
+    print('Test date selection correctly triggers filter');
     expect(find.text(DateFormat('dd.MM.yyyy').format(DateTime.now().add(Duration(days: 1)))), findsOneWidget);
     expect(find.text('Keine Aufgaben'), findsNWidgets(testClasses.length));
   });
