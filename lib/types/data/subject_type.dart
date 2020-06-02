@@ -13,5 +13,5 @@ class SubjectType {
 
   SubjectType({this.id, @required this.title, this.created });
 
-  bool isValid(String subject) => _subjects.contains(subject.toLowerCase()); 
+  bool isValid() => _subjects.contains(this.title.toLowerCase()); 
 }
