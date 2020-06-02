@@ -100,41 +100,35 @@ class _StudentPageState extends State<StudentPage> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
-      child: Card(
-        elevation: 2,
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(12.0),
-              child: InfoCard(student: _student),
-            ),
+      child: Column(
+        children: <Widget>[
+          InfoCard(student: _student),
 
-            Flexible(
-              child: FutureBuilder(
-                future: _getTrackings(),
-                builder: (context, snapshot) {
-                  if (snapshot.data == null || snapshot.data.length < 1) {
-                    return Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.all(12.0),
-                          child: Text('Keine Aufgaben zugewiesen.'),
-                        ),
-                      ],
-                    );
-                  }
-
-                  return Container(
-                    child: ListView(
-                      children: _buildTrackingList(snapshot.data)
-                    )
+          Flexible(
+            child: FutureBuilder(
+              future: _getTrackings(),
+              builder: (context, snapshot) {
+                if (snapshot.data == null || snapshot.data.length < 1) {
+                  return Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: Text('Keine Aufgaben zugewiesen.'),
+                      ),
+                    ],
                   );
-              }),
-            ),
-          ],
-        ),
-      )
+                }
+
+                return Container(
+                  child: ListView(
+                    children: _buildTrackingList(snapshot.data)
+                  )
+                );
+            }),
+          ),
+        ],
+      ),
     );
   }
 
