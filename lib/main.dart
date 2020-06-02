@@ -70,7 +70,7 @@ class FlexedMobile extends StatelessWidget {
             // use this locally for now when designing.
             // You may need to quit your app and rebuild
             // completely before this takes effect.
-            // fontFamily: 'Montserrat',
+            fontFamily: 'Montserrat',
 
             textTheme: TextTheme(
               bodyText1: TextStyle(color: Colors.black),
