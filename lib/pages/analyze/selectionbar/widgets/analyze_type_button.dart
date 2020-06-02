@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AnalyzeTypeButton<String> extends StatefulWidget {
-  final Color btnColor = Color(0xFF33D97D);
+  final Color btnColor = Color(0xFF14BD9C);
   final Function(String) callBackSelectedAnalyzeType;
   final String analyzeType;
 

@@ -4,7 +4,7 @@ import '../../../../models/flexclass.dart';
 import '../../../../models/student.dart';
 
 class StudentButton<Student> extends StatefulWidget {
-  final Color btnColor = Color(0xFF33D97D);
+  final Color btnColor = Color(0xFF14BD9C);
   final Function(Student) callBackSelectedStudent;
   final FlexClass selectedClass;
   Student selectedStudent;

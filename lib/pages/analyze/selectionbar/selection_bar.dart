@@ -16,8 +16,6 @@ class SelectionBar extends StatefulWidget {
   final Function(Student) callBackSelectedStudent;
   final Function(String) callBackSelectedAnalyzeType;
 
-  final Color btnColor = Color(0xFF33D97D);
-
   SelectionBar({
     this.createdClasses,
     this.selectedClass,
