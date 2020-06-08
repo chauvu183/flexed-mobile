@@ -1,0 +1,11 @@
+stages:
+  - build-and-test
+
+build-and-test:
+  stage: build-and-test
+  only:
+    - /^next-.*$/
+    - /^dev.*$/
+  image: cirrusci/flutter:dev
+  script:
+    - flutter test
