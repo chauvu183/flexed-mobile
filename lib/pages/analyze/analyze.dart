@@ -65,7 +65,7 @@ class _AnalyzeState extends State<Analyze> {
           image: DecorationImage(
             alignment: Alignment.bottomRight,
             image: AssetImage(
-              'images/background-03-02.png',
+              'images/background.png',
             ),
           ),
         ),

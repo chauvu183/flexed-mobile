@@ -12,7 +12,7 @@ class _SolTrackingHomeState extends State<SolTrackingHome> {
     return Scaffold(
       body: Center(
         child: Image.asset(
-          'images/homepagewithAll-01.png',
+          'images/logo.png',
           fit: BoxFit.cover,
           height: double.infinity,
           width: double.infinity,

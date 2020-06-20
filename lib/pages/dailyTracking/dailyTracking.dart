@@ -22,7 +22,7 @@ class _DailyTrackingState extends State<DailyTracking> {
               image: DecorationImage(
                 alignment: Alignment.bottomRight,
                 image: AssetImage(
-                  'images/background-03-02.png',
+                  'images/background.png',
                 ),
               ),
             ),

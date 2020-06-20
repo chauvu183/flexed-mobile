@@ -30,9 +30,9 @@ class RatingChart extends IChart {
           decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,
-              alignment: Alignment.bottomLeft,
+              alignment: Alignment.bottomRight,
               image: AssetImage(
-                'images/background-03-02.png',
+                'images/background.png',
               ),
             ),
           ),

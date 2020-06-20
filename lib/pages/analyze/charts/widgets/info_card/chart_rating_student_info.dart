@@ -38,8 +38,8 @@ class ChartRatingStudentInfo extends IChartInfo {
   }
   IconTitle buildIconTitle() {
     String url = gender == Gender.MALE
-        ? 'images/boyForPageStudent-01.png'
-        : 'images/girlForPageClasses-02.png';
+        ? 'images/boy.png'
+        : 'images/girl.png';
         print(url);
     return IconTitle(
       url: url,

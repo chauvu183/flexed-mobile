@@ -2,16 +2,11 @@ import 'package:flexed_mobile/api/mocking/fixtures/fixtures.dart';
 import 'package:flexed_mobile/api/repository/flexclass_repository.dart';
 import 'package:flexed_mobile/api/repository/soltrack_repository.dart';
 import 'package:flexed_mobile/api/repository/student_repository.dart';
-import 'package:flexed_mobile/models/flexclass.dart';
 import 'package:flexed_mobile/models/soltrack.dart';
-import 'package:flexed_mobile/pages/feedback/feedback.dart';
 import 'package:flexed_mobile/pages/feedback/widgets/student_carousel/widgets/rating_sheet.dart';
-import 'package:flexed_mobile/shared/flex_class_list/flex_class_tile.dart';
-import 'package:flexed_mobile/shared/flex_class_list_date_filter/date_selection.dart';
 import 'package:flexed_mobile/types/enums/rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:intl/intl.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 

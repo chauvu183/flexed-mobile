@@ -35,8 +35,8 @@ class InfoCard extends StatelessWidget {
                 child: Image(
                   fit: BoxFit.contain,
                   image: AssetImage(student.gender == Gender.MALE
-                      ? 'images/boyForPageStudent-trimmed.png'
-                      : 'images/girlForPageClassesTrimmed.png'),
+                      ? 'images/boy.png'
+                      : 'images/girl.png'),
                 ),
               ),
               Flexible(
