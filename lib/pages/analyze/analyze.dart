@@ -25,14 +25,23 @@ class Analyze extends StatefulWidget {
 }
 
 class _AnalyzeState extends State<Analyze> {
+
+  // REPOSITORIES
   FlexClassRepository _flexClassRepository;
   SOLTrackRepository _trackRepository;
+
+  // CURRENT SELECTIONS
   FlexClass _selectedClass;
   Student _selectedStudent;
   String _analyzeType;
+
+  // DATA
   List<FlexClass> _createdClasses = List();
   List<SOLTrack> _trackings = List();
   IChart _chart;
+
+
+  // CALLBACK FUNCTIONS FOR THE SELECTION BAR
 
   callBackSelectedClass(selectedClass) {
     setState(() {
@@ -51,6 +60,7 @@ class _AnalyzeState extends State<Analyze> {
       _analyzeType = selectedAnalyzeType;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +106,7 @@ class _AnalyzeState extends State<Analyze> {
     );
   }
 
+  // checking which content should be rendered based on the current selections
   Widget _buildContent() {
     if (_selectedClass == null) {
       _chart = PlaceholderChart();
@@ -123,6 +134,7 @@ class _AnalyzeState extends State<Analyze> {
     );
   }
 
+  // METHODS FOR REFRESHING THE DATA 
   _refreshFlexClass() async {
     await _flexClassRepository
         .index()
@@ -141,6 +153,8 @@ class _AnalyzeState extends State<Analyze> {
         .then((trackings) => {_trackings = trackings});
   }
 
+
+  // CHECK WHICH CHART TYPE SHALL BE RENDERED
   _buildChart() {
     Map<String, int> trackings;
     if (_analyzeType == 'Fach') {
@@ -158,6 +172,8 @@ class _AnalyzeState extends State<Analyze> {
     }
   }
 
+  // CHECK WHICH CHART INFO TYPE SHALL BE RENDERED 
+  // OPTIONS: RATING OR SUBJECT && STUDENT OR CLASS
   IChartInfo _buildChartInfo(Map<String, int> trackings) {
     IChartInfo chartInfo;
     _analyzeType == 'Fach'
