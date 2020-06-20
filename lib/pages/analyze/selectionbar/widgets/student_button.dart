@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../../models/flexclass.dart';
 import '../../../../models/student.dart';
 
+// the dropdown button for the students
 class StudentButton<Student> extends StatefulWidget {
   final Color btnColor = Color(0xFF14BD9C);
   final Function(Student) callBackSelectedStudent;
   final FlexClass selectedClass;
-  Student selectedStudent;
+  final Student selectedStudent;
 
   StudentButton({
     this.callBackSelectedStudent,
@@ -20,6 +21,7 @@ class StudentButton<Student> extends StatefulWidget {
 }
 
 class _StudentButtonState extends State<StudentButton> {
+ 
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,7 +50,6 @@ class _StudentButtonState extends State<StudentButton> {
         onChanged: (Student newStudent) {
           setState(() {
             widget.callBackSelectedStudent(newStudent);
-            widget.selectedStudent = newStudent;
           });
         },
         items: widget.selectedClass == null

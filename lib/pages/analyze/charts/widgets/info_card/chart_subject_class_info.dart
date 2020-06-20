@@ -16,16 +16,17 @@ class ChartSubjectClassInfo extends IChartInfo {
     this.solTrackingsRated,
   });
 
+  // build the text widgets shown in the chartinfo card
   @override
   List<Widget> declareChildren(BuildContext context) {
     return [
-      // Text('SOL Stunden: '),
       Text('gesamt: ${(solTrackingsOpen + solTrackingsRated).ceil()}'),
       Text('bewertet: ${solTrackingsRated.ceil()}'),
       Text('offen: ${solTrackingsOpen.ceil()}'),
     ];
   }
 
+  // if a class is chosen, show teacher image and number of students
   IconTitle buildIconTitle() {
     return IconTitle(
       url: 'images/teacher.png',

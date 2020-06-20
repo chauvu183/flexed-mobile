@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+// BUILDS THE PICTURE AND INFORMATION 
+// THAT IS SHOWN ON THE CHART INFO CARD
+// IF NO PICTURE IS DEFINED IT INSERTS
+// A PLACEHOLDER
 class IconTitle extends StatelessWidget {
   final String title;
   final String url;
@@ -11,7 +15,6 @@ class IconTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             height: 65,

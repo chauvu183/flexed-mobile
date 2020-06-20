@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../charts/ichart.dart';
 import '../charts/widgets/info_card/ichart_info.dart';
 
+// subject chart is shown if analyzetype subject is chosen
 class SubjectChart extends IChart {
   final List<Color> colors = [
     Color(0xFF33D97D),
@@ -52,12 +53,13 @@ class SubjectChart extends IChart {
     double maxHeight = MediaQuery.of(context).size.height / 2.5;
     List<SubjectBarItem> bars = [];
 
-    double total =
-        trackings['total'].toDouble() + trackings['undefined'].toDouble();
+    // prepare the data to be shown in the chart
+    double total = trackings['total'].toDouble() + trackings['undefined'].toDouble();
     double german = trackings['deutsch'].toDouble();
     double english = trackings['englisch'].toDouble();
     double math = trackings['mathematik'].toDouble();
 
+    // build the bars 
     bars.add(SubjectBarItem(
       color: colors[0],
       height: german / total * maxHeight,

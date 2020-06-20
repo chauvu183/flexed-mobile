@@ -10,7 +10,5 @@ abstract class BarItem extends StatelessWidget {
     );
   }
 
-  // ABSTRACT METHOD TO DECLARE THE CHILDREN
-  // WHICH ARE INSERTED IN THE COLUMN
   List<Widget> declareChildren();
 }

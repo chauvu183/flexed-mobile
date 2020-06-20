@@ -14,6 +14,7 @@ class ChartRatingClassInfo extends IChartInfo {
     this.numberRatings,
   });
 
+  // build the text widgets shown in the chartinfo card
   @override
   List<Text> declareChildren(BuildContext context) {
     return [
@@ -21,6 +22,7 @@ class ChartRatingClassInfo extends IChartInfo {
     ];
   }
 
+  // if a class is chosen, show teacher image and number of students
   IconTitle buildIconTitle() {
     return IconTitle(
       url: 'images/teacher.png',

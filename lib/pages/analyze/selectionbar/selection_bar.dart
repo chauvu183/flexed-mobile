@@ -29,7 +29,7 @@ class SelectionBar extends StatefulWidget {
   @override
   _SelectionBarState createState() => _SelectionBarState();
 }
-
+// the selection bar includes the three dropdown buttons for each category
 class _SelectionBarState extends State<SelectionBar> {
   @override
   Widget build(BuildContext context) {
@@ -42,6 +42,7 @@ class _SelectionBarState extends State<SelectionBar> {
           FlexClassButton(
             callBackSelectedClass: widget.callBackSelectedClass,
             callBackSelectedStudent: widget.callBackSelectedStudent,
+            selected: widget.selectedClass,
             createdClasses: widget.createdClasses,
           ),
           StudentButton(

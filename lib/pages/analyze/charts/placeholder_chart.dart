@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../charts/ichart.dart';
 
+// ENTERING THE VIEW SHOW PLACEHOLDER CHART
 class PlaceholderChart extends IChart {
   @override
   Widget build(BuildContext context) {

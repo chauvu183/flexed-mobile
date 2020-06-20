@@ -3,8 +3,10 @@ import 'dart:collection';
 import '../../../types/enums/rating.dart';
 import '../../../models/soltrack.dart';
 
+// the calculator is used for analyzing the SOL Tracks
 class SOLTrackCalculator {
 
+  // the trackings are analyzed by subject
   static Map<String,int> analyzeTrackingsBySOL(List<SOLTrack> trackings) {
     int german = 0;
     int english = 0;
@@ -35,6 +37,7 @@ class SOLTrackCalculator {
     return result;
   }
 
+  // the trackings are analyzed by rating
   static Map<String,int> analyzeTrackingsByRating(List<SOLTrack> trackings) {
     int bad = 0;
     int quitebad = 0;

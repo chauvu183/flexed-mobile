@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// the dropdown button for the rating type (string)
 class AnalyzeTypeButton<String> extends StatefulWidget {
   final Color btnColor = Color(0xFF14BD9C);
   final Function(String) callBackSelectedAnalyzeType;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import './bar_item.dart';
 
-// THE BARS THAT ARE USED FOR THE RATING CHARTS
+// the bars used for the rating charts
 class RatingBarItem extends BarItem  {
   final Color color;
   final double height;

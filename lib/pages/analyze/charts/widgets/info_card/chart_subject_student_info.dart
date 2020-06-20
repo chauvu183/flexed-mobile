@@ -20,6 +20,7 @@ class ChartSubjectStudentInfo extends IChartInfo {
     this.gender,
   });
 
+  // build the text widgets shown in the chartinfo card
   @override
   List<Widget> declareChildren(BuildContext context) {
     return [
@@ -31,6 +32,7 @@ class ChartSubjectStudentInfo extends IChartInfo {
     ];
   }
 
+  // check if the student has some special needs
   Text _checkSpecialNeeds() {
     switch (specialEducationalNeeds) {
       case SpecialEducationalNeeds.GERMAN_AS_SECOND_LANGUAGE:
@@ -42,12 +44,11 @@ class ChartSubjectStudentInfo extends IChartInfo {
         return Text("");
     }
   }
-
+   // if a student is chosen, show image based on the gender
   IconTitle buildIconTitle() {
     String url = gender == Gender.MALE
         ? 'images/boy.png'
         : 'images/girl.png';
-        print(url);
     return IconTitle(
       url: url,
       title: fullName,

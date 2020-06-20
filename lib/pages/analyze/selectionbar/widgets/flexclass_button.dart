@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 import '../../../../models/flexclass.dart';
 import '../../../../models/student.dart';
 
+// the dropdown button for the flex classes
 class FlexClassButton<FlexClass> extends StatefulWidget {
   final Color btnColor = Color(0xFF14BD9C);
   final Function(FlexClass) callBackSelectedClass;
   final Function(Student) callBackSelectedStudent;
   final List<FlexClass> createdClasses;
+  final FlexClass selected;
 
   FlexClassButton({
     this.callBackSelectedClass,
     this.callBackSelectedStudent,
+    this.selected,
     this.createdClasses,
   });
 
@@ -20,7 +23,6 @@ class FlexClassButton<FlexClass> extends StatefulWidget {
 }
 
 class _FlexClassButtonState extends State<FlexClassButton> {
-  FlexClass selected;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +36,7 @@ class _FlexClassButtonState extends State<FlexClassButton> {
         ),
       ),
       child: DropdownButton<FlexClass>(
-        value: selected ?? null,
+        value: widget.selected ?? null,
         hint: Text("Klasse"),
         icon: Icon(
           Icons.arrow_drop_down,
@@ -47,7 +49,7 @@ class _FlexClassButtonState extends State<FlexClassButton> {
         style: TextStyle(color: Theme.of(context).primaryColorDark),
         onChanged: (FlexClass newSelectedClass) {
           setState(() {
-            selected = newSelectedClass;
+            // selected = newSelectedClass;
             widget.callBackSelectedClass(newSelectedClass);
             widget.callBackSelectedStudent(null);
           });

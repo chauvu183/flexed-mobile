@@ -4,6 +4,7 @@ import '../charts/ichart.dart';
 import '../charts/widgets/info_card/ichart_info.dart';
 import 'widgets/chart-bars/rating_bar_item.dart';
 
+// rating chart is shown if analyzetype rating is chosen
 class RatingChart extends IChart {
   static const List<Color> colors = [
     Color(0xFF33D97D),
@@ -53,6 +54,7 @@ class RatingChart extends IChart {
     double maxHeight = MediaQuery.of(context).size.height / 2.5;
     List<RatingBarItem> bars = [];
 
+    // extract information of the tracking list
     double bad = trackings['bad'].toDouble();
     double quitebad = trackings['quitebad'].toDouble();
     double average = trackings['average'].toDouble();
@@ -60,6 +62,7 @@ class RatingChart extends IChart {
     double good = trackings['good'].toDouble();
     double total = trackings['total'].toDouble();
 
+    // added bar items with the values of tracking information
     bars.add(RatingBarItem(
         color: colors[0],
         height: bad / total * maxHeight,

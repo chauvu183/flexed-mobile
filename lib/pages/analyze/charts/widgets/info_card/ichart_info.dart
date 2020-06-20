@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'icon_title.dart';
 
+// BASIC CHART INFO CARD
 abstract class IChartInfo extends StatelessWidget {
   final List<Color> colors = [
     Color(0xFF33D97D),
@@ -45,7 +46,9 @@ abstract class IChartInfo extends StatelessWidget {
     );
   }
 
+  // declare the row children based on chart type
   List<Widget> declareChildren(BuildContext context) => List();
   
+  // build the icon and title based on chart type
   IconTitle buildIconTitle();
 }
