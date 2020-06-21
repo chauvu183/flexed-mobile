@@ -40,6 +40,7 @@ class _DailyTrackingState extends State<DailyTracking> {
 
   _goToClassDetails(_class) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ClassRouter(_class)));
+        context, MaterialPageRoute(builder: (context) => ClassRouter(_class))
+    ).then((value) => setState(() => {}));
   }
 }
