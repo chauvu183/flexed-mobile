@@ -38,7 +38,7 @@ class _AnalyzeTypeButtonState extends State<AnalyzeTypeButton> {
         ),
         iconSize: 28,
         isDense: true,
-        isExpanded: false,
+        isExpanded: true,
         underline: SizedBox(),
         style: TextStyle(color: Theme.of(context).primaryColorDark),
         onChanged: (String newType) {

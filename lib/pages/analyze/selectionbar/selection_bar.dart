@@ -41,7 +41,7 @@ class _SelectionBarState extends State<SelectionBar> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
             children: [
               FlexClassButton(
                 callBackSelectedClass: widget.callBackSelectedClass,
@@ -49,17 +49,27 @@ class _SelectionBarState extends State<SelectionBar> {
                 selected: widget.selectedClass,
                 createdClasses: widget.createdClasses,
               ),
-              AnalyzeTypeButton(
-                analyzeType: widget.analyzeType,
-                callBackSelectedAnalyzeType: widget.callBackSelectedAnalyzeType,
+              VerticalDivider(),
+              Expanded(
+                child: AnalyzeTypeButton(
+                  analyzeType: widget.analyzeType,
+                  callBackSelectedAnalyzeType: widget.callBackSelectedAnalyzeType,
+                ),
               ),
             ],
           ),
           Divider(),
-          StudentButton(
-            selectedClass: widget.selectedClass,
-            callBackSelectedStudent: widget.callBackSelectedStudent,
-            selectedStudent: widget.selectedStudent,
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: StudentButton(
+                  selectedClass: widget.selectedClass,
+                  callBackSelectedStudent: widget.callBackSelectedStudent,
+                  selectedStudent: widget.selectedStudent,
+                ),
+              ),
+            ],
           ),
         ],
       ),

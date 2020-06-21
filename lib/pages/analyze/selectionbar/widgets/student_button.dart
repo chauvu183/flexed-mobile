@@ -44,7 +44,7 @@ class _StudentButtonState extends State<StudentButton> {
         ),
         iconSize: 28,
         isDense: true,
-        isExpanded: false,
+        isExpanded: true,
         underline: SizedBox(),
         style: TextStyle(color: Theme.of(context).primaryColorDark),
         onChanged: (Student newStudent) {
