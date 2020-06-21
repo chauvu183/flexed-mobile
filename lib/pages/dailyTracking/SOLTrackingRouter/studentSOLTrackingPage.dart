@@ -40,12 +40,7 @@ class _StudentSOLPageState extends State<StudentSOLPage> {
 
         ///on form user deleted
   _onDelete(SOLTrack _solTracking) {
-       var find = solEntries.firstWhere(
-        (it) => it == _solTracking,
-        orElse: () => null,
-      );
-      if (find != null) _repo.delete(solEntries.indexOf(find)).then((_) => _refreshTrackings());
-  
+    _repo.delete(_solTracking.id).then((_) => _refreshTrackings());
   }
 
 
