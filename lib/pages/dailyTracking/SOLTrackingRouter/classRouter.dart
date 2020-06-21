@@ -71,7 +71,6 @@ refreshPageIndicator(int page) {
           ],
         ),
       ),
-      //floatingActionButton: MyFloatingActionButton()
     );
   }
 }
