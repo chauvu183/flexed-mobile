@@ -22,9 +22,7 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
   _MyFloatingActionButtonState( Student student){
     _student = student;
   }
-  _addTracking(){
-    _tracking.student = _student;
-  }
+  
   @override
   Widget build(BuildContext context) {
     return showFab

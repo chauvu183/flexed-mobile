@@ -45,7 +45,6 @@ refreshPageIndicator(int page) {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
      return Scaffold(
       appBar: AppBar(
         title : Text(flexClass.title,
