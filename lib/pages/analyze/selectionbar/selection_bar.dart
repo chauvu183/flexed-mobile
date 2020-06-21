@@ -29,6 +29,7 @@ class SelectionBar extends StatefulWidget {
   @override
   _SelectionBarState createState() => _SelectionBarState();
 }
+
 // the selection bar includes the three dropdown buttons for each category
 class _SelectionBarState extends State<SelectionBar> {
   @override
@@ -36,23 +37,29 @@ class _SelectionBarState extends State<SelectionBar> {
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.fromLTRB(10, 30, 10, 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FlexClassButton(
-            callBackSelectedClass: widget.callBackSelectedClass,
-            callBackSelectedStudent: widget.callBackSelectedStudent,
-            selected: widget.selectedClass,
-            createdClasses: widget.createdClasses,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              FlexClassButton(
+                callBackSelectedClass: widget.callBackSelectedClass,
+                callBackSelectedStudent: widget.callBackSelectedStudent,
+                selected: widget.selectedClass,
+                createdClasses: widget.createdClasses,
+              ),
+              AnalyzeTypeButton(
+                analyzeType: widget.analyzeType,
+                callBackSelectedAnalyzeType: widget.callBackSelectedAnalyzeType,
+              ),
+            ],
           ),
+          Divider(),
           StudentButton(
             selectedClass: widget.selectedClass,
             callBackSelectedStudent: widget.callBackSelectedStudent,
             selectedStudent: widget.selectedStudent,
-          ),
-          AnalyzeTypeButton(
-            analyzeType: widget.analyzeType,
-            callBackSelectedAnalyzeType: widget.callBackSelectedAnalyzeType,
           ),
         ],
       ),
