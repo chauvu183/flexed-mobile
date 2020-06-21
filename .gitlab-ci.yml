@@ -6,6 +6,7 @@ build-and-test:
   only:
     - /^next-.*$/
     - /^dev.*$/
+    - master
   image: cirrusci/flutter:dev
   script:
     - flutter test
