@@ -66,10 +66,6 @@ class FlexedMobile extends StatelessWidget {
             accentColor: Color(0xFF33D97D),
             errorColor: Color(0xFFBC0000),
 
-            // Breaks some of the layouts right now;
-            // use this locally for now when designing.
-            // You may need to quit your app and rebuild
-            // completely before this takes effect.
             fontFamily: 'Montserrat',
 
             textTheme: TextTheme(
