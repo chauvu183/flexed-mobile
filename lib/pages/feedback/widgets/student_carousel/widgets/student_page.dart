@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
+/// A student detail page, showing the trackings of a student on a specified date.
 class StudentPage extends StatefulWidget {
 
   final Student student;
@@ -29,6 +30,16 @@ class _StudentPageState extends State<StudentPage> {
   Student _student;
   DateTime _date;
 
+  /// Maps ratings to their respective icons
+  Map<Rating, IconData> _ratingIconMap = {
+    Rating.GOOD:      Icons.sentiment_very_satisfied,
+    Rating.QUITEGOOD: Icons.sentiment_satisfied,
+    Rating.AVERAGE:   Icons.sentiment_neutral,
+    Rating.QUITEBAD:  Icons.sentiment_dissatisfied,
+    Rating.BAD:       Icons.sentiment_very_dissatisfied,
+  };
+
+
   _StudentPageState(Student student, DateTime date) {
     _student = student;
     _date = date;
@@ -45,40 +56,6 @@ class _StudentPageState extends State<StudentPage> {
     return _trackings;
   }
 
-
-  _ratingSentiment(Rating rating) {
-    IconData icon;
-
-    switch(rating) {
-      case Rating.GOOD:
-        icon = Icons.sentiment_very_satisfied;
-        break;
-      
-      case Rating.QUITEGOOD:
-        icon = Icons.sentiment_satisfied;
-        break;
-
-      case Rating.AVERAGE:
-        icon = Icons.sentiment_neutral;
-        break;
-
-      case Rating.QUITEBAD:
-        icon = Icons.sentiment_dissatisfied;
-        break;
-
-      case Rating.BAD:
-        icon = Icons.sentiment_very_dissatisfied;
-        break;
-
-      default:
-        icon = Icons.error;
-        break;
-    }
-
-    return Icon(icon, size: 39);
-  }
-
-
   _buildTrackingList(List<SOLTrack> trackings) {
     List<Widget> list = [];
 
@@ -91,7 +68,7 @@ class _StudentPageState extends State<StudentPage> {
         TrackingTile(
           tracking: tracking,
           subtitle: Text('${tracking.lessonNumber}. Unterrichtsstunde'),
-          trailing: tracking.rating == Rating.UNDEFINED ? null : _ratingSentiment(tracking.rating),
+          trailing: tracking.rating == Rating.UNDEFINED ? null : Icon(_ratingIconMap[tracking.rating], size: 39),
           onTap: (selectedTracking) => showModalBottomSheet(context: context, builder: (context) => RatingSheet(selectedTracking)).then((value) => {
             setState(() => null)
           }),

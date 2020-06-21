@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
+/// Rating form that is opened as a bottom sheet when
+/// a SOL tracking of a student is selected.
 class RatingSheet extends StatefulWidget {
 
   final SOLTrack tracking;
@@ -22,10 +24,13 @@ class RatingSheet extends StatefulWidget {
 
 class _RatingSheetState extends State<RatingSheet> {
 
+  /// Used to update the rating of the tracking
   SOLTrackRepository _repo;
 
-  SOLTrack tracking;
+  /// The tracking to rate
+  final SOLTrack tracking;
 
+  /// The currently selected rating for the tracking
   Rating _selectedRating;
 
   _RatingSheetState(this.tracking) {
@@ -41,6 +46,7 @@ class _RatingSheetState extends State<RatingSheet> {
   _submitRating() {
     tracking.rating = _selectedRating;
 
+    // Update record, then pop navigator to close bottom sheet
     _repo.update(tracking).then((tracking) {
       if (tracking != null) {
         Navigator.pop(context, tracking.rating);

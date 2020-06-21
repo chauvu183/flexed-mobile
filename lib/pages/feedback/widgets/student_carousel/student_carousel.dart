@@ -21,9 +21,13 @@ class StudentCarousel extends StatefulWidget {
 
 class _StudentCarouselState extends State<StudentCarousel> {
 
-  DateTime date;
+  /// Contains the date of SOLtrackings to display
+  final DateTime date;
 
-  FlexClass flexClass;
+  /// The class that is currently displayed
+  final FlexClass flexClass;
+
+  /// The students of the class.
   List<Student> _students;
 
   int _activePage = 0;
@@ -33,6 +37,7 @@ class _StudentCarouselState extends State<StudentCarousel> {
     _students = flexClass.getMembers();
   }
 
+  /// Builds a StudentPage widget for each student of the active flex class
   _buildPages() {
     List<Widget> pages = List();
 

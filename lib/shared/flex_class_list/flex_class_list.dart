@@ -124,7 +124,7 @@ class _FlexClassListState extends State<FlexClassList> {
 
       return Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).errorColor,
           shape: BoxShape.circle
         ),
         child: Padding(

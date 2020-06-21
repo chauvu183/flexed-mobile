@@ -12,6 +12,7 @@ class FeedbackView extends StatefulWidget {
 
 class FeedbackState extends State<FeedbackView> {
 
+  /// The current selected date of the date filter - defaults to today.
   DateTime _selectedDate = DateTime.now();
 
   @override
@@ -50,12 +51,14 @@ class FeedbackState extends State<FeedbackView> {
     );
   }
 
+  /// Called, when the date filter up-top changes its value
   _onDateChanged(DateTime date) {
     setState(() {
       _selectedDate = date;
     });
   }
 
+  /// Opens class details and updates the view when user returns
   _goToClassDetails(_class) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
         return StudentCarousel(flexClass: _class, selectedDate: _selectedDate,);

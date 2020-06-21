@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 
-
+/// A page indicator displaying an array of dots, with the active
+/// page filled and embiggened.
 class PageIndicator extends StatelessWidget {
 
   final int maxPages;
