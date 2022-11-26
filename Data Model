@@ -1,0 +1,84 @@
+```mermaid
+classDiagram
+      class Student{
+          +int id
+          +String firstName
+          +String lastName
+          +Gender gender
+          +String note
+          +String specialEducationalNeeds
+          +DateTime birthday
+          +MailType mail
+          +MailType parentMail
+          +PhoneType phone
+          +DateTime created
+          +getInititals() String
+      }
+      class FlexClass{
+          +int id
+          +String title
+          +List~Student~ members
+          +DateTime created
+          +getMembers() List~Student~
+          +addMember(Student student) void
+      }
+
+      class Subject{
+      <<data type>>
+          +int id
+          +String title
+          +DateTime created
+      }
+      
+      class SOLTrack {
+          +int id
+          +Date date
+          +Int lessonNumber
+          +Subject subject
+          +Rating rating
+      }
+
+      class Rating{
+      <<enumeration>>
+          +bad
+          +quitebad
+          +average
+          +quitegood
+          +good
+      }
+
+      class Gender{
+      <<enumeration>>
+          +female
+          +male
+      }
+      class SpecialEducationalNeeds{
+      <<enumeration>>
+          +GERMAN_AS_SECOND_LANGUAGE
+          +SPECIAL_NEEDS
+          +NONE
+      }
+     
+      class MailAddressType {
+      <<datatype>>
+         +String mail
+         +isValid() bool
+      }
+
+      class PhoneNumberType {
+      <<datatype>>
+         +String prefix
+         +String number
+         +isValid() bool
+      }
+
+      Student .. Gender
+      Student .. SpecialEducationalNeeds
+      Student .. MailAddressType
+      Student .. PhoneNumberType
+      SOLTrack .. Rating
+      FlexClass "1" --> "n" Student
+      Student"1" --> "n" SOLTrack
+      Subject .. SOLTrack
+
+```
